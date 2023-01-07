@@ -4,7 +4,7 @@ import com.atatc.hephaestus.component.Component;
 import com.atatc.hephaestus.component.MultiComponents;
 import com.atatc.hephaestus.component.Text;
 import com.atatc.hephaestus.component.UnsupportedComponent;
-import com.atatc.hephaestus.config.Parsers;
+import com.atatc.hephaestus.config.Config;
 import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.exception.ComponentNotClosed;
 import com.atatc.hephaestus.parser.Parser;
@@ -22,7 +22,7 @@ public final class Hephaestus {
         int i = Text.indexOf(expr, ':');
         if (i < 0) return Text.PARSER.parse(expr.substring(1, expr.length() - 1));
         else temp.tagName = expr.substring(1, i).replaceAll(" ", "");
-        Parser<?> parser = Parsers.getInstance().get(temp.tagName);
+        Parser<?> parser = Config.getInstance().getParser(temp.tagName);
         if (parser == null) return temp;
         return parser.parse(expr.substring(i + 1, expr.length() - 1));
     }
