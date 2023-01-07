@@ -3,7 +3,7 @@ package com.atatc.hephaestus.component;
 import org.jsoup.nodes.Element;
 
 public class UnsupportedComponent extends Component {
-    public String name = "unknown";
+    public String tagName = "undefined";
     public String expr = "";
 
     @Override
@@ -13,6 +13,6 @@ public class UnsupportedComponent extends Component {
 
     @Override
     public Element toHTML() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

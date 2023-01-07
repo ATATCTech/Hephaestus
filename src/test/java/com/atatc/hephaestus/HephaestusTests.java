@@ -1,24 +1,18 @@
 package com.atatc.hephaestus;
 
 
-import com.atatc.hephaestus.component.MultiComponents;
-import com.atatc.hephaestus.component.Text;
+import com.atatc.hephaestus.component.Component;
+import com.atatc.hephaestus.component.Title;
 import com.atatc.hephaestus.exception.BadFormat;
 import org.junit.jupiter.api.Test;
 
 public class HephaestusTests {
     @Test
     void test() throws BadFormat {
-        Text text = new Text("{text^}");
-        Text text2 = new Text("text2");
-        MultiComponents multiComponents = new MultiComponents(text, text2);
-        System.out.println(multiComponents.expr());
-        System.out.println(multiComponents.toHTML());
-
-        String compiled = Text.compile("{text^}");
-        System.out.println(compiled);
-        System.out.println(Text.decompile(compiled));
-
-        System.out.println((Hephaestus.parseExpr(multiComponents.expr())).toHTML());
+        Title title = new Title(2, "Test");
+        title.setColor(Color.NEGATIVE);
+        System.out.println(title.expr());
+        Component component = Hephaestus.parseExpr(title.expr());
+        System.out.println(component.toHTML());
     }
 }

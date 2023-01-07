@@ -4,36 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Color.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Style.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Document.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/UnsupportedComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/config/Parsers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/BadFormat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/ComponentNotClosed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/parser/Parser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/render/HTMLRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" afterDir="false" />
+    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Parser binding strategy changed.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Attribute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/AttributesUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/ComponentConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Title.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Typography.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/HephaestusException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/HephaestusRuntimeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/MissingAnnotationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/MissingFieldException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/parser/WrapperComponentParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/UnsupportedComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/UnsupportedComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/config/Parsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/config/Parsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/BadFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/BadFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +43,7 @@
       <list>
         <option value="Interface" />
         <option value="package-info" />
+        <option value="AnnotationType" />
         <option value="Class" />
       </list>
     </option>
@@ -122,11 +116,35 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673055653617</updated>
-      <workItem from="1673055654769" duration="18813000" />
+      <workItem from="1673055654769" duration="36402000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit.">
+      <created>1673079536940</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1673079536940</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit." />
+    <MESSAGE value="Parser binding strategy changed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Parser binding strategy changed." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/config/Parsers.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

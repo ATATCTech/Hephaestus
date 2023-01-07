@@ -11,8 +11,12 @@ public abstract class WrapperComponent extends Component {
         setChildren(children);
     }
 
-    public void setChildren(MultiComponents children) {
+    public void setChildrenComponent(MultiComponents children) {
         this.children = children;
+    }
+
+    public void setChildren(MultiComponents children) {
+        setChildrenComponent(children);
     }
 
     public void setChildren(Component... children) {
@@ -21,5 +25,10 @@ public abstract class WrapperComponent extends Component {
 
     public MultiComponents getChildren() {
         return children;
+    }
+
+    @Override
+    public String expr() {
+        return "{" + getTagName() + ":" + AttributesUtils.extractAttributes(this) + getChildren().expr() + "}";
     }
 }
