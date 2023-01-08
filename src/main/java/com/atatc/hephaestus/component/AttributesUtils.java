@@ -34,11 +34,10 @@ public final class AttributesUtils {
     public record AttributesAndBody(String attributesExpr, String bodyExpr) {}
 
     public static AttributesAndBody searchAttributesInExpr(String expr) {
-        int startIndex = Text.indexOf(expr, '(');
-        if (startIndex < 0) return null;
-        int endIndex = Text.indexOf(expr, ')', startIndex + 1) + 1;
+        if (!Text.startsWith(expr, '(')) return null;
+        int endIndex = Text.indexOf(expr, ')', 1) + 1;
         if (endIndex < 1) return null;
-        return new AttributesAndBody(expr.substring(startIndex, endIndex), expr.substring(endIndex));
+        return new AttributesAndBody(expr.substring(0, endIndex), expr.substring(endIndex));
     }
 
     public static void injectField(Field field, Object instance, String value) throws IllegalAccessException {

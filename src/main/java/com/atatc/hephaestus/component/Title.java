@@ -7,8 +7,13 @@ import org.jsoup.nodes.Element;
 
 @ComponentConfig(tagName = "tt")
 public class Title extends Typography {
-    public static HTMLRender<Title> HTML_RENDER = title -> new Element("h" + title.getLevel()).appendChild(title.getChildren().toHTML());
-    public static Parser<Title> PARSER = WrapperComponentParser.makeParser(Title.class);
+    public static HTMLRender<Title> HTML_RENDER;
+    public static Parser<Title> PARSER;
+
+    static {
+        HTML_RENDER = title -> new Element("h" + title.getLevel()).appendChild(title.getChildren().toHTML());
+        PARSER = WrapperComponentParser.makeParser(Title.class);
+    }
 
     @Attribute
     protected Integer level;

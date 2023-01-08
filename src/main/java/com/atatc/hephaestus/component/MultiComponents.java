@@ -12,12 +12,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MultiComponents extends Component {
-    public static HTMLRender<MultiComponents> HTML_RENDER = (multiComponents) -> {
+    public static HTMLRender<MultiComponents> HTML_RENDER = multiComponents -> {
         Element element = new Element("div").attr("style", "display:inline-block;");
         multiComponents.getComponents().forEach((component) -> element.appendChild(component.toHTML()));
         return element;
     };
-    public static Parser<MultiComponents> PARSER = (expr) -> {
+    public static Parser<MultiComponents> PARSER = expr -> {
         if (!Text.startsWith(expr, '{') || !Text.endsWith(expr, '}')) throw new ComponentNotClosed(expr);
         int startIndex = 0;
         boolean open = true;

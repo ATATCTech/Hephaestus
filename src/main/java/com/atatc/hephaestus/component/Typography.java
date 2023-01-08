@@ -8,8 +8,17 @@ import org.jsoup.nodes.Element;
 
 @ComponentConfig(tagName = "typo")
 public class Typography extends WrapperComponent {
-    public static HTMLRender<Typography> HTML_RENDER = typography -> new Element("p").appendChild(typography.getChildren().toHTML());
-    public static Parser<Typography> PARSER = WrapperComponentParser.makeParser(Typography.class);
+    public static HTMLRender<Typography> HTML_RENDER;
+    public static Parser<Typography> PARSER;
+
+    static {
+        HTML_RENDER = typography -> {
+            Element element = new Element("p").appendChild(typography.getChildren().toHTML());
+            element.attr("style", "color:" + typography.getColor() + ";backgroundColor:" + typography.getBackgroundColor() + ";");
+            return element;
+        };
+        PARSER = WrapperComponentParser.makeParser(Typography.class);
+    }
 
     @Attribute
     protected Color color;
@@ -32,7 +41,7 @@ public class Typography extends WrapperComponent {
     }
 
     public void setColor(Color color) {
-        this.color = color;
+        if (color != Color.POSITIVE) this.color = color;
     }
 
     public Color getColor() {
@@ -40,7 +49,7 @@ public class Typography extends WrapperComponent {
     }
 
     public void setBackgroundColor(Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
+        if (backgroundColor != Color.NEGATIVE) this.backgroundColor = backgroundColor;
     }
 
     public Color getBackgroundColor() {
