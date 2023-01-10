@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Known bug: brackets does not pair.">
+    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Routine updates.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +59,6 @@
   }
 }</component>
   <component name="RecentsManager">
-    <key name="MoveMembersDialog.RECENTS_KEY">
-      <recent name="com.atatc.hephaestus.component.WrapperComponent" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.atatc.packages.basics" />
     </key>
@@ -82,29 +78,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;com.atatc.hephaestus.HephaestusTests.test&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="HephaestusTests.test2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.atatc.hephaestus.HephaestusTests.test2&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -140,7 +113,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.HephaestusTests.test3" />
-        <item itemvalue="Gradle.HephaestusTests.test2" />
         <item itemvalue="Gradle.HephaestusTests.test" />
       </list>
     </recent_temporary>
@@ -156,9 +128,6 @@
       <workItem from="1673055654769" duration="49493000" />
       <workItem from="1673219283923" duration="1699000" />
       <workItem from="1673317090951" duration="11277000" />
-      <workItem from="1673359465764" duration="10438000" />
-      <workItem from="1673375861283" duration="2263000" />
-      <workItem from="1673382077913" duration="1573000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1673079536940</created>
@@ -188,57 +157,17 @@
       <option name="project" value="LOCAL" />
       <updated>1673149032025</updated>
     </task>
-    <task id="LOCAL-00005" summary="Routine updates.">
-      <created>1673362146138</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1673362146138</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Known bug: brackets does not pair.">
-      <created>1673377535059</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1673377535059</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit." />
     <MESSAGE value="Parser binding strategy changed." />
     <MESSAGE value="`Parsers.java` renamed to `Config.java`." />
     <MESSAGE value="Routine updates." />
-    <MESSAGE value="Known bug: brackets does not pair." />
-    <option name="LAST_COMMIT_MESSAGE" value="Known bug: brackets does not pair." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.UnsupportedOperationException" package="java.lang" />
-          <option name="timeStamp" value="7" />
-        </breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="com.atatc.hephaestus.exception.ComponentNotClosed" package="com.atatc.hephaestus.exception" />
-          <option name="timeStamp" value="13" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="Routine updates." />
   </component>
 </project>

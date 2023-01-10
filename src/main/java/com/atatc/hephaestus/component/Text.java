@@ -36,45 +36,79 @@ public class Text extends Component {
 
     public static final char COMPILER_CHARACTER = '^';
 
-    public static final String[] RESERVED_PATTERNS = {
-            "^",
-            ":",
-            "{",
-            "}",
-            "[",
-            "]",
-            "(",
-            ")",
-            "<",
-            ">",
-            "=",
-            ";",
+    public static final char[] RESERVED_KEYWORDS = {
+            '^',
+            ':',
+            '{',
+            '}',
+            '[',
+            ']',
+            '(',
+            ')',
+            '<',
+            '>',
+            '=',
+            ';',
     };
 
-    public static String quote(String s) {
-        return COMPILER_CHARACTER + s;
+    /**
+     * To prevent the character from being recognized as a keyword.
+     * @param c the character to quote
+     * @return quotation string
+     */
+    public static String quote(char c) {
+        return String.valueOf(COMPILER_CHARACTER) + c;
     }
 
-    public static String compile(String s, String p) {
+    /**
+     * To quote all the occurrences of a specific character.
+     * @param s the string object
+     * @param c the character that needs to be quoted
+     * @return compiled string
+     */
+    public static String compile(String s, char c) {
         if (s == null) return null;
-        return s.replaceAll(Pattern.quote(p), quote(p));
+        return s.replaceAll(Pattern.quote(String.valueOf(c)), quote(c));
     }
 
+    /**
+     * To quote all the occurrences of every reserved keyword.
+     * @param s the string object
+     * @return the compiled string
+     */
     public static String compile(String s) {
-        for (String p : RESERVED_PATTERNS) s = compile(s, p);
+        for (char c : RESERVED_KEYWORDS) s = compile(s, c);
         return s;
     }
 
-    public static String decompile(String s, String p) {
+    /**
+     * To remove all the quotations of a specific character.
+     * @param s the string object
+     * @param c the character whose quotations need to be removed
+     * @return the decompiled string
+     */
+    public static String decompile(String s, char c) {
         if (s == null) return null;
-        return s.replaceAll(Pattern.quote(quote(p)), p);
+        return s.replaceAll(Pattern.quote(quote(c)), String.valueOf(c));
     }
 
+    /**
+     * To remove all the quotations of every reserved keyword.
+     * @param s the string object
+     * @return the decompiled string
+     */
     public static String decompile(String s) {
-        for (String p : RESERVED_PATTERNS) s = decompile(s, p);
+        for (char c : RESERVED_KEYWORDS) s = decompile(s, c);
         return s;
     }
 
+    /**
+     * To find the first index of a certain character in the string, excluding the quotations.
+     * @param s the string object
+     * @param c the character to find
+     * @param fromIndex search starts from this index
+     * @return the index
+     */
     public static int indexOf(String s, char c, int fromIndex) {
         for (int i = fromIndex; i < s.length(); i++) if (charAtEquals(s, i, c)) return i;
         return -1;
@@ -84,6 +118,13 @@ public class Text extends Component {
         return indexOf(s, c, 0);
     }
 
+    /**
+     * To find the last index of a certain character in the string, excluding the quotations.
+     * @param s the string object
+     * @param c the character to find
+     * @param fromIndex search starts from this index
+     * @return the index
+     */
     public static int lastIndexOf(String s, char c, int fromIndex) {
         for (int i = fromIndex; i > 0; i--) if (charAtEquals(s, i, c)) return i;
         return -1;
@@ -93,17 +134,36 @@ public class Text extends Component {
         return lastIndexOf(s, c, s.length() - 1);
     }
 
+    /**
+     * To determine whether the character at a certain index in the string equals to a specific character and is not a quotation.
+     * @param s the string object
+     * @param i the index in the string at which the character needs to be compared
+     * @param c the character to compare
+     * @return true: equal; false: unequal
+     */
     public static boolean charAtEquals(String s, int i, char c) {
         if (i > 0) return s.charAt(i) == c && s.charAt(i - 1) != COMPILER_CHARACTER;
         return s.charAt(i) == c;
     }
 
+    /**
+     * To determine whether the string object starts with a certain character and not a quotation.
+     * @param s the string object
+     * @param c the character to compare
+     * @return true: does start with; false: does not start with
+     */
     public static boolean startsWith(String s, char c) {
         boolean b = s.charAt(0) == c;
         if (c == COMPILER_CHARACTER && s.length() > 1) return b && s.charAt(1) != COMPILER_CHARACTER;
         return b;
     }
 
+    /**
+     * To determine whether the string object ends with a certain character and not a quotation.
+     * @param s the string object
+     * @param c the character to compare
+     * @return true: does end with; false: does not end with
+     */
     public static boolean endsWith(String s, char c) {
         boolean b = s.charAt(s.length() - 1) == c;
         if (s.length() < 2) return b;
@@ -118,7 +178,7 @@ public class Text extends Component {
             if (bit == open) {
                 if (depth++ == requiredDepth) startIndex = i;
             } else if (bit == close) {
-                if (depth-- == requiredDepth) return new int[]{startIndex, i};
+                if (--depth == requiredDepth) return new int[]{startIndex, i};
             }
         }
         return new int[]{startIndex, -1};
