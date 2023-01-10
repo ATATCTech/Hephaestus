@@ -45,6 +45,8 @@ public class Text extends Component {
             "]",
             "(",
             ")",
+            "<",
+            ">",
             "=",
             ";",
     };
@@ -59,9 +61,7 @@ public class Text extends Component {
     }
 
     public static String compile(String s) {
-        for (String p : RESERVED_PATTERNS) {
-            s = compile(s, p);
-        }
+        for (String p : RESERVED_PATTERNS) s = compile(s, p);
         return s;
     }
 
@@ -71,22 +71,26 @@ public class Text extends Component {
     }
 
     public static String decompile(String s) {
-        for (String p : RESERVED_PATTERNS) {
-            s = decompile(s, p);
-        }
+        for (String p : RESERVED_PATTERNS) s = decompile(s, p);
         return s;
     }
 
     public static int indexOf(String s, char c, int fromIndex) {
-        if (s.charAt(fromIndex) == c) return fromIndex;
-        for (int i = fromIndex + 1; i < s.length(); i++) {
-            if (s.charAt(i) == c && s.charAt(i - 1) != COMPILER_CHARACTER) return i;
-        }
+        for (int i = fromIndex; i < s.length(); i++) if (charAtEquals(s, i, c)) return i;
         return -1;
     }
 
     public static int indexOf(String s, char c) {
         return indexOf(s, c, 0);
+    }
+
+    public static int lastIndexOf(String s, char c, int fromIndex) {
+        for (int i = fromIndex; i > 0; i--) if (charAtEquals(s, i, c)) return i;
+        return -1;
+    }
+
+    public static int lastIndexOf(String s, char c) {
+        return lastIndexOf(s, c, s.length() - 1);
     }
 
     public static boolean charAtEquals(String s, int i, char c) {
@@ -104,5 +108,10 @@ public class Text extends Component {
         boolean b = s.charAt(s.length() - 1) == c;
         if (s.length() < 2) return b;
         return b && s.charAt(s.length() - 2) != COMPILER_CHARACTER;
+    }
+
+    public int pairBrackets() {
+        // todo
+        return 0;
     }
 }

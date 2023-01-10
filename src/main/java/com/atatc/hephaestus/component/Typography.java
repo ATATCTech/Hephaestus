@@ -2,7 +2,6 @@ package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Color;
 import com.atatc.hephaestus.parser.Parser;
-import com.atatc.hephaestus.parser.WrapperComponentParser;
 import com.atatc.hephaestus.render.HTMLRender;
 import org.jsoup.nodes.Element;
 
@@ -17,7 +16,7 @@ public class Typography extends WrapperComponent {
             element.attr("style", "color:" + typography.getColor() + ";backgroundColor:" + typography.getBackgroundColor() + ";");
             return element;
         };
-        PARSER = WrapperComponentParser.makeParser(Typography.class);
+        PARSER = WrapperComponent.makeParser(Typography.class);
     }
 
     @Attribute

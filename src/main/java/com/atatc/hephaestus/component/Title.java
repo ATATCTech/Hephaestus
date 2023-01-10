@@ -1,7 +1,6 @@
 package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.parser.Parser;
-import com.atatc.hephaestus.parser.WrapperComponentParser;
 import com.atatc.hephaestus.render.HTMLRender;
 import org.jsoup.nodes.Element;
 
@@ -12,7 +11,7 @@ public class Title extends Typography {
 
     static {
         HTML_RENDER = title -> new Element("h" + title.getLevel()).appendChild(title.getChildren().toHTML());
-        PARSER = WrapperComponentParser.makeParser(Title.class);
+        PARSER = WrapperComponent.makeParser(Title.class);
     }
 
     @Attribute

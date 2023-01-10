@@ -8,6 +8,8 @@ import com.atatc.hephaestus.config.Config;
 import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.exception.ComponentNotClosed;
 import com.atatc.hephaestus.parser.Parser;
+import com.atatc.hephaestus.skeleton.Bone;
+import com.atatc.hephaestus.skeleton.Skeleton;
 
 public final class Hephaestus {
     public static Component parseExpr(String expr) throws BadFormat {
@@ -15,6 +17,7 @@ public final class Hephaestus {
             if (!Text.endsWith(expr, ']')) throw new BadFormat("Component list is not closed.", expr);
             return MultiComponents.PARSER.parse(expr.substring(1, expr.length() - 1));
         }
+        if (Text.startsWith(expr, '<') && Text.endsWith(expr, '>')) return Bone.PARSER.parse(expr.substring(1, expr.length() - 1));
         if (!Text.startsWith(expr, '{') || !Text.endsWith(expr, '}')) throw new ComponentNotClosed(expr);
         UnsupportedComponent temp = new UnsupportedComponent();
         temp.expr = expr;
@@ -25,5 +28,17 @@ public final class Hephaestus {
         Parser<?> parser = Config.getInstance().getParser(temp.tagName);
         if (parser == null) return temp;
         return parser.parse(expr.substring(i + 1, expr.length() - 1));
+    }
+
+    public static Skeleton parse(String expr) throws BadFormat {
+        Bone bone = null;
+        if (Text.startsWith(expr, '<')) {
+            int endIndex = Text.lastIndexOf(expr, '>') + 1;
+            if (endIndex >= 0) {
+                bone = Bone.PARSER.parse(expr.substring(0, endIndex));
+                expr = expr.substring(endIndex);
+            }
+        }
+        return new Skeleton(bone, parseExpr(expr));
     }
 }

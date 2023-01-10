@@ -51,7 +51,7 @@ public class MultiComponents extends Component implements Collection<Component> 
     }
 
     public void setComponents(Component... components) {
-        setComponents(Arrays.asList(components));
+        setComponents(new ArrayList<>(Arrays.asList(components)));
     }
 
     @Override
@@ -113,6 +113,10 @@ public class MultiComponents extends Component implements Collection<Component> 
         return components.remove(o);
     }
 
+    public Component remove(int index) {
+        return components.remove(index);
+    }
+
     @Override
     public boolean containsAll(@NotNull Collection<?> c) {
         return new HashSet<>(components).containsAll(c);
@@ -136,5 +140,9 @@ public class MultiComponents extends Component implements Collection<Component> 
     @Override
     public void clear() {
         components.clear();
+    }
+
+    public Component get(int index) {
+        return components.get(index);
     }
 }

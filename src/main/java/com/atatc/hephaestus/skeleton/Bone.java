@@ -2,26 +2,16 @@ package com.atatc.hephaestus.skeleton;
 
 import com.atatc.hephaestus.component.Component;
 import com.atatc.hephaestus.component.Text;
-import com.atatc.hephaestus.exception.BadFormat;
+import com.atatc.hephaestus.component.WrapperComponent;
 import com.atatc.hephaestus.parser.Parser;
 import org.jsoup.nodes.Element;
 
-import java.util.LinkedList;
-import java.util.List;
+public class Bone extends WrapperComponent {
+    public static Parser<Bone> PARSER = WrapperComponent.makeParser(Bone.class);
 
-public class Bone extends Component {
-    public static Parser<Bone> PARSER = new Parser<Bone>() {
-        @Override
-        public Bone parse(String expr) throws BadFormat {
-            // todo
-            return null;
-        }
-    };
     protected String name;
 
     protected Bone parent;
-
-    protected List<Bone> children = new LinkedList<>();
 
     public Bone() {}
 
@@ -46,23 +36,20 @@ public class Bone extends Component {
         return parent;
     }
 
-    public void appendChild(Bone bone) {
-        bone.parent = this;
-        getChildren().add(bone);
-    }
-
-    public List<Bone> getChildren() {
-        return children;
+    @Override
+    public void appendChild(Component child) {
+        if (child instanceof Bone bone) {
+            super.appendChild(child);
+            bone.setParent(this);
+        } else throw new UnsupportedOperationException();
     }
 
     @Override
     public String expr() {
-        StringBuilder expr = new StringBuilder("<" + Text.compile(getName()) + ":");
-        for (Bone child : getChildren()) {
-            expr.append(child.expr());
-        }
-        if (expr.toString().endsWith(":")) return expr.substring(0, expr.length() - 1) + ">";
-        return expr + ">";
+        StringBuilder expr = new StringBuilder("<" + Text.compile(getName()) + ":[");
+        for (Component child : getChildren()) if (child instanceof Bone) expr.append(child.expr());
+        if (expr.toString().endsWith("[")) return expr.substring(0, expr.length() - 2) + ">";
+        return expr + "]>";
     }
 
     @Override

@@ -1,7 +1,11 @@
 package com.atatc.hephaestus.component;
 
+import com.atatc.hephaestus.Hephaestus;
 import com.atatc.hephaestus.function.Consumer;
+import com.atatc.hephaestus.parser.Parser;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class WrapperComponent extends Component {
@@ -29,6 +33,22 @@ public abstract class WrapperComponent extends Component {
 
     public MultiComponents getChildren() {
         return children;
+    }
+
+    public void appendChild(Component child) {
+        getChildren().add(child);
+    }
+
+    public Component child(int index) {
+        return getChildren().get(index);
+    }
+
+    public void removeChild(Component child) {
+        getChildren().remove(child);
+    }
+
+    public void removeChild(int index) {
+        getChildren().remove(index);
     }
 
     public String getText() {
@@ -66,5 +86,32 @@ public abstract class WrapperComponent extends Component {
     @Override
     public String expr() {
         return "{" + getTagName() + ":" + AttributesUtils.extractAttributes(this) + getChildren().expr() + "}";
+    }
+
+    public static <C extends WrapperComponent> Parser<C> makeParser(Class<C> clz) {
+        Constructor<C> constructor;
+        try {
+            constructor = clz.getDeclaredConstructor();
+        } catch (NoSuchMethodException ignored) {
+            return null;
+        }
+        return expr -> {
+            try {
+                C component = constructor.newInstance();
+                AttributesUtils.AttributesAndBody attributesAndBody = AttributesUtils.searchAttributesInExpr(expr);
+                String body;
+                if (attributesAndBody == null) body = expr;
+                else {
+                    body = attributesAndBody.bodyExpr();
+                    AttributesUtils.injectAttributes(component, attributesAndBody.attributesExpr());
+                }
+                Component children = Hephaestus.parseExpr(body);
+                if (children instanceof MultiComponents) component.setChildrenComponent((MultiComponents) children);
+                else component.setChildren(children);
+                return component;
+            } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        };
     }
 }

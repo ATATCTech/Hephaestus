@@ -6,7 +6,8 @@ import com.atatc.hephaestus.component.Title;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Skeleton {
+public record Skeleton(Bone bone, Component component) {
+
     public static Bone generateSkeleton(Component component, String name) {
         Bone bone = new Bone(name);
         final Bone[] currentBone = {bone};
