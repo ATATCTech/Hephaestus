@@ -110,8 +110,21 @@ public class Text extends Component {
         return b && s.charAt(s.length() - 2) != COMPILER_CHARACTER;
     }
 
-    public int pairBrackets() {
-        // todo
-        return 0;
+    public static int[] pairBrackets(String s, char open, char close, int requiredDepth) {
+        int depth = 0;
+        int startIndex = -1;
+        for (int i = 0; i < s.length(); i++) {
+            char bit = s.charAt(i);
+            if (bit == open) {
+                if (depth++ == requiredDepth) startIndex = i;
+            } else if (bit == close) {
+                if (depth-- == requiredDepth) return new int[]{startIndex, i};
+            }
+        }
+        return new int[]{startIndex, -1};
+    }
+
+    public static int[] pairBrackets(String s, char open, char close) {
+        return pairBrackets(s, open, close, 0);
     }
 }

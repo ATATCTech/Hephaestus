@@ -2,11 +2,14 @@ package com.atatc.hephaestus;
 
 
 import com.atatc.hephaestus.component.Document;
+import com.atatc.hephaestus.component.Text;
 import com.atatc.hephaestus.component.Title;
 import com.atatc.hephaestus.component.Typography;
 import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.skeleton.Skeleton;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 public class HephaestusTests {
     @Test
@@ -31,5 +34,10 @@ public class HephaestusTests {
         String expr = document.expr();
         System.out.println(expr);
         System.out.println(Hephaestus.parseExpr(expr));
+    }
+
+    @Test
+    void test3() {
+        System.out.println(Arrays.toString(Text.pairBrackets("{}", '{', '}')));
     }
 }

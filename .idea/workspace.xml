@@ -6,16 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Known bug: brackets does not pair.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Document.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Title.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Typography.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Typography.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/parser/WrapperComponentParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Bone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Bone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Skeleton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +67,7 @@
       <recent name="com.atatc.packages.basics" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.HephaestusTests.test2">
+  <component name="RunManager" selected="Gradle.HephaestusTests.test3">
     <configuration name="HephaestusTests.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -123,8 +114,32 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="HephaestusTests.test3" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.atatc.hephaestus.HephaestusTests.test3&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.HephaestusTests.test3" />
         <item itemvalue="Gradle.HephaestusTests.test2" />
         <item itemvalue="Gradle.HephaestusTests.test" />
       </list>
@@ -142,7 +157,8 @@
       <workItem from="1673219283923" duration="1699000" />
       <workItem from="1673317090951" duration="11277000" />
       <workItem from="1673359465764" duration="10438000" />
-      <workItem from="1673375861283" duration="1488000" />
+      <workItem from="1673375861283" duration="2263000" />
+      <workItem from="1673382077913" duration="1573000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1673079536940</created>
@@ -179,11 +195,29 @@
       <option name="project" value="LOCAL" />
       <updated>1673362146138</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Known bug: brackets does not pair.">
+      <created>1673377535059</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1673377535059</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit." />
