@@ -17,7 +17,7 @@ public final class Config {
     private final Map<String, Parser<?>> parserMap = new HashMap<>();
 
     private Config() {
-        scanPackage("com.atatc.hephaestus.component");
+        scanPackages("com.atatc.hephaestus.component", "com.atatc.hephaestus.skeleton");
     }
 
     public void scanPackage(String pkg) {
@@ -33,6 +33,10 @@ public final class Config {
                 throw new MissingFieldException(clz, "PARSER");
             } catch (IllegalAccessException ignored) {}
         }
+    }
+
+    public void scanPackages(String... packages) {
+        for (String pkg : packages) scanPackage(pkg);
     }
 
     public void putParser(String componentName, Parser<?> parser) {

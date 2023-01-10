@@ -2,19 +2,18 @@ package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Hephaestus;
 import com.atatc.hephaestus.exception.ComponentNotClosed;
+import com.atatc.hephaestus.function.Consumer;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.Element;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public class MultiComponents extends Component {
+public class MultiComponents extends Component implements Collection<Component> {
     public static HTMLRender<MultiComponents> HTML_RENDER = multiComponents -> {
         Element element = new Element("div").attr("style", "display:inline-block;");
-        multiComponents.getComponents().forEach((component) -> element.appendChild(component.toHTML()));
+        multiComponents.forEach((component) -> element.appendChild(component.toHTML()));
         return element;
     };
     public static Parser<MultiComponents> PARSER = expr -> {
@@ -35,11 +34,9 @@ public class MultiComponents extends Component {
         return new MultiComponents(components);
     };
 
-    protected List<Component> components;
+    protected List<Component> components = new LinkedList<>();
 
-    public MultiComponents() {
-        components = new LinkedList<>();
-    }
+    public MultiComponents() {}
 
     public MultiComponents(List<Component> components) {
         setComponents(components);
@@ -57,20 +54,11 @@ public class MultiComponents extends Component {
         setComponents(Arrays.asList(components));
     }
 
-    public List<Component> getComponents() {
-        return components;
-    }
-
-    public Component[] getComponentsArray() {
-        return getComponents().toArray(Component[]::new);
-    }
-
-    public void append(Component component) {
-        getComponents().add(component);
-    }
-
-    public void appendAll(Collection<? extends Component> components) {
-        getComponents().addAll(components);
+    @Override
+    public void forEach(Consumer<? super Component> action, int depth) {
+        for (Component component : components) {
+            if (!action.accept(component, depth)) break;
+        }
     }
 
     @Override
@@ -83,5 +71,70 @@ public class MultiComponents extends Component {
     @Override
     public Element toHTML() {
         return HTML_RENDER.render(this);
+    }
+
+    @Override
+    public int size() {
+        return components.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return components.isEmpty();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return components.contains(o);
+    }
+
+    @Override
+    public Iterator<Component> iterator() {
+        return components.iterator();
+    }
+
+    @Override
+    public Object @NotNull [] toArray() {
+        return components.toArray();
+    }
+
+    @Override
+    public <T> T @NotNull [] toArray(T @NotNull [] a) {
+        return components.toArray(a);
+    }
+
+    @Override
+    public boolean add(Component component) {
+        return components.add(component);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return components.remove(o);
+    }
+
+    @Override
+    public boolean containsAll(@NotNull Collection<?> c) {
+        return new HashSet<>(components).containsAll(c);
+    }
+
+    @Override
+    public boolean addAll(@NotNull Collection<? extends Component> c) {
+        return components.addAll(c);
+    }
+
+    @Override
+    public boolean removeAll(@NotNull Collection<?> c) {
+        return components.removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(@NotNull Collection<?> c) {
+        return components.retainAll(c);
+    }
+
+    @Override
+    public void clear() {
+        components.clear();
     }
 }
