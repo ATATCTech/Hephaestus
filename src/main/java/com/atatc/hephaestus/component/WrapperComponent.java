@@ -34,7 +34,7 @@ public abstract class WrapperComponent extends Component {
     public String getText() {
         StringBuilder text = new StringBuilder();
         getChildren().forEach((component, depth) -> {
-            if (component instanceof Text t) text.append(t);
+            if (component instanceof Text t) text.append(t.getText());
             return true;
         });
         return text.toString();

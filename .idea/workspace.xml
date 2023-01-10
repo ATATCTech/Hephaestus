@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Routine updates.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/function/Consumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Bone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Skeleton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/atatc/packages/basics/Basics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Document.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/config/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Bone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Bone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Skeleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +109,7 @@
       <workItem from="1673055654769" duration="49493000" />
       <workItem from="1673219283923" duration="1699000" />
       <workItem from="1673317090951" duration="11277000" />
+      <workItem from="1673359465764" duration="2600000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1673079536940</created>

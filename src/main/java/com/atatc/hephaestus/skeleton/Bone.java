@@ -1,6 +1,7 @@
 package com.atatc.hephaestus.skeleton;
 
 import com.atatc.hephaestus.component.Component;
+import com.atatc.hephaestus.component.Text;
 import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.parser.Parser;
 import org.jsoup.nodes.Element;
@@ -18,8 +19,6 @@ public class Bone extends Component {
     };
     protected String name;
 
-    protected Component component;
-
     protected Bone parent;
 
     protected List<Bone> children = new LinkedList<>();
@@ -36,14 +35,6 @@ public class Bone extends Component {
 
     public String getName() {
         return name;
-    }
-
-    public void setComponent(Component component) {
-        this.component = component;
-    }
-
-    public Component getComponent() {
-        return component;
     }
 
     public void setParent(Bone parent) {
@@ -66,11 +57,11 @@ public class Bone extends Component {
 
     @Override
     public String expr() {
-        StringBuilder expr = new StringBuilder("<" + getName() + ":");
+        StringBuilder expr = new StringBuilder("<" + Text.compile(getName()) + ":");
         for (Bone child : getChildren()) {
             expr.append(child.expr());
         }
-        if (expr.toString().endsWith(":")) return expr.substring(0, expr.length() - 1);
+        if (expr.toString().endsWith(":")) return expr.substring(0, expr.length() - 1) + ">";
         return expr + ">";
     }
 

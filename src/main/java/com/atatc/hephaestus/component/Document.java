@@ -18,6 +18,9 @@ public class Document extends WrapperComponent {
     @Attribute
     protected String htmlHeader;
 
+    @Attribute
+    protected String name = "untitled";
+
     public Document() {}
 
     public Document(MultiComponents body) {
@@ -34,6 +37,14 @@ public class Document extends WrapperComponent {
 
     public String getHTMLHeader() {
         return htmlHeader == null ? DEFAULT_HEADER : htmlHeader;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

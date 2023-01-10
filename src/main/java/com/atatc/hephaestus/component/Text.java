@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Text extends Component {
     public static HTMLRender<Text> HTML_RENDER = text -> new Element("b").text(text.getText());
-    public static Parser<Text> PARSER = expr -> new Text(Text.decompile(expr, ":"));
+    public static Parser<Text> PARSER = expr -> new Text(Text.decompile(expr));
 
     protected String text;
 
@@ -24,14 +24,9 @@ public class Text extends Component {
         return text;
     }
 
-    public String getCompiledText() {
-        // No need to compile other patterns.
-        return compile(getText(), ":");
-    }
-
     @Override
     public String expr() {
-        return "{" + getText() + "}";
+        return "{" + compile(getText()) + "}";
     }
 
     @Override
@@ -59,6 +54,7 @@ public class Text extends Component {
     }
 
     public static String compile(String s, String p) {
+        if (s == null) return null;
         return s.replaceAll(Pattern.quote(p), quote(p));
     }
 
@@ -70,6 +66,7 @@ public class Text extends Component {
     }
 
     public static String decompile(String s, String p) {
+        if (s == null) return null;
         return s.replaceAll(Pattern.quote(quote(p)), p);
     }
 
