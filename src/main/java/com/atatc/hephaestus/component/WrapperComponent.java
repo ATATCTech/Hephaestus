@@ -9,9 +9,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class WrapperComponent extends Component {
-    protected MultiComponents children;
+    protected MultiComponent children;
 
-    public WrapperComponent(MultiComponents children) {
+    public WrapperComponent(MultiComponent children) {
         setChildren(children);
     }
 
@@ -19,19 +19,19 @@ public abstract class WrapperComponent extends Component {
         setChildren(children);
     }
 
-    public void setChildrenComponent(MultiComponents children) {
+    public void setChildrenComponent(MultiComponent children) {
         this.children = children;
     }
 
-    public void setChildren(MultiComponents children) {
+    public void setChildren(MultiComponent children) {
         setChildrenComponent(children);
     }
 
     public void setChildren(Component... children) {
-        setChildren(new MultiComponents(children));
+        setChildren(new MultiComponent(children));
     }
 
-    public MultiComponents getChildren() {
+    public MultiComponent getChildren() {
         return children;
     }
 
@@ -106,7 +106,7 @@ public abstract class WrapperComponent extends Component {
                     AttributesUtils.injectAttributes(component, attributesAndBody.attributesExpr());
                 }
                 Component children = Hephaestus.parseExpr(body);
-                if (children instanceof MultiComponents) component.setChildrenComponent((MultiComponents) children);
+                if (children instanceof MultiComponent) component.setChildrenComponent((MultiComponent) children);
                 else component.setChildren(children);
                 return component;
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {

@@ -5,6 +5,7 @@ import org.jsoup.nodes.Element;
 public class UnsupportedComponent extends Component {
     public String tagName = "undefined";
     public String expr = "";
+    public String inner = "";
 
     @Override
     public String expr() {

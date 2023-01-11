@@ -27,16 +27,16 @@ public class Typography extends WrapperComponent {
 
     public Typography() {}
 
-    public Typography(MultiComponents children) {
+    public Typography(MultiComponent children) {
         super(children);
     }
 
     public Typography(Component... children) {
-        super(new MultiComponents(children));
+        super(new MultiComponent(children));
     }
 
     public Typography(String text) {
-        super(new MultiComponents(new Text(text)));
+        super(new MultiComponent(new Text(text)));
     }
 
     public void setColor(Color color) {

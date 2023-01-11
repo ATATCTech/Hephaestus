@@ -22,7 +22,7 @@ public class Document extends WrapperComponent {
 
     public Document() {}
 
-    public Document(MultiComponents body) {
+    public Document(MultiComponent body) {
         super(body);
     }
 

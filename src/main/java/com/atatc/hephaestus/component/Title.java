@@ -19,7 +19,7 @@ public class Title extends Typography {
 
     public Title() {}
 
-    public Title(int level, MultiComponents children) {
+    public Title(int level, MultiComponent children) {
         super(children);
         setLevel(level);
     }
@@ -39,7 +39,7 @@ public class Title extends Typography {
         setLevel(level);
     }
 
-    public Title(MultiComponents children) {
+    public Title(MultiComponent children) {
         super(children);
     }
 

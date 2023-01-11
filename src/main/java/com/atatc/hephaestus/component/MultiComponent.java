@@ -1,7 +1,6 @@
 package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Hephaestus;
-import com.atatc.hephaestus.exception.ComponentNotClosed;
 import com.atatc.hephaestus.function.Consumer;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
@@ -10,14 +9,13 @@ import org.jsoup.nodes.Element;
 
 import java.util.*;
 
-public class MultiComponents extends Component implements Collection<Component> {
-    public static HTMLRender<MultiComponents> HTML_RENDER = multiComponents -> {
+public class MultiComponent extends Component implements Collection<Component> {
+    public static HTMLRender<MultiComponent> HTML_RENDER = multiComponents -> {
         Element element = new Element("div").attr("style", "display:inline-block;");
         multiComponents.forEach((component) -> element.appendChild(component.toHTML()));
         return element;
     };
-    public static Parser<MultiComponents> PARSER = expr -> {
-        if (!Text.startsWith(expr, '{') || !Text.endsWith(expr, '}')) throw new ComponentNotClosed(expr);
+    public static Parser<MultiComponent> PARSER = expr -> {
         List<Component> components = new LinkedList<>();
         int[] indexes = Text.pairBrackets(expr, '{', '}');
         while (indexes[0] >= 0 && indexes[1] >= 0) {
@@ -25,18 +23,18 @@ public class MultiComponents extends Component implements Collection<Component> 
             expr = expr.substring(indexes[1] + 1);
             indexes = Text.pairBrackets(expr, '{', '}');
         }
-        return new MultiComponents(components);
+        return new MultiComponent(components);
     };
 
     protected List<Component> components = new LinkedList<>();
 
-    public MultiComponents() {}
+    public MultiComponent() {}
 
-    public MultiComponents(List<Component> components) {
+    public MultiComponent(List<Component> components) {
         setComponents(components);
     }
 
-    public MultiComponents(Component... components) {
+    public MultiComponent(Component... components) {
         setComponents(components);
     }
 

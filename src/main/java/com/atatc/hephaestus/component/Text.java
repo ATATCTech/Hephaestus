@@ -172,6 +172,10 @@ public class Text extends Component {
         return charAtEquals(s, s.length() - 1, c);
     }
 
+    public static boolean wrappedBy(String s, char start, char end) {
+        return startsWith(s, start) && endsWith(s, end);
+    }
+
     public static int[] pairBrackets(String s, char open, char close, int requiredDepth) {
         int depth = 0;
         int startIndex = -1;

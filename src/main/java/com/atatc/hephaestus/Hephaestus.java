@@ -1,7 +1,7 @@
 package com.atatc.hephaestus;
 
 import com.atatc.hephaestus.component.Component;
-import com.atatc.hephaestus.component.MultiComponents;
+import com.atatc.hephaestus.component.MultiComponent;
 import com.atatc.hephaestus.component.Text;
 import com.atatc.hephaestus.component.UnsupportedComponent;
 import com.atatc.hephaestus.config.Config;
@@ -13,21 +13,23 @@ import com.atatc.hephaestus.skeleton.Skeleton;
 
 public final class Hephaestus {
     public static Component parseExpr(String expr) throws BadFormat {
-        if (Text.startsWith(expr, '[')) {
-            if (!Text.endsWith(expr, ']')) throw new BadFormat("Component list is not closed.", expr);
-            return MultiComponents.PARSER.parse(expr.substring(1, expr.length() - 1));
-        }
-        if (Text.startsWith(expr, '<') && Text.endsWith(expr, '>')) return Bone.PARSER.parse(expr.substring(1, expr.length() - 1));
-        if (!Text.startsWith(expr, '{') || !Text.endsWith(expr, '}')) throw new ComponentNotClosed(expr);
+        if (Text.wrappedBy(expr, '[', ']')) return MultiComponent.PARSER.parse(expr.substring(1, expr.length() - 1));
         UnsupportedComponent temp = new UnsupportedComponent();
         temp.expr = expr;
-        // Only determine component name, NO ATTRIBUTES OR CONTENT INVOLVED.
         int i = Text.indexOf(expr, ':');
         if (i < 0) return Text.PARSER.parse(expr.substring(1, expr.length() - 1));
-        else temp.tagName = expr.substring(1, i).replaceAll(" ", "");
+        temp.tagName = expr.substring(1, i).replaceAll(" ", "");
+        temp.inner = expr.substring(i + 1, expr.length() - 1);
+        if (Text.wrappedBy(expr, '<', '>')) {
+            Bone bone = Bone.PARSER.parse(temp.inner);
+            bone.setName(temp.tagName);
+            return bone;
+        }
+        if (!Text.wrappedBy(expr, '{', '}')) throw new ComponentNotClosed(expr);
+        // Only determine component name, NO ATTRIBUTES OR CONTENT INVOLVED.
         Parser<?> parser = Config.getInstance().getParser(temp.tagName);
         if (parser == null) return temp;
-        return parser.parse(expr.substring(i + 1, expr.length() - 1));
+        return parser.parse(temp.inner);
     }
 
     public static Skeleton parse(String expr) throws BadFormat {

@@ -6,6 +6,7 @@ import com.atatc.hephaestus.component.WrapperComponent;
 import com.atatc.hephaestus.parser.Parser;
 import org.jsoup.nodes.Element;
 
+// Fixme: MultiComponent is not capable to parse `<>`.
 public class Bone extends WrapperComponent {
     public static Parser<Bone> PARSER = WrapperComponent.makeParser(Bone.class);
 
