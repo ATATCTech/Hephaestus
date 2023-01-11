@@ -6,6 +6,10 @@ import org.jsoup.nodes.Element;
 
 import java.util.regex.Pattern;
 
+/**
+ * This is the most commonly used thing, and it assumes the role of the equivalent of a string in programming languages.
+ * You may also notice that yes, there are static methods related to text processing under this class name.
+ */
 public class Text extends Component {
     public static HTMLRender<Text> HTML_RENDER = text -> new Element("b").text(text.getText());
     public static Parser<Text> PARSER = expr -> new Text(Text.decompile(expr));
@@ -142,8 +146,10 @@ public class Text extends Component {
      * @return true: equal; false: unequal
      */
     public static boolean charAtEquals(String s, int i, char c) {
-        if (i > 0) return s.charAt(i) == c && s.charAt(i - 1) != COMPILER_CHARACTER;
-        return s.charAt(i) == c;
+        boolean e = s.charAt(i) == c;
+        if (i > 0) return e && s.charAt(i - 1) != COMPILER_CHARACTER;
+        if (c == COMPILER_CHARACTER && s.length() > 1) return e && s.charAt(1) != COMPILER_CHARACTER;
+        return e;
     }
 
     /**
@@ -153,9 +159,7 @@ public class Text extends Component {
      * @return true: does start with; false: does not start with
      */
     public static boolean startsWith(String s, char c) {
-        boolean b = s.charAt(0) == c;
-        if (c == COMPILER_CHARACTER && s.length() > 1) return b && s.charAt(1) != COMPILER_CHARACTER;
-        return b;
+        return charAtEquals(s, 0, c);
     }
 
     /**
@@ -165,9 +169,7 @@ public class Text extends Component {
      * @return true: does end with; false: does not end with
      */
     public static boolean endsWith(String s, char c) {
-        boolean b = s.charAt(s.length() - 1) == c;
-        if (s.length() < 2) return b;
-        return b && s.charAt(s.length() - 2) != COMPILER_CHARACTER;
+        return charAtEquals(s, s.length() - 1, c);
     }
 
     public static int[] pairBrackets(String s, char open, char close, int requiredDepth) {
@@ -175,11 +177,8 @@ public class Text extends Component {
         int startIndex = -1;
         for (int i = 0; i < s.length(); i++) {
             char bit = s.charAt(i);
-            if (bit == open) {
-                if (depth++ == requiredDepth) startIndex = i;
-            } else if (bit == close) {
-                if (--depth == requiredDepth) return new int[]{startIndex, i};
-            }
+            if (bit == open && depth++ == requiredDepth) startIndex = i;
+            else if (bit == close && --depth == requiredDepth) return new int[]{startIndex, i};
         }
         return new int[]{startIndex, -1};
     }

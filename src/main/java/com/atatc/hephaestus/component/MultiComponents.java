@@ -18,18 +18,12 @@ public class MultiComponents extends Component implements Collection<Component> 
     };
     public static Parser<MultiComponents> PARSER = expr -> {
         if (!Text.startsWith(expr, '{') || !Text.endsWith(expr, '}')) throw new ComponentNotClosed(expr);
-        int startIndex = 0;
-        boolean open = true;
         List<Component> components = new LinkedList<>();
-        for (int i = 1; i < expr.length(); i++) {
-            if (open && Text.charAtEquals(expr, i, '}')) {
-                open = false;
-                components.add(Hephaestus.parseExpr(expr.substring(startIndex, i + 1)));
-            }
-            else if (!open && Text.charAtEquals(expr, i, '{')) {
-                open = true;
-                startIndex = i;
-            }
+        int[] indexes = Text.pairBrackets(expr, '{', '}');
+        while (indexes[0] >= 0 && indexes[1] >= 0) {
+            components.add(Hephaestus.parseExpr(expr.substring(indexes[0], indexes[1] + 1)));
+            expr = expr.substring(indexes[1] + 1);
+            indexes = Text.pairBrackets(expr, '{', '}');
         }
         return new MultiComponents(components);
     };
