@@ -7,6 +7,7 @@ import com.atatc.hephaestus.component.Title;
 import com.atatc.hephaestus.component.Typography;
 import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.skeleton.Skeleton;
+import com.atatc.hephaestus.skeleton.Body;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -21,9 +22,10 @@ public class HephaestusTests {
         Document document = new Document(title1, title2, title3, title4);
         String expr = Skeleton.generateSkeleton(document).expr();
         System.out.println(expr);
-        Skeleton skeleton = Hephaestus.parse(expr);
-        System.out.println(skeleton.bone());
-        System.out.println(skeleton.component());
+        Body body = Hephaestus.parse(expr);
+        assert body != null;
+        System.out.println(body.skeleton());
+        System.out.println(body.component());
     }
 
     @Test

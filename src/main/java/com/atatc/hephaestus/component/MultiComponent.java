@@ -1,6 +1,7 @@
 package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Hephaestus;
+import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.function.Consumer;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
@@ -17,7 +18,15 @@ public class MultiComponent extends Component implements Collection<Component> {
     };
     public static Parser<MultiComponent> PARSER = expr -> {
         List<Component> components = new LinkedList<>();
-        int[] indexes = Text.pairBrackets(expr, '{', '}');
+        char open, close;
+        if (Text.wrappedBy(expr, '{', '{')) {
+            open = '{';
+            close = '}';
+        } else if (Text.wrappedBy(expr, '<', '>')) {
+            open = '<';
+            close = '>';
+        } else throw new BadFormat("Unrecognized format.", expr);
+        int[] indexes = Text.pairBrackets(expr, open, close);
         while (indexes[0] >= 0 && indexes[1] >= 0) {
             components.add(Hephaestus.parseExpr(expr.substring(indexes[0], indexes[1] + 1)));
             expr = expr.substring(indexes[1] + 1);
