@@ -19,7 +19,7 @@ public class MultiComponent extends Component implements Collection<Component> {
     public static Parser<MultiComponent> PARSER = expr -> {
         List<Component> components = new LinkedList<>();
         char open, close;
-        if (Text.wrappedBy(expr, '{', '{')) {
+        if (Text.wrappedBy(expr, '{', '}')) {
             open = '{';
             close = '}';
         } else if (Text.wrappedBy(expr, '<', '>')) {
@@ -64,6 +64,8 @@ public class MultiComponent extends Component implements Collection<Component> {
 
     @Override
     public String expr() {
+        if (components.size() == 0) return "";
+        if (components.size() == 1) return components.get(0).expr();
         StringBuilder expr = new StringBuilder("[");
         components.forEach((component) -> expr.append(component.expr()));
         return expr + "]";

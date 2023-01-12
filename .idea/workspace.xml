@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Routine updates.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Body.java" afterDir="false" />
+    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Bug fixed.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/HTMLCapable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MDCapable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Bone.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Skeleton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,10 +24,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="package-info" />
         <option value="AnnotationType" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -68,7 +66,7 @@
       <recent name="com.atatc.packages.basics" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.HephaestusTests.test">
+  <component name="RunManager" selected="Gradle.HephaestusTests.test2">
     <configuration name="HephaestusTests.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -140,8 +138,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.HephaestusTests.test" />
         <item itemvalue="Gradle.HephaestusTests.test2" />
+        <item itemvalue="Gradle.HephaestusTests.test" />
         <item itemvalue="Gradle.HephaestusTests.test3" />
       </list>
     </recent_temporary>
@@ -207,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673399414724</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Bug fixed.">
+      <created>1673486622185</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1673486622185</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +225,23 @@
     <MESSAGE value="Some static methods in `Text.java` annotated." />
     <MESSAGE value="Some bugs fixed idk." />
     <MESSAGE value="Routine updates." />
-    <option name="LAST_COMMIT_MESSAGE" value="Routine updates." />
+    <MESSAGE value="Bug fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixed." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponent.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java</url>
+          <line>175</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -2,9 +2,8 @@ package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Style;
 import com.atatc.hephaestus.function.Consumer;
-import org.jsoup.nodes.Element;
 
-public abstract class Component {
+public abstract class Component implements HTMLCapable {
     protected Style style = new Style();
 
     public Component() {
@@ -37,8 +36,6 @@ public abstract class Component {
     }
 
     public abstract String expr();
-
-    public abstract Element toHTML();
 
     @Override
     public String toString() {
