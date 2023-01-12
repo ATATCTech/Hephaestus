@@ -8,6 +8,7 @@ import com.atatc.hephaestus.component.Typography;
 import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.skeleton.Skeleton;
 import com.atatc.hephaestus.skeleton.Body;
+import com.atatc.packages.log.Log;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
