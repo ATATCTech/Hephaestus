@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Bug fixed.">
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/render/MDRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/atatc/packages/log/Log.java" afterDir="false" />
+    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Introduced flexmark-java.&#10;`README.md` updated.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MDCapable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MDCapable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673489466533</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Introduced flexmark-java.&#10;`README.md` updated.">
+      <created>1673491623404</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1673491623404</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,7 +252,8 @@
     <MESSAGE value="Some bugs fixed idk." />
     <MESSAGE value="Routine updates." />
     <MESSAGE value="Bug fixed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixed." />
+    <MESSAGE value="Introduced flexmark-java.&#10;`README.md` updated." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduced flexmark-java.&#10;`README.md` updated." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
