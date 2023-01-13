@@ -1,7 +1,7 @@
 package com.atatc.hephaestus.component;
 
-import com.vladsch.flexmark.util.ast.Node;
+import com.atatc.hephaestus.markdown.MDElement;
 
 public interface MDCapable {
-    Node toMarkdown();
+    MDElement toMarkdown();
 }

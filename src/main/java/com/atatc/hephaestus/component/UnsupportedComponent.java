@@ -1,6 +1,6 @@
 package com.atatc.hephaestus.component;
 
-import org.jsoup.nodes.Element;
+import com.atatc.hephaestus.html.HTMLElement;
 
 public class UnsupportedComponent extends Component {
     public String tagName = "undefined";
@@ -13,7 +13,7 @@ public class UnsupportedComponent extends Component {
     }
 
     @Override
-    public Element toHTML() {
+    public HTMLElement toHTML() {
         throw new UnsupportedOperationException();
     }
 }

@@ -1,9 +1,9 @@
 package com.atatc.hephaestus.component;
 
+import com.atatc.hephaestus.html.HTMLElement;
+import com.atatc.hephaestus.html.HTMLString;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
 
 @ComponentConfig(tagName = "html")
 public class HTMLBlock extends Component {
@@ -11,7 +11,7 @@ public class HTMLBlock extends Component {
     public static Parser<HTMLBlock> PARSER;
 
     static {
-        HTML_RENDER = htmlBlock -> Jsoup.parse(htmlBlock.getHtml());
+        HTML_RENDER = htmlBlock -> new HTMLString(htmlBlock.getHTML());
         PARSER = HTMLBlock::new;
     }
 
@@ -23,21 +23,21 @@ public class HTMLBlock extends Component {
         this.html = html;
     }
 
-    public void setHtml(String html) {
+    public void setHTML(String html) {
         this.html = html;
     }
 
-    public String getHtml() {
+    public String getHTML() {
         return html;
     }
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + getHtml() + "}";
+        return "{" + getTagName() + ":" + getHTML() + "}";
     }
 
     @Override
-    public Element toHTML() {
+    public HTMLElement toHTML() {
         return HTML_RENDER.render(this);
     }
 }

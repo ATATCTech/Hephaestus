@@ -3,57 +3,51 @@ package com.atatc.hephaestus.component;
 import com.atatc.hephaestus.Hephaestus;
 import com.atatc.hephaestus.function.Consumer;
 import com.atatc.hephaestus.parser.Parser;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class WrapperComponent extends Component {
-    protected MultiComponent children;
+    @NotNull
+    protected MultiComponent children = new MultiComponent();
 
-    public WrapperComponent(MultiComponent children) {
+    public WrapperComponent(@NotNull MultiComponent children) {
         setChildren(children);
     }
 
     public WrapperComponent(Component... children) {
-        setChildren(children);
-    }
-
-    public void setChildrenComponent(MultiComponent children) {
-        this.children = children;
-    }
-
-    public void setChildren(MultiComponent children) {
-        setChildrenComponent(children);
-    }
-
-    public void setChildren(Component... children) {
         setChildren(new MultiComponent(children));
     }
 
-    public MultiComponent getChildren() {
+    public void setChildren(@NotNull MultiComponent children) {
+        this.children = children;
+    }
+
+    public @NotNull MultiComponent getChildren() {
         return children;
     }
 
     public void appendChild(Component child) {
-        getChildren().add(child);
+        children.add(child);
     }
 
     public Component child(int index) {
-        return getChildren().get(index);
+        return children.get(index);
     }
 
     public void removeChild(Component child) {
-        getChildren().remove(child);
+        children.remove(child);
     }
 
     public void removeChild(int index) {
-        getChildren().remove(index);
+        children.remove(index);
     }
 
     public String getText() {
         StringBuilder text = new StringBuilder();
-        getChildren().forEach((component, depth) -> {
+        children.forEach((component, depth) -> {
             if (component instanceof Text t) text.append(t.getText());
             return true;
         });
@@ -67,7 +61,7 @@ public abstract class WrapperComponent extends Component {
 
     public boolean contains(Class<? extends Component> classOfComponent, int depthLimit) {
         AtomicBoolean flag = new AtomicBoolean(false);
-        getChildren().forEach((component, depth) -> {
+        children.forEach((component, depth) -> {
             if (component.getClass().isAssignableFrom(classOfComponent)) {
                 flag.set(true);
                 return false;
@@ -80,12 +74,12 @@ public abstract class WrapperComponent extends Component {
     @Override
     public void forEach(Consumer<? super Component> action, int depth) {
         super.forEach(action, depth);
-        getChildren().forEach(action, depth + 1);
+        children.forEach(action, depth + 1);
     }
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + AttributesUtils.extractAttributes(this) + getChildren().expr() + "}";
+        return "{" + getTagName() + ":" + AttributesUtils.extractAttributes(this) + children.expr() + "}";
     }
 
     public static <C extends WrapperComponent> Parser<C> makeParser(Class<C> clz) {
@@ -105,9 +99,8 @@ public abstract class WrapperComponent extends Component {
                     body = attributesAndBody.bodyExpr();
                     AttributesUtils.injectAttributes(component, attributesAndBody.attributesExpr());
                 }
-                Component children = Hephaestus.parseExpr(body);
-                if (children instanceof MultiComponent) component.setChildrenComponent((MultiComponent) children);
-                else component.setChildren(children);
+                Component bodyComponent = Hephaestus.parseExpr(body);
+                component.setChildren(bodyComponent instanceof MultiComponent children ? children : new MultiComponent(bodyComponent));
                 return component;
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 throw new RuntimeException(e);

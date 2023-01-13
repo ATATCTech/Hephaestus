@@ -1,8 +1,8 @@
 package com.atatc.hephaestus.skeleton;
 
 import com.atatc.hephaestus.component.*;
+import com.atatc.hephaestus.html.HTMLElement;
 import com.atatc.hephaestus.parser.Parser;
-import org.jsoup.nodes.Element;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -53,7 +53,7 @@ public class Skeleton extends WrapperComponent {
     }
 
     @Override
-    public Element toHTML() {
+    public HTMLElement toHTML() {
         throw new UnsupportedOperationException();
     }
 

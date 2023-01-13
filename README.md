@@ -2,4 +2,4 @@
 
 The most suitable text language for documentation. Native support for Markdown and HTML.
 
-Markdown and HTML support provided by [flexmark-java](https://github.com/vsch/flexmark-java) and [jsoup](https://github.com/jhy/jsoup) respectively.
+The language is designed to be as compact as possible to reduce the overhead of network transmission, and at the same time, it supports generating outlines.

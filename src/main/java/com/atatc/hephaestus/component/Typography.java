@@ -1,9 +1,9 @@
 package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Color;
+import com.atatc.hephaestus.html.HTMLElement;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
-import org.jsoup.nodes.Element;
 
 @ComponentConfig(tagName = "typo")
 public class Typography extends WrapperComponent {
@@ -11,11 +11,7 @@ public class Typography extends WrapperComponent {
     public static Parser<Typography> PARSER;
 
     static {
-        HTML_RENDER = typography -> {
-            Element element = new Element("p").appendChild(typography.getChildren().toHTML());
-            element.attr("style", "color:" + typography.getColor() + ";backgroundColor:" + typography.getBackgroundColor() + ";");
-            return element;
-        };
+        HTML_RENDER = typography -> new HTMLElement("p").appendChild(typography.getChildren().toHTML()).attr("style", "color:" + typography.getColor() + ";backgroundColor:" + typography.getBackgroundColor() + ";");
         PARSER = WrapperComponent.makeParser(Typography.class);
     }
 
@@ -56,7 +52,7 @@ public class Typography extends WrapperComponent {
     }
 
     @Override
-    public Element toHTML() {
+    public HTMLElement toHTML() {
         return HTML_RENDER.render(this);
     }
 }

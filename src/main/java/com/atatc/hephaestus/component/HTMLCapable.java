@@ -1,7 +1,7 @@
 package com.atatc.hephaestus.component;
 
-import org.jsoup.nodes.Element;
+import com.atatc.hephaestus.html.HTMLElement;
 
 public interface HTMLCapable {
-    Element toHTML();
+    HTMLElement toHTML();
 }

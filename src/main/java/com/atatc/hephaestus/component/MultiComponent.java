@@ -3,16 +3,16 @@ package com.atatc.hephaestus.component;
 import com.atatc.hephaestus.Hephaestus;
 import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.function.Consumer;
+import com.atatc.hephaestus.html.HTMLElement;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
 import org.jetbrains.annotations.NotNull;
-import org.jsoup.nodes.Element;
 
 import java.util.*;
 
 public class MultiComponent extends Component implements Collection<Component> {
     public static HTMLRender<MultiComponent> HTML_RENDER = multiComponents -> {
-        Element element = new Element("div").attr("style", "display:inline-block;");
+        HTMLElement element = new HTMLElement("div");
         multiComponents.forEach((component) -> element.appendChild(component.toHTML()));
         return element;
     };
@@ -72,7 +72,7 @@ public class MultiComponent extends Component implements Collection<Component> {
     }
 
     @Override
-    public Element toHTML() {
+    public HTMLElement toHTML() {
         return HTML_RENDER.render(this);
     }
 

@@ -2,7 +2,7 @@ package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Style;
 import com.atatc.hephaestus.function.Consumer;
-import com.vladsch.flexmark.util.ast.Node;
+import com.atatc.hephaestus.markdown.MDElement;
 
 public abstract class Component implements HTMLCapable, MDCapable {
     protected Style style = new Style();
@@ -40,7 +40,7 @@ public abstract class Component implements HTMLCapable, MDCapable {
 
     // fixme: remove
     @Override
-    public Node toMarkdown() {
+    public MDElement toMarkdown() {
         return null;
     }
 

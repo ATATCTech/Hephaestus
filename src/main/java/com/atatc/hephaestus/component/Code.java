@@ -1,8 +1,8 @@
 package com.atatc.hephaestus.component;
 
+import com.atatc.hephaestus.html.HTMLElement;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
-import org.jsoup.nodes.Element;
 
 @ComponentConfig(tagName = "cd")
 public class Code extends Component {
@@ -10,7 +10,7 @@ public class Code extends Component {
     public static Parser<Code> PARSER;
 
     static {
-        HTML_RENDER = code -> new Element("pre").appendChild(new Element("code").text(code.getCode()).attr("class", "language-" + code.getLanguage()));
+        HTML_RENDER = code -> null;
         PARSER = expr -> {
             Code component = new Code();
             AttributesUtils.AttributesAndBody attributesAndBody = AttributesUtils.searchAttributesInExpr(expr);
@@ -64,7 +64,7 @@ public class Code extends Component {
     }
 
     @Override
-    public Element toHTML() {
+    public HTMLElement toHTML() {
         return HTML_RENDER.render(this);
     }
 }

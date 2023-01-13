@@ -1,8 +1,8 @@
 package com.atatc.hephaestus.component;
 
+import com.atatc.hephaestus.html.HTMLElement;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
-import org.jsoup.nodes.Element;
 
 @ComponentConfig(tagName = "tt")
 public class Title extends Typography {
@@ -10,7 +10,7 @@ public class Title extends Typography {
     public static Parser<Title> PARSER;
 
     static {
-        HTML_RENDER = title -> new Element("h" + title.getLevel()).appendChild(title.getChildren().toHTML());
+        HTML_RENDER = title -> new HTMLElement("h" + title.getLevel()).appendChild(title.getChildren().toHTML());
         PARSER = WrapperComponent.makeParser(Title.class);
     }
 
@@ -65,7 +65,7 @@ public class Title extends Typography {
     }
 
     @Override
-    public Element toHTML() {
+    public HTMLElement toHTML() {
         return HTML_RENDER.render(this);
     }
 }

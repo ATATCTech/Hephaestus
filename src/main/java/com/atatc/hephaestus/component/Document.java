@@ -1,8 +1,9 @@
 package com.atatc.hephaestus.component;
 
+import com.atatc.hephaestus.html.HTMLElement;
+import com.atatc.hephaestus.html.HTMLString;
 import com.atatc.hephaestus.parser.Parser;
 import com.atatc.hephaestus.render.HTMLRender;
-import org.jsoup.nodes.Element;
 
 @ComponentConfig(tagName = "doc")
 public class Document extends WrapperComponent {
@@ -10,7 +11,7 @@ public class Document extends WrapperComponent {
     public static Parser<Document> PARSER;
 
     static {
-        HTML_RENDER = document -> new Element("div").append(document.getHTMLHeader()).appendChild(document.getChildren().toHTML());
+        HTML_RENDER = document -> new HTMLElement("div").appendChild(new HTMLString(document.getHTMLHeader())).appendChild(document.getChildren().toHTML());
         PARSER = WrapperComponent.makeParser(Document.class);
     }
 
@@ -47,7 +48,7 @@ public class Document extends WrapperComponent {
     }
 
     @Override
-    public Element toHTML() {
+    public HTMLElement toHTML() {
         return HTML_RENDER.render(this);
     }
 
