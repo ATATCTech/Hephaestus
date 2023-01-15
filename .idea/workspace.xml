@@ -4,33 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Giving up on being a catch-all language.&#10;The rendering mechanism has been canceled.&#10;Merge `Skeleton.java` into `com.atatc.athena.hephaestus.components` and allow to include a corresponding component to merge the role of `Body.java`.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MDBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Skeleton.java" afterDir="false" />
+    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Group ID changed to &quot;com.atatctech&quot;.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/AttributesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/AttributesUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Code.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Document.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/HTMLBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/HTMLBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/HTMLCapable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MDCapable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Title.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Typography.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/UnsupportedComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/UnsupportedComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/html/Attributes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/html/HTMLElement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/html/HTMLString.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/markdown/MDElement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/render/HTMLRender.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/render/MDRender.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Body.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/skeleton/Skeleton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Hephaestus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/Hephaestus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/Style.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/Style.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/Attribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/AttributesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/AttributesUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/ComponentConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/ComponentConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/HTMLBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/HTMLBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MDBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/MDBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/MultiComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/Skeleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/Text.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/UnsupportedComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/UnsupportedComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/WrapperComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/WrapperComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/config/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/BadFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/exception/BadFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/ComponentNotClosed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/exception/ComponentNotClosed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/HephaestusException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/exception/HephaestusException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/HephaestusRuntimeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/exception/HephaestusRuntimeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/MissingAnnotationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/exception/MissingAnnotationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/exception/MissingFieldException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/exception/MissingFieldException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/function/Consumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/function/Consumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/hephaestus/HephaestusTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatctech/hephaestus/HephaestusTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/packages/basics/Basics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatctech/packages/basics/Basics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/atatc/packages/log/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/atatctech/packages/log/Log.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +182,7 @@
       <workItem from="1673219283923" duration="1699000" />
       <workItem from="1673317090951" duration="11277000" />
       <workItem from="1673575208687" duration="18000" />
-      <workItem from="1673755445309" duration="9909000" />
+      <workItem from="1673755445309" duration="13627000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1673079536940</created>
@@ -253,7 +254,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673491623404</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Giving up on being a catch-all language.&#10;The rendering mechanism has been canceled.&#10;Merge `Skeleton.java` into `com.atatc.athena.hephaestus.components` and allow to include a corresponding component to merge the role of `Body.java`.">
+      <created>1673767935814</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1673767935814</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,18 +288,19 @@
     <MESSAGE value="Bug fixed." />
     <MESSAGE value="Introduced flexmark-java.&#10;`README.md` updated." />
     <MESSAGE value="Giving up on being a catch-all language.&#10;The rendering mechanism has been canceled.&#10;Merge `Skeleton.java` into `com.atatc.athena.hephaestus.components` and allow to include a corresponding component to merge the role of `Body.java`." />
-    <option name="LAST_COMMIT_MESSAGE" value="Giving up on being a catch-all language.&#10;The rendering mechanism has been canceled.&#10;Merge `Skeleton.java` into `com.atatc.athena.hephaestus.components` and allow to include a corresponding component to merge the role of `Body.java`." />
+    <MESSAGE value="Group ID changed to &quot;com.atatctech&quot;." />
+    <option name="LAST_COMMIT_MESSAGE" value="Group ID changed to &quot;com.atatctech&quot;." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponent.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/MultiComponent.java</url>
           <line>56</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/atatc/hephaestus/component/MultiComponent.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/atatctech/hephaestus/component/MultiComponent.java</url>
           <line>43</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
