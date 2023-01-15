@@ -4,6 +4,8 @@ plugins {
     id 'signing'
 }
 
+apply plugin: 'maven-publish'
+
 group 'com.atatctech'
 version '1.0.0-SNAPSHOT'
 
@@ -17,6 +19,57 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+javadoc {
+    options.addStringOption('charset', 'UTF-8')
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'hephaestus'
+            from components.java
+
+            pom {
+                name = 'Hephaestus'
+                description = 'The most suitable text language for documentation. Native support for Markdown and HTML.'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection='scm:git:git:github.com/ATATC/Hephaestus.git'
+                    developerConnection='scm:git:https://github.com/ATATC/Hephaestus.git'
+                    url='https://github.com/ATATC/Hephaestus'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username = findProperty("ossrhUsername") ?: System.getenv("OSSRH_USERNAME")
+                password = findProperty("ossrhPassword") ?: System.getenv("OSSRH_PASSWORD")
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
 }
 
 test {
