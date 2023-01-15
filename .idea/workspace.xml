@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Updated build.gradle.">
-      <change afterPath="$PROJECT_DIR$/secring.gpg" afterDir="false" />
+    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Added secring.gpg.">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/gradle-publish.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/gradle-publish.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +99,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Projects\Projects\Hephaestus\Hephaestus\src\test\java\com\atatc\packages\log" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Projects\Projects\Hephaestus\Hephaestus" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.atatc.packages.basics" />
@@ -237,7 +241,7 @@
       <workItem from="1673575208687" duration="18000" />
       <workItem from="1673755445309" duration="13679000" />
       <workItem from="1673773423329" duration="459000" />
-      <workItem from="1673813427119" duration="5861000" />
+      <workItem from="1673813427119" duration="6315000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1673079536940</created>
@@ -344,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673819631038</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added secring.gpg.">
+      <created>1673820492615</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1673820492615</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +385,8 @@
     <MESSAGE value="Group ID changed to &quot;com.atatctech&quot;." />
     <MESSAGE value="Adapted to GitHub Actions." />
     <MESSAGE value="Updated build.gradle." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated build.gradle." />
+    <MESSAGE value="Added secring.gpg." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added secring.gpg." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
