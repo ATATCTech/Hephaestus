@@ -3,19 +3,12 @@ package com.atatc.hephaestus.component;
 import com.atatc.hephaestus.Hephaestus;
 import com.atatc.hephaestus.exception.BadFormat;
 import com.atatc.hephaestus.function.Consumer;
-import com.atatc.hephaestus.html.HTMLElement;
 import com.atatc.hephaestus.parser.Parser;
-import com.atatc.hephaestus.render.HTMLRender;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 public class MultiComponent extends Component implements Collection<Component> {
-    public static HTMLRender<MultiComponent> HTML_RENDER = multiComponents -> {
-        HTMLElement element = new HTMLElement("div");
-        multiComponents.forEach((component) -> element.appendChild(component.toHTML()));
-        return element;
-    };
     public static Parser<MultiComponent> PARSER = expr -> {
         List<Component> components = new LinkedList<>();
         char open, close;
@@ -43,10 +36,6 @@ public class MultiComponent extends Component implements Collection<Component> {
         setComponents(components);
     }
 
-    public MultiComponent(Component... components) {
-        setComponents(components);
-    }
-
     public void setComponents(List<Component> components) {
         this.components = components;
     }
@@ -69,11 +58,6 @@ public class MultiComponent extends Component implements Collection<Component> {
         StringBuilder expr = new StringBuilder("[");
         components.forEach((component) -> expr.append(component.expr()));
         return expr + "]";
-    }
-
-    @Override
-    public HTMLElement toHTML() {
-        return HTML_RENDER.render(this);
     }
 
     @Override

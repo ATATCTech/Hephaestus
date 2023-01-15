@@ -1,6 +1,8 @@
 package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Color;
+import com.atatc.hephaestus.Hephaestus;
+import com.atatc.hephaestus.exception.BadFormat;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -22,6 +24,7 @@ public final class AttributesUtils {
         for (Field field : fields) {
             try {
                 if (!field.isAnnotationPresent(Attribute.class)) continue;
+                field.setAccessible(true);
                 Object val = field.get(component);
                 if (val == null) continue;
                 attributes.append(field.getName()).append("=").append(val).append(";");
@@ -40,7 +43,7 @@ public final class AttributesUtils {
         return new AttributesAndBody(expr.substring(0, endIndex), expr.substring(endIndex));
     }
 
-    public static void injectField(Field field, Object instance, String value) throws IllegalAccessException {
+    public static void injectField(Field field, Object instance, String value) throws IllegalAccessException, BadFormat {
         Class<?> t = field.getType();
         if (t == String.class) field.set(instance, value);
         else if (t == Integer.class) field.set(instance, Integer.valueOf(value));
@@ -48,6 +51,7 @@ public final class AttributesUtils {
         else if (t == Long.class) field.set(instance, Long.valueOf(value));
         else if (t == Double.class) field.set(instance, Double.valueOf(value));
         else if (t == Color.class) field.set(instance, new Color(value));
+        else if (t == Component.class) field.set(instance, Hephaestus.parseExpr(value));
         else field.set(instance, t.cast(value));
     }
 
@@ -71,7 +75,7 @@ public final class AttributesUtils {
                 String val = getAttribute(attributesExpr, field.getName());
                 if (val == null) continue;
                 injectField(field, component, val);
-            } catch (IllegalAccessException ignored) {}
+            } catch (IllegalAccessException | BadFormat ignored) {}
         }
     }
 }

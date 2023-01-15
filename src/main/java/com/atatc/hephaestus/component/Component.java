@@ -2,9 +2,8 @@ package com.atatc.hephaestus.component;
 
 import com.atatc.hephaestus.Style;
 import com.atatc.hephaestus.function.Consumer;
-import com.atatc.hephaestus.markdown.MDElement;
 
-public abstract class Component implements HTMLCapable, MDCapable {
+public abstract class Component {
     protected Style style = new Style();
 
     public Component() {
@@ -37,12 +36,6 @@ public abstract class Component implements HTMLCapable, MDCapable {
     }
 
     public abstract String expr();
-
-    // fixme: remove
-    @Override
-    public MDElement toMarkdown() {
-        return null;
-    }
 
     @Override
     public String toString() {

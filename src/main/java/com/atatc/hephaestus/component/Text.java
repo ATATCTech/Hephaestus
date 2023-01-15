@@ -1,9 +1,6 @@
 package com.atatc.hephaestus.component;
 
-import com.atatc.hephaestus.html.HTMLElement;
-import com.atatc.hephaestus.html.HTMLString;
 import com.atatc.hephaestus.parser.Parser;
-import com.atatc.hephaestus.render.HTMLRender;
 
 import java.util.regex.Pattern;
 
@@ -12,7 +9,6 @@ import java.util.regex.Pattern;
  * You may also notice that yes, there are static methods related to text processing under this class name.
  */
 public class Text extends Component {
-    public static HTMLRender<Text> HTML_RENDER = text -> new HTMLElement("b").appendChild(new HTMLString(text.getText()));
     public static Parser<Text> PARSER = expr -> new Text(Text.decompile(expr));
 
     protected String text;
@@ -32,11 +28,6 @@ public class Text extends Component {
     @Override
     public String expr() {
         return "{" + compile(getText()) + "}";
-    }
-
-    @Override
-    public HTMLElement toHTML() {
-        return HTML_RENDER.render(this);
     }
 
     public static final char COMPILER_CHARACTER = '^';
