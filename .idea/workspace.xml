@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Updated gradle-publish.yml.">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/gradle-publish.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/gradle-publish.yml" afterDir="false" />
+    <list default="true" id="c5177553-7f46-4ff4-9700-aa1b62d57f69" name="Changes" comment="Bug fixed.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +240,7 @@
       <workItem from="1673575208687" duration="18000" />
       <workItem from="1673755445309" duration="13679000" />
       <workItem from="1673773423329" duration="459000" />
-      <workItem from="1673813427119" duration="6673000" />
+      <workItem from="1673813427119" duration="8270000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1673079536940</created>
@@ -361,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673820876000</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Bug fixed.">
+      <created>1673821243174</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1673821243174</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,7 +392,6 @@
     <MESSAGE value="Some static methods in `Text.java` annotated." />
     <MESSAGE value="Some bugs fixed idk." />
     <MESSAGE value="Routine updates." />
-    <MESSAGE value="Bug fixed." />
     <MESSAGE value="Introduced flexmark-java.&#10;`README.md` updated." />
     <MESSAGE value="Giving up on being a catch-all language.&#10;The rendering mechanism has been canceled.&#10;Merge `Skeleton.java` into `com.atatc.athena.hephaestus.components` and allow to include a corresponding component to merge the role of `Body.java`." />
     <MESSAGE value="Group ID changed to &quot;com.atatctech&quot;." />
@@ -393,7 +399,8 @@
     <MESSAGE value="Updated build.gradle." />
     <MESSAGE value="Added secring.gpg." />
     <MESSAGE value="Updated gradle-publish.yml." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated gradle-publish.yml." />
+    <MESSAGE value="Bug fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
