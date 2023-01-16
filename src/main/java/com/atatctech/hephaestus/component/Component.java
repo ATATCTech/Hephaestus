@@ -6,7 +6,7 @@ import com.atatctech.hephaestus.function.Consumer;
 public abstract class Component {
     protected Style style = new Style();
 
-    public Component() {
+    protected Component() {
     }
 
     public ComponentConfig getConfig() {
