@@ -10,7 +10,6 @@ import java.util.*;
 
 public class MultiComponent extends Component implements Collection<Component> {
     public static Parser<MultiComponent> PARSER = expr -> {
-        List<Component> components = new LinkedList<>();
         char open, close;
         if (Text.wrappedBy(expr, '{', '}')) {
             open = '{';
@@ -20,10 +19,11 @@ public class MultiComponent extends Component implements Collection<Component> {
             close = '>';
         } else throw new BadFormat("Unrecognized format.", expr);
         int[] indexes = Text.pairBrackets(expr, open, close);
-        while (indexes[0] >= 0 && indexes[1] >= 0) {
-            components.add(Hephaestus.parseExpr(expr.substring(indexes[0], indexes[1] + 1)));
-            expr = expr.substring(indexes[1] + 1);
-            indexes = Text.pairBrackets(expr, '{', '}');
+        List<Component> components = new LinkedList<>();
+        while (indexes[0] >= 0 && indexes[1]++ >= 0) {
+            components.add(Hephaestus.parseExpr(expr.substring(indexes[0], indexes[1])));
+            expr = expr.substring(indexes[1]);
+            indexes = Text.pairBrackets(expr, open, close);
         }
         return new MultiComponent(components);
     };
@@ -33,6 +33,10 @@ public class MultiComponent extends Component implements Collection<Component> {
     public MultiComponent() {}
 
     public MultiComponent(List<Component> components) {
+        setComponents(components);
+    }
+
+    public MultiComponent(Component... components) {
         setComponents(components);
     }
 

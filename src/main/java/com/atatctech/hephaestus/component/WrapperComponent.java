@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class WrapperComponent extends Component {
@@ -101,7 +100,7 @@ public abstract class WrapperComponent extends Component {
                     AttributesUtils.injectAttributes(component, attributesAndBody.attributesExpr());
                 }
                 Component bodyComponent = Hephaestus.parseExpr(body);
-                if (bodyComponent != null) component.setChildren(bodyComponent instanceof MultiComponent children ? children : new MultiComponent(List.of(bodyComponent)));
+                if (bodyComponent != null) component.setChildren(bodyComponent instanceof MultiComponent children ? children : new MultiComponent(bodyComponent));
                 return component;
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 throw new RuntimeException(e);
