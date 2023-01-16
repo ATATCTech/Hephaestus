@@ -34,7 +34,7 @@ public abstract class WrapperComponent extends Component {
     }
 
     public Component child(int index) {
-        return children.get(index);
+        return getChildren().get(index);
     }
 
     public void removeChild(Component child) {
@@ -47,7 +47,7 @@ public abstract class WrapperComponent extends Component {
 
     public String getText() {
         StringBuilder text = new StringBuilder();
-        children.forEach((component, depth) -> {
+        getChildren().forEach((component, depth) -> {
             if (component instanceof Text t) text.append(t.getText());
             return true;
         });
@@ -61,7 +61,7 @@ public abstract class WrapperComponent extends Component {
 
     public boolean contains(Class<? extends Component> classOfComponent, int depthLimit) {
         AtomicBoolean flag = new AtomicBoolean(false);
-        children.forEach((component, depth) -> {
+        getChildren().forEach((component, depth) -> {
             if (component.getClass().isAssignableFrom(classOfComponent)) {
                 flag.set(true);
                 return false;
@@ -74,12 +74,12 @@ public abstract class WrapperComponent extends Component {
     @Override
     public void forEach(Consumer<? super Component> action, int depth) {
         super.forEach(action, depth);
-        children.forEach(action, depth + 1);
+        getChildren().forEach(action, depth + 1);
     }
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + AttributesUtils.extractAttributes(this) + children.expr() + "}";
+        return "{" + getTagName() + ":" + AttributesUtils.extractAttributes(this) + getChildren().expr() + "}";
     }
 
     public static <C extends WrapperComponent> Parser<C> makeParser(Class<C> clz) {
