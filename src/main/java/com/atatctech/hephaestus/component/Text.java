@@ -168,6 +168,10 @@ public class Text extends Component {
         return startsWith(s, start) && endsWith(s, end);
     }
 
+    public static boolean wrappedBy(String s, char boarder) {
+        return wrappedBy(s, boarder, boarder);
+    }
+
     public static int[] pairBrackets(String s, char open, char close, int requiredDepth) {
         int depth = 0;
         int startIndex = -1;
