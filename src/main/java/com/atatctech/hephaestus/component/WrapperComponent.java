@@ -14,7 +14,7 @@ public abstract class WrapperComponent extends Component {
     @NotNull
     protected MultiComponent children = new MultiComponent();
 
-    public WrapperComponent(@NotNull MultiComponent children) {
+    public WrapperComponent(MultiComponent children) {
         setChildren(children);
     }
 

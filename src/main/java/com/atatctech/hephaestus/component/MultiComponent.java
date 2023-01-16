@@ -28,6 +28,7 @@ public class MultiComponent extends Component implements Collection<Component> {
         return new MultiComponent(components);
     };
 
+    @NotNull
     protected List<Component> components = new LinkedList<>();
 
     public MultiComponent() {}
@@ -40,7 +41,7 @@ public class MultiComponent extends Component implements Collection<Component> {
         setComponents(components);
     }
 
-    public void setComponents(List<Component> components) {
+    public void setComponents(@NotNull List<Component> components) {
         this.components = components;
     }
 
@@ -104,8 +105,8 @@ public class MultiComponent extends Component implements Collection<Component> {
         return components.remove(o);
     }
 
-    public Component remove(int index) {
-        return components.remove(index);
+    public void remove(int index) {
+        components.remove(index);
     }
 
     @Override
