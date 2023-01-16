@@ -14,9 +14,9 @@ public abstract class Component {
     }
 
     public String getTagName() {
-        ComponentConfig componentConfig = getConfig();
-        if (componentConfig == null) return "undefined";
-        return componentConfig.tagName();
+        ComponentConfig config = getConfig();
+        if (config == null) return "undefined";
+        return config.tagName();
     }
 
     public void setStyle(Style style) {
