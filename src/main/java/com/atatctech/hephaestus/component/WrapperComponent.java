@@ -1,6 +1,7 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.Hephaestus;
+import com.atatctech.hephaestus.attribute.AttributesUtils;
 import com.atatctech.hephaestus.function.Consumer;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;

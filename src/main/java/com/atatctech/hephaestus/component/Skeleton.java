@@ -1,5 +1,7 @@
 package com.atatctech.hephaestus.component;
 
+import com.atatctech.hephaestus.attribute.Attribute;
+import com.atatctech.hephaestus.attribute.AttributesUtils;
 import com.atatctech.hephaestus.parser.Parser;
 
 public class Skeleton extends WrapperComponent {

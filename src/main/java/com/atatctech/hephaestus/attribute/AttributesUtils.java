@@ -1,7 +1,9 @@
-package com.atatctech.hephaestus.component;
+package com.atatctech.hephaestus.attribute;
 
 import com.atatctech.hephaestus.Color;
 import com.atatctech.hephaestus.Hephaestus;
+import com.atatctech.hephaestus.component.Component;
+import com.atatctech.hephaestus.component.Text;
 import com.atatctech.hephaestus.exception.BadFormat;
 
 import java.lang.reflect.Field;

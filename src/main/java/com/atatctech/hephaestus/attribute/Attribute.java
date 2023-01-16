@@ -1,4 +1,4 @@
-package com.atatctech.hephaestus.component;
+package com.atatctech.hephaestus.attribute;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
