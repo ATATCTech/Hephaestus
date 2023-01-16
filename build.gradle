@@ -37,6 +37,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId = 'hephaestus'
+            description = 'The most suitable text language for documentation. Native support for Markdown and HTML.'
             from components.java
 
             pom {
