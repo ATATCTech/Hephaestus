@@ -18,7 +18,7 @@ public final class Hephaestus {
         if (expr.isEmpty()) return null;
         if (Text.wrappedBy(expr, '[', ']')) return MultiComponent.PARSER.parse(expr.substring(1, expr.length() - 1));
         UnsupportedComponent temp = new UnsupportedComponent();
-        temp.expr = expr;
+        temp.fullExpr = expr;
         int i = Text.indexOf(expr, ':');
         if (i < 0) return Text.PARSER.parse(expr.substring(1, expr.length() - 1));
         temp.tagName = expr.substring(1, i);
@@ -31,7 +31,6 @@ public final class Hephaestus {
         temp.tagName = temp.tagName.replaceAll(" ", "");
         if (!Text.wrappedBy(expr, '{', '}')) throw new ComponentNotClosed(expr);
         Parser<?> parser = Config.getInstance().getParser(temp.tagName);
-        if (parser == null) return temp;
-        return parser.parse(temp.inner);
+        return parser == null ? temp : parser.parse(temp.inner);
     }
 }

@@ -1,5 +1,6 @@
 package com.atatctech.hephaestus.config;
 
+import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.ComponentConfig;
 import com.atatctech.hephaestus.exception.MissingFieldException;
@@ -18,7 +19,7 @@ public final class Config {
     private final Map<String, Parser<?>> parserMap = new HashMap<>();
 
     private Config() {
-        scanPackages("com.atatc.hephaestus.component", "com.atatc.hephaestus.skeleton");
+        scanPackages(Component.class.getPackageName());
     }
 
     public void scanPackage(String pkg) {
