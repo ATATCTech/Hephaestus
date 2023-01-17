@@ -2,6 +2,7 @@ package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
+import com.atatctech.hephaestus.exception.MissingDefaultConstructorException;
 import com.atatctech.hephaestus.function.Consumer;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
@@ -87,7 +88,7 @@ public abstract class WrapperComponent extends Component {
         try {
             constructor = clz.getDeclaredConstructor();
         } catch (NoSuchMethodException ignored) {
-            return null;
+            throw new MissingDefaultConstructorException(clz);
         }
         return expr -> {
             try {

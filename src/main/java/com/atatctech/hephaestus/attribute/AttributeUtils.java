@@ -5,6 +5,7 @@ import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.Text;
 import com.atatctech.hephaestus.exception.BadFormat;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -38,6 +39,7 @@ public final class AttributeUtils {
 
     public record AttributesAndBody(String attributesExpr, String bodyExpr) {}
 
+    @Nullable
     public static AttributesAndBody searchAttributesInExpr(String expr) {
         if (!Text.startsWith(expr, '(')) return null;
         int endIndex = Text.indexOf(expr, ')', 1) + 1;

@@ -1,6 +1,7 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.parser.Parser;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
 
@@ -174,6 +175,7 @@ public class Text extends Component {
 
     public record IndexPair(int start, int end) {}
 
+    @NotNull
     public static IndexPair pairBrackets(String s, char open, char close, int requiredDepth) {
         int depth = 0;
         int startIndex = -1;
@@ -185,6 +187,7 @@ public class Text extends Component {
         return new IndexPair(startIndex, -1);
     }
 
+    @NotNull
     public static IndexPair pairBrackets(String s, char open, char close) {
         return pairBrackets(s, open, close, 0);
     }
