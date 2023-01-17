@@ -23,7 +23,7 @@ public final class Hephaestus {
         temp.inner = expr.substring(i + 1, expr.length() - 1);
         if (Text.wrappedBy(expr, '<', '>')) {
             Skeleton skeleton = Skeleton.PARSER.parse(temp.inner);
-            skeleton.setName(temp.tagName);
+            skeleton.setName(Text.decompile(temp.tagName));
             return skeleton;
         }
         temp.tagName = temp.tagName.replaceAll(" ", "");
