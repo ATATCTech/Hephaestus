@@ -1,6 +1,5 @@
 package com.atatctech.hephaestus.config;
 
-import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.ComponentConfig;
 import com.atatctech.hephaestus.exception.MissingFieldException;
