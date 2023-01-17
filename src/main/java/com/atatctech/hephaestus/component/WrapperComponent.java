@@ -14,11 +14,11 @@ public abstract class WrapperComponent extends Component {
     @NotNull
     protected MultiComponent children = new MultiComponent();
 
-    public WrapperComponent(MultiComponent children) {
+    protected WrapperComponent(MultiComponent children) {
         setChildren(children);
     }
 
-    public WrapperComponent() {
+    protected WrapperComponent() {
     }
 
     public void setChildren(@NotNull MultiComponent children) {
