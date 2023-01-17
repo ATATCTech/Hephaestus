@@ -18,11 +18,12 @@ public class MultiComponent extends Component implements Collection<Component> {
             open = '<';
             close = '>';
         } else throw new BadFormat("Unrecognized format.", expr);
-        int[] indexes = Text.pairBrackets(expr, open, close);
+        Text.IndexPair indexes = Text.pairBrackets(expr, open, close);
+        int endIndex = indexes.end();
         List<Component> components = new LinkedList<>();
-        while (indexes[0] >= 0 && indexes[1]++ >= 0) {
-            components.add(Hephaestus.parseExpr(expr.substring(indexes[0], indexes[1])));
-            expr = expr.substring(indexes[1]);
+        while (indexes.start() >= 0 && endIndex++ >= 0) {
+            components.add(Hephaestus.parseExpr(expr.substring(indexes.start(), endIndex)));
+            expr = expr.substring(endIndex);
             indexes = Text.pairBrackets(expr, open, close);
         }
         return new MultiComponent(components);
@@ -31,7 +32,8 @@ public class MultiComponent extends Component implements Collection<Component> {
     @NotNull
     protected List<Component> components = new LinkedList<>();
 
-    public MultiComponent() {}
+    public MultiComponent() {
+    }
 
     public MultiComponent(List<Component> components) {
         setComponents(components);

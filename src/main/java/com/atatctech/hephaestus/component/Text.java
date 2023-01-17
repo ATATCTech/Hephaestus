@@ -172,18 +172,20 @@ public class Text extends Component {
         return wrappedBy(s, boarder, boarder);
     }
 
-    public static int[] pairBrackets(String s, char open, char close, int requiredDepth) {
+    public record IndexPair(int start, int end) {}
+
+    public static IndexPair pairBrackets(String s, char open, char close, int requiredDepth) {
         int depth = 0;
         int startIndex = -1;
         for (int i = 0; i < s.length(); i++) {
             char bit = s.charAt(i);
             if (bit == open && depth++ == requiredDepth) startIndex = i;
-            else if (bit == close && --depth == requiredDepth) return new int[]{startIndex, i};
+            else if (bit == close && --depth == requiredDepth) return new IndexPair(startIndex, i);
         }
-        return new int[]{startIndex, -1};
+        return new IndexPair(startIndex, -1);
     }
 
-    public static int[] pairBrackets(String s, char open, char close) {
+    public static IndexPair pairBrackets(String s, char open, char close) {
         return pairBrackets(s, open, close, 0);
     }
 }
