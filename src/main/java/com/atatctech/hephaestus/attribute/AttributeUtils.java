@@ -57,16 +57,16 @@ public final class AttributeUtils {
         else field.set(instance, t.cast(value));
     }
 
-    public static String getAttribute(String attributeExpr, String attributeName) {
-        if (attributeExpr.length() < attributeName.length()) return null;
-        int startIndex = attributeExpr.indexOf(attributeName);
+    public static String getAttribute(String attributesExpr, String attributeName) {
+        if (attributesExpr.length() < attributeName.length()) return null;
+        int startIndex = attributesExpr.indexOf(attributeName);
         if (startIndex < 0) return null;
         startIndex += attributeName.length();
-        if (!Text.charAtEquals(attributeExpr, startIndex, '=')) return getAttribute(attributeExpr.substring(startIndex), attributeName);
+        if (!Text.charAtEquals(attributesExpr, startIndex, '=')) return getAttribute(attributesExpr.substring(startIndex), attributeName);
         startIndex += 1;
-        int endIndex = Text.indexOf(attributeExpr, ';', startIndex);
-        if (endIndex < 0) return attributeExpr.substring(startIndex);
-        return attributeExpr.substring(startIndex, endIndex);
+        int endIndex = Text.indexOf(attributesExpr, ';', startIndex);
+        if (endIndex < 0) return attributesExpr.substring(startIndex);
+        return attributesExpr.substring(startIndex, endIndex);
     }
 
     public static void injectAttributes(Component component, String attributesExpr) {
