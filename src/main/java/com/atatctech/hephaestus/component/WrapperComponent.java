@@ -1,7 +1,7 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.Hephaestus;
-import com.atatctech.hephaestus.attribute.AttributesUtils;
+import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.function.Consumer;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
@@ -79,7 +79,7 @@ public abstract class WrapperComponent extends Component {
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + AttributesUtils.extractAttributes(this) + getChildren().expr() + "}";
+        return "{" + getTagName() + ":" + AttributeUtils.extractAttributes(this) + getChildren().expr() + "}";
     }
 
     public static <C extends WrapperComponent> Parser<C> makeParser(Class<C> clz) {
@@ -92,12 +92,12 @@ public abstract class WrapperComponent extends Component {
         return expr -> {
             try {
                 C component = constructor.newInstance();
-                AttributesUtils.AttributesAndBody attributesAndBody = AttributesUtils.searchAttributesInExpr(expr);
+                AttributeUtils.AttributesAndBody attributesAndBody = AttributeUtils.searchAttributesInExpr(expr);
                 String body;
                 if (attributesAndBody == null) body = expr;
                 else {
                     body = attributesAndBody.bodyExpr();
-                    AttributesUtils.injectAttributes(component, attributesAndBody.attributesExpr());
+                    AttributeUtils.injectAttributes(component, attributesAndBody.attributesExpr());
                 }
                 Component bodyComponent = Hephaestus.parseExpr(body);
                 if (bodyComponent != null) component.setChildren(bodyComponent instanceof MultiComponent children ? children : new MultiComponent(bodyComponent));

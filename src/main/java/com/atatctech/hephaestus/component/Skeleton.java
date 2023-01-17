@@ -1,7 +1,7 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.attribute.Attribute;
-import com.atatctech.hephaestus.attribute.AttributesUtils;
+import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.parser.Parser;
 
 public class Skeleton extends WrapperComponent {
@@ -55,7 +55,7 @@ public class Skeleton extends WrapperComponent {
 
     @Override
     public String expr() {
-        String expr = "<" + Text.compile(getName()) + ":" + AttributesUtils.extractAttributes(this) + getChildren().expr();
+        String expr = "<" + Text.compile(getName()) + ":" + AttributeUtils.extractAttributes(this) + getChildren().expr();
         return (expr.endsWith(":") ? expr.substring(0, expr.length() - 1) : expr) + ">";
     }
 }

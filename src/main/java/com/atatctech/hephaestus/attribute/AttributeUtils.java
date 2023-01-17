@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public final class AttributesUtils {
+public final class AttributeUtils {
     public static Set<Field> getDeclaredFields(Class<?> clz) {
         if (clz == null) return null;
         Set<Field> fields = new HashSet<>(Arrays.asList(clz.getDeclaredFields()));

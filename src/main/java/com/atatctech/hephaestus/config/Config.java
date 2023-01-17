@@ -40,11 +40,11 @@ public final class Config {
         for (String pkg : packages) scanPackage(pkg);
     }
 
-    public void putParser(String componentName, Parser<?> parser) {
-        parserMap.put(componentName, parser);
+    public void putParser(String tagName, Parser<?> parser) {
+        parserMap.put(tagName, parser);
     }
 
-    public Parser<?> getParser(String componentName) {
-        return parserMap.get(componentName);
+    public Parser<?> getParser(String tagName) {
+        return parserMap.get(tagName);
     }
 }
