@@ -30,7 +30,7 @@ public final class AttributeUtils {
                 field.setAccessible(true);
                 Object val = field.get(component);
                 if (val == null) continue;
-                attributes.append(field.getName()).append("=").append(val).append(";");
+                attributes.append(getAttributeName(field.getAnnotation(Attribute.class), field)).append("=").append(val).append(";");
             } catch (IllegalAccessException ignored) {}
         }
         if (attributes.length() == 1) return "";
@@ -60,6 +60,10 @@ public final class AttributeUtils {
         else field.set(instance, t.cast(value));
     }
 
+    public static String getAttributeName(Attribute annotation, Field field) {
+        return annotation.name().isEmpty() ? field.getName() : annotation.name();
+    }
+
     public static String getAttribute(String attributesExpr, String attributeName) {
         if (attributesExpr.length() < attributeName.length()) return null;
         int startIndex = attributesExpr.indexOf(attributeName);
@@ -75,9 +79,9 @@ public final class AttributeUtils {
     public static void injectAttributes(Component component, String attributesExpr) {
         Set<Field> fields = getDeclaredFields(component.getClass());
         for (Field field : fields) {
-            if (!field.isAnnotationPresent(Attribute.class)) continue;
             try {
-                String val = getAttribute(attributesExpr, field.getName());
+                if (!field.isAnnotationPresent(Attribute.class)) continue;
+                String val = getAttribute(attributesExpr, getAttributeName(field.getAnnotation(Attribute.class), field));
                 if (val == null) continue;
                 injectField(field, component, val);
             } catch (IllegalAccessException | BadFormat ignored) {}
