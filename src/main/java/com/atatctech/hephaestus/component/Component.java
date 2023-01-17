@@ -27,7 +27,7 @@ public abstract class Component {
         return style;
     }
 
-    protected void forEach(Consumer<? super Component> action, int depth) {
+    public void forEach(Consumer<? super Component> action, int depth) {
         action.accept(this, depth);
     }
 

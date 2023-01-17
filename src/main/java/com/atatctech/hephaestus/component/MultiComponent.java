@@ -53,9 +53,7 @@ public class MultiComponent extends Component implements Collection<Component> {
 
     @Override
     public void forEach(Consumer<? super Component> action, int depth) {
-        for (Component component : components) {
-            if (!action.accept(component, depth)) break;
-        }
+        for (Component component : components) if (!action.accept(component, depth)) break;
     }
 
     @Override
