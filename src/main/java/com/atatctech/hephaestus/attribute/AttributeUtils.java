@@ -48,6 +48,7 @@ public final class AttributeUtils {
     }
 
     public static void injectField(Field field, Object instance, String value) throws IllegalAccessException, BadFormat {
+        field.setAccessible(true);
         Class<?> t = field.getType();
         if (t == String.class) field.set(instance, value);
         else if (t == Integer.class) field.set(instance, Integer.valueOf(value));
