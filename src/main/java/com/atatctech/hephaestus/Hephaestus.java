@@ -9,13 +9,12 @@ import com.atatctech.hephaestus.exception.BadFormat;
 import com.atatctech.hephaestus.exception.ComponentNotClosed;
 import com.atatctech.hephaestus.parser.Parser;
 import com.atatctech.hephaestus.component.Skeleton;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class Hephaestus {
     @Nullable
-    public static Component parseExpr(@NotNull String expr) throws BadFormat {
-        if (expr.isEmpty()) return null;
+    public static Component parseExpr(String expr) throws BadFormat {
+        if (expr == null || expr.isEmpty()) return null;
         if (Text.wrappedBy(expr, '[', ']')) return MultiComponent.PARSER.parse(expr.substring(1, expr.length() - 1));
         UnsupportedComponent temp = new UnsupportedComponent();
         temp.fullExpr = expr;
