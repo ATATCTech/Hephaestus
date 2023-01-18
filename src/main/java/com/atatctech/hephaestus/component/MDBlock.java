@@ -7,7 +7,7 @@ public class MDBlock extends Component {
     public static Parser<MDBlock> PARSER;
 
     static {
-        PARSER = MDBlock::new;
+        PARSER = expr -> new MDBlock(Text.decompile(expr));
     }
 
     protected String markdown;
@@ -28,6 +28,6 @@ public class MDBlock extends Component {
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + getMarkdown() + "}";
+        return "{" + getTagName() + ":" + Text.compile(getMarkdown()) + "}";
     }
 }

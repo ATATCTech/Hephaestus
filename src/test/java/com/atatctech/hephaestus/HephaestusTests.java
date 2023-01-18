@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 public class HephaestusTests {
     @Test
     void test() throws BadFormat {
-        // fixme
         Skeleton skeleton = new Skeleton("column a");
         skeleton.setComponent(new HTMLBlock("};)"));
         System.out.println(skeleton.expr());

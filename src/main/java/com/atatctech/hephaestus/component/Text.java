@@ -180,9 +180,8 @@ public class Text extends Component {
         int depth = 0;
         int startIndex = -1;
         for (int i = 0; i < s.length(); i++) {
-            char bit = s.charAt(i);
-            if (bit == open && depth++ == requiredDepth) startIndex = i;
-            else if (bit == close && --depth == requiredDepth) return new IndexPair(startIndex, i);
+            if (Text.charAtEquals(s, i, open) && depth++ == requiredDepth) startIndex = i;
+            else if (Text.charAtEquals(s, i, close) && --depth == requiredDepth) return new IndexPair(startIndex, i);
         }
         return new IndexPair(startIndex, -1);
     }

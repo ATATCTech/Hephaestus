@@ -7,7 +7,7 @@ public class HTMLBlock extends Component {
     public static Parser<HTMLBlock> PARSER;
 
     static {
-        PARSER = HTMLBlock::new;
+        PARSER = expr -> new HTMLBlock(Text.decompile(expr));
     }
 
     protected String html;
@@ -28,6 +28,6 @@ public class HTMLBlock extends Component {
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + getHTML() + "}";
+        return "{" + getTagName() + ":" + Text.compile(getHTML()) + "}";
     }
 }
