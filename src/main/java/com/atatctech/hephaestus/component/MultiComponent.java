@@ -64,7 +64,7 @@ public class MultiComponent extends Component implements Collection<Component> {
         if (components.size() == 0) return "";
         if (components.size() == 1) return components.get(0).expr();
         StringBuilder expr = new StringBuilder("[");
-        components.forEach((component) -> expr.append(component.expr()));
+        components.forEach(component -> expr.append(component.expr()));
         return expr + "]";
     }
 

@@ -7,27 +7,27 @@ public class MDBlock extends Component {
     public static Parser<MDBlock> PARSER;
 
     static {
-        PARSER = expr -> new MDBlock(Text.decompile(expr));
+        PARSER = expr -> new MDBlock(Text.PARSER.parse(expr));
     }
 
-    protected String markdown;
+    protected Text markdown;
 
     public MDBlock() {}
 
-    public MDBlock(String markdown) {
+    public MDBlock(Text markdown) {
         setMarkdown(markdown);
     }
 
-    public void setMarkdown(String html) {
+    public void setMarkdown(Text html) {
         this.markdown = html;
     }
 
-    public String getMarkdown() {
+    public Text getMarkdown() {
         return markdown;
     }
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + Text.compile(getMarkdown()) + "}";
+        return "{" + getTagName() + ":" + getMarkdown().expr() + "}";
     }
 }

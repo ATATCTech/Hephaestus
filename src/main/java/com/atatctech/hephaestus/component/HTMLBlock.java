@@ -7,27 +7,27 @@ public class HTMLBlock extends Component {
     public static Parser<HTMLBlock> PARSER;
 
     static {
-        PARSER = expr -> new HTMLBlock(Text.decompile(expr));
+        PARSER = expr -> new HTMLBlock(Text.PARSER.parse(expr));
     }
 
-    protected String html;
+    protected Text html;
 
     public HTMLBlock() {}
 
-    public HTMLBlock(String html) {
+    public HTMLBlock(Text html) {
         setHTML(html);
     }
 
-    public void setHTML(String html) {
+    public void setHTML(Text html) {
         this.html = html;
     }
 
-    public String getHTML() {
+    public Text getHTML() {
         return html;
     }
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + Text.compile(getHTML()) + "}";
+        return "{" + getTagName() + ":" + getHTML().expr() + "}";
     }
 }
