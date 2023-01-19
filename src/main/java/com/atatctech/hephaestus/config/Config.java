@@ -8,6 +8,9 @@ import org.reflections.Reflections;
 
 import java.util.*;
 
+/**
+ * The global configuration manager.
+ */
 public final class Config {
     private final static Config instance = new Config();
 

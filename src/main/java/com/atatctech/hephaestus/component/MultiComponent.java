@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+/**
+ * A collection of components.
+ */
 public class MultiComponent extends Component implements Collection<Component> {
     public static Parser<MultiComponent> PARSER = expr -> {
         char open, close;
@@ -18,13 +21,13 @@ public class MultiComponent extends Component implements Collection<Component> {
             open = '<';
             close = '>';
         } else throw new BadFormat("Unrecognized format.", expr);
-        Text.IndexPair indexes = Text.pairBrackets(expr, open, close);
+        Text.IndexPair indexes = Text.matchBrackets(expr, open, close);
         int endIndex = indexes.end();
         List<Component> components = new LinkedList<>();
         while (indexes.start() >= 0 && endIndex++ >= 0) {
             components.add(Hephaestus.parseExpr(expr.substring(indexes.start(), endIndex)));
             expr = expr.substring(endIndex);
-            indexes = Text.pairBrackets(expr, open, close);
+            indexes = Text.matchBrackets(expr, open, close);
         }
         return new MultiComponent(components);
     };

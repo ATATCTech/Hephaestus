@@ -4,6 +4,9 @@ import com.atatctech.hephaestus.attribute.Attribute;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.parser.Parser;
 
+/**
+ * A component used to integrate pages and display hierarchical relationships.
+ */
 public class Skeleton extends WrapperComponent {
     public static Parser<Skeleton> PARSER = WrapperComponent.makeParser(Skeleton.class);
 

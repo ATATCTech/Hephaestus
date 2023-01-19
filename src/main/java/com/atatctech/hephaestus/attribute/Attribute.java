@@ -8,5 +8,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Attribute {
+    /**
+     * Specify the name appears in the expression.
+     * @return the name, the name of the field is used instead if empty
+     */
     String name() default "";
 }

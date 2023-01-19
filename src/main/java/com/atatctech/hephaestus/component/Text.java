@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 
 /**
  * This is the most commonly used thing, and it assumes the role of the equivalent of a string in programming languages.
- * You may also notice that yes, there are static methods related to text processing under this class name.
+ * Basically, it is used for string scape.
+ * You may also notice that yes, there are static methods related to text processing under this class.
  */
 public class Text extends Component {
     public static Parser<Text> PARSER = expr -> new Text(Text.decompile(expr));
@@ -49,7 +50,7 @@ public class Text extends Component {
     };
 
     /**
-     * To prevent the character from being recognized as a keyword.
+     * Prevent {@param c} from being recognized as a keyword.
      * @param c the character to quote
      * @return quotation string
      */
@@ -58,7 +59,7 @@ public class Text extends Component {
     }
 
     /**
-     * To quote all the occurrences of a specific character.
+     * Quote all the occurrences of {@param c}.
      * @param s the string object
      * @param c the character that needs to be quoted
      * @return compiled string
@@ -69,7 +70,7 @@ public class Text extends Component {
     }
 
     /**
-     * To quote all the occurrences of every reserved keyword.
+     * Quote all the occurrences of every reserved keyword.
      * @param s the string object
      * @return the compiled string
      */
@@ -79,7 +80,7 @@ public class Text extends Component {
     }
 
     /**
-     * To remove all the quotations of a specific character.
+     * Remove all the quotations of {@param c}.
      * @param s the string object
      * @param c the character whose quotations need to be removed
      * @return the decompiled string
@@ -90,7 +91,7 @@ public class Text extends Component {
     }
 
     /**
-     * To remove all the quotations of every reserved keyword.
+     * Remove all the quotations of every reserved keyword.
      * @param s the string object
      * @return the decompiled string
      */
@@ -100,7 +101,7 @@ public class Text extends Component {
     }
 
     /**
-     * To find the first index of a certain character in the string, excluding the quotations.
+     * Find the first index of {@param c} in {@param s}, excluding the quotations.
      * @param s the string object
      * @param c the character to find
      * @param fromIndex search starts from this index
@@ -116,7 +117,7 @@ public class Text extends Component {
     }
 
     /**
-     * To find the last index of a certain character in the string, excluding the quotations.
+     * Find the last index of {@param c} in {@param s}, excluding the quotations.
      * @param s the string object
      * @param c the character to find
      * @param fromIndex search starts from this index
@@ -132,7 +133,7 @@ public class Text extends Component {
     }
 
     /**
-     * To determine whether the character at a certain index in the string equals to a specific character and is not a quotation.
+     * Determine whether the character at {@param i} in {@param s} equals to {@param c} and is not a quotation.
      * @param s the string object
      * @param i the index in the string at which the character needs to be compared
      * @param c the character to compare
@@ -146,9 +147,9 @@ public class Text extends Component {
     }
 
     /**
-     * To determine whether the string object starts with a certain character and not a quotation.
+     * Determine whether {@param s} starts with {@param c} and the occurrence is not a quotation.
      * @param s the string object
-     * @param c the character to compare
+     * @param c expected starting character
      * @return true: does start with; false: does not start with
      */
     public static boolean startsWith(String s, char c) {
@@ -156,15 +157,22 @@ public class Text extends Component {
     }
 
     /**
-     * To determine whether the string object ends with a certain character and not a quotation.
+     * Determine whether {@param s} ends with {@param c} and not a quotation.
      * @param s the string object
-     * @param c the character to compare
+     * @param c expected ending character
      * @return true: does end with; false: does not end with
      */
     public static boolean endsWith(String s, char c) {
         return charAtEquals(s, s.length() - 1, c);
     }
 
+    /**
+     * Determine if {@param s} starts with {@param start} and ends with {@param end}.
+     * @param s the string object
+     * @param start expected starting character
+     * @param end expected ending character
+     * @return true: is wrapped by; false: is not wrapped by
+     */
     public static boolean wrappedBy(String s, char start, char end) {
         return startsWith(s, start) && endsWith(s, end);
     }
@@ -175,8 +183,16 @@ public class Text extends Component {
 
     public record IndexPair(int start, int end) {}
 
+    /**
+     * Match brackets at a same level.
+     * @param s the string object
+     * @param open the left bracket
+     * @param close the right bracket
+     * @param requiredDepth the target level
+     * @return indexes of the left bracket and the right bracket
+     */
     @NotNull
-    public static IndexPair pairBrackets(String s, char open, char close, int requiredDepth) {
+    public static IndexPair matchBrackets(String s, char open, char close, int requiredDepth) {
         int depth = 0;
         int startIndex = -1;
         for (int i = 0; i < s.length(); i++) {
@@ -187,7 +203,7 @@ public class Text extends Component {
     }
 
     @NotNull
-    public static IndexPair pairBrackets(String s, char open, char close) {
-        return pairBrackets(s, open, close, 0);
+    public static IndexPair matchBrackets(String s, char open, char close) {
+        return matchBrackets(s, open, close, 0);
     }
 }
