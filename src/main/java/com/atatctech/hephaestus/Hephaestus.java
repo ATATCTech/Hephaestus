@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public final class Hephaestus {
     @Nullable
     public static Component parseExpr(String expr) throws BadFormat {
-        if (expr == null || expr.isEmpty()) return null;
+        if (expr == null || expr.length() < 2) return null;
         if (Text.wrappedBy(expr, '[', ']')) return MultiComponent.PARSER.parse(expr.substring(1, expr.length() - 1));
         UnsupportedComponent temp = new UnsupportedComponent();
         temp.fullExpr = expr;
@@ -27,8 +27,8 @@ public final class Hephaestus {
             skeleton.setName(Text.decompile(temp.tagName));
             return skeleton;
         }
-        temp.tagName = temp.tagName.replaceAll(" ", "");
         if (!Text.wrappedBy(expr, '{', '}')) throw new ComponentNotClosed(expr);
+        temp.tagName = temp.tagName.replaceAll(" ", "");
         Parser<?> parser = Config.getInstance().getParser(temp.tagName);
         return parser == null ? temp : parser.parse(temp.inner);
     }
