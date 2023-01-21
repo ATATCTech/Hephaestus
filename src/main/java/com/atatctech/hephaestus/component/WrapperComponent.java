@@ -79,6 +79,12 @@ public abstract class WrapperComponent extends Component {
     }
 
     @Override
+    public void parallelTraversal(Consumer<? super Component> action, int depth) {
+        super.parallelTraversal(action, depth);
+        getChildren().parallelTraversal(action, depth + 1);
+    }
+
+    @Override
     public String expr() {
         return "{" + getTagName() + ":" + AttributeUtils.extractAttributes(this) + getChildren().expr() + "}";
     }

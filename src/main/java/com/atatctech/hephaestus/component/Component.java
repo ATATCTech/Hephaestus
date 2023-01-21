@@ -44,9 +44,9 @@ public abstract class Component {
     }
 
     /**
-     * Exposes an interface capable of traversing the component tree.
+     * Exposes an interface capable of traversing the component tree. This method traverses the component tree in order from top right to bottom left.
      * @param action callback function
-     * @param depth indicates the depth of the top component
+     * @param depth indicates the depth of the top (this) component
      */
     public void forEach(Consumer<? super Component> action, int depth) {
         action.accept(this, depth);
@@ -54,6 +54,19 @@ public abstract class Component {
 
     public void forEach(Consumer<? super Component> action) {
         forEach(action, 0);
+    }
+
+    /**
+     * Exposes an interface capable of traversing the component tree. Different from `Component.forEach()`, this method traverses the component tree horizontally from top to bottom.
+     * @param action callback function
+     * @param depth indicates the depth of the top (this) component
+     */
+    public void parallelTraversal(Consumer<? super Component> action, int depth) {
+        action.accept(this, depth);
+    }
+
+    public void parallelTraversal(Consumer<? super Component> action) {
+        parallelTraversal(action, 0);
     }
 
     /**
