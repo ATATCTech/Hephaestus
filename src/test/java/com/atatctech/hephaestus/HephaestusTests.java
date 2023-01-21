@@ -17,14 +17,8 @@ public class HephaestusTests {
         skeleton2.appendChild(skeleton4);
         skeleton3.appendChild(skeleton5);
 
-        skeleton1.forEach((component, depth) -> {
-            System.out.println(depth);
-            return true;
-        });
+        skeleton1.forEach((component, depth) -> System.out.println(depth));
 
-        skeleton1.parallelTraversal((component, depth) -> {
-            System.out.println(depth);
-            return true;
-        });
+        skeleton1.parallelTraversal((component, depth) -> System.out.println(depth));
     }
 }

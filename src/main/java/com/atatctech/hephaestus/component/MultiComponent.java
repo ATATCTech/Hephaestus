@@ -63,7 +63,7 @@ public class MultiComponent extends Component implements Collection<Component> {
         List<Component> next = new LinkedList<>();
         for (Component component : components) {
             if (component instanceof WrapperComponent wrapperComponent) next.addAll(wrapperComponent.getChildren().components);
-            if (!action.accept(component, depth)) return;
+            action.accept(component, depth);
         }
         if (next.size() > 0) parallelTraversal(action, next, depth + 1);
     }
