@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class WrapperComponent extends Component {
     @NotNull
@@ -50,7 +49,6 @@ public abstract class WrapperComponent extends Component {
         StringBuilder text = new StringBuilder();
         getChildren().forEach((component, depth) -> {
             if (component instanceof Text t) text.append(t.getText());
-            return true;
         });
         return text.toString();
     }
@@ -58,18 +56,6 @@ public abstract class WrapperComponent extends Component {
     public boolean contains(Class<? extends Component> classOfComponent) {
         for (Component child : getChildren()) if (child.getClass().isAssignableFrom(classOfComponent)) return true;
         return false;
-    }
-
-    public boolean contains(Class<? extends Component> classOfComponent, int depthLimit) {
-        AtomicBoolean flag = new AtomicBoolean(false);
-        getChildren().forEach((component, depth) -> {
-            if (component.getClass().isAssignableFrom(classOfComponent)) {
-                flag.set(true);
-                return false;
-            }
-            return depthLimit < 0 || depth < depthLimit;
-        });
-        return flag.get();
     }
 
     @Override

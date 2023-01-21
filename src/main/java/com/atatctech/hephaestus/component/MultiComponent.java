@@ -59,18 +59,18 @@ public class MultiComponent extends Component implements Collection<Component> {
         for (Component component : components) component.forEach(action, depth);
     }
 
-    protected void parallelTraversal(Consumer<? super Component> action, List<Component> components, int depth) {
+    protected void parallelTraversal(Consumer<? super Component> action, int depth, List<Component> components) {
         List<Component> next = new LinkedList<>();
         for (Component component : components) {
             if (component instanceof WrapperComponent wrapperComponent) next.addAll(wrapperComponent.getChildren().components);
             action.accept(component, depth);
         }
-        if (next.size() > 0) parallelTraversal(action, next, depth + 1);
+        if (next.size() > 0) parallelTraversal(action, depth + 1, next);
     }
 
     @Override
     public void parallelTraversal(Consumer<? super Component> action, int depth) {
-        parallelTraversal(action, components, depth);
+        parallelTraversal(action, depth, components);
     }
 
     @Override
