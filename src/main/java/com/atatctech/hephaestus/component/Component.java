@@ -44,7 +44,7 @@ public abstract class Component {
     }
 
     /**
-     * Exposes an interface capable of traversing the component tree. This method traverses the component tree in order from top right to bottom left.
+     * Exposes an interface capable of traversing the component tree. This method traverses the component tree in order from top right to bottom left (DFS).
      * @param action callback function
      * @param depth indicates the depth of the top (this) component
      */
@@ -57,7 +57,7 @@ public abstract class Component {
     }
 
     /**
-     * Exposes an interface capable of traversing the component tree. Different from `Component.forEach()`, this method traverses the component tree horizontally from top to bottom.
+     * Exposes an interface capable of traversing the component tree. Different from `Component.forEach()`, this method traverses the component tree horizontally from top to bottom (BFS).
      * @param action callback function
      * @param depth indicates the depth of the top (this) component
      */
