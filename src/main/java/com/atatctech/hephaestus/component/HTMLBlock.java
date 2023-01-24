@@ -1,5 +1,6 @@
 package com.atatctech.hephaestus.component;
 
+import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.parser.Parser;
 
 @ComponentConfig(tagName = "html")
@@ -7,7 +8,7 @@ public class HTMLBlock extends Component {
     public static Parser<HTMLBlock> PARSER;
 
     static {
-        PARSER = expr -> new HTMLBlock(Text.PARSER.parse(expr));
+        PARSER = expr -> new HTMLBlock((Text) Hephaestus.parseExpr(expr));
     }
 
     protected Text html;

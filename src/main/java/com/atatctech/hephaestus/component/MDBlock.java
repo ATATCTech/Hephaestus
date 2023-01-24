@@ -1,5 +1,6 @@
 package com.atatctech.hephaestus.component;
 
+import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.parser.Parser;
 
 @ComponentConfig(tagName = "md")
@@ -7,7 +8,7 @@ public class MDBlock extends Component {
     public static Parser<MDBlock> PARSER;
 
     static {
-        PARSER = expr -> new MDBlock(Text.PARSER.parse(expr));
+        PARSER = expr -> new MDBlock((Text) Hephaestus.parseExpr(expr));
     }
 
     protected Text markdown;

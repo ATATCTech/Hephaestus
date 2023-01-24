@@ -18,7 +18,6 @@ public class HephaestusTests {
         skeleton2.appendChild(skeleton4);
         skeleton3.appendChild(skeleton5);
 
-        // FixMe
         System.out.println(Hephaestus.parseExpr(skeleton1.expr()));
     }
 }

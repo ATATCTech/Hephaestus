@@ -28,6 +28,7 @@ public class MultiComponent extends Component implements Collection<Component> {
             components.add(Hephaestus.parseExpr(expr.substring(indexes.start(), endIndex)));
             expr = expr.substring(endIndex);
             indexes = Text.matchBrackets(expr, open, close);
+            endIndex = indexes.end();
         }
         return new MultiComponent(components);
     };
@@ -62,7 +63,8 @@ public class MultiComponent extends Component implements Collection<Component> {
     protected void parallelTraversal(Consumer<? super Component> action, int depth, List<Component> components) {
         List<Component> next = new LinkedList<>();
         for (Component component : components) {
-            if (component instanceof WrapperComponent wrapperComponent) next.addAll(wrapperComponent.getChildren().components);
+            if (component instanceof WrapperComponent wrapperComponent)
+                next.addAll(wrapperComponent.getChildren().components);
             action.accept(component, depth);
         }
         if (next.size() > 0) parallelTraversal(action, depth + 1, next);
