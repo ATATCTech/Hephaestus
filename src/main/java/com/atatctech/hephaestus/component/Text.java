@@ -1,5 +1,6 @@
 package com.atatctech.hephaestus.component;
 
+import com.atatctech.hephaestus.format.Format;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,6 +16,8 @@ public class Text extends Component {
 
     protected String text;
 
+    protected Format format;
+
     public Text(String text) {
         this.text = text;
     }
@@ -25,6 +28,19 @@ public class Text extends Component {
 
     public String getText() {
         return text;
+    }
+
+    public void assertFormat(Format format) {
+        this.format = format;
+    }
+
+    public Format detectFormat() {
+        if (getText().matches("<[a-z][\\s\\S]*>")) return Format.HTML;
+        return Format.MARKDOWN;
+    }
+
+    public Format getFormat() {
+        return format == null ? detectFormat() : format;
     }
 
     @Override

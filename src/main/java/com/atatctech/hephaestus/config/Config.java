@@ -43,6 +43,10 @@ public final class Config {
         for (String pkg : packages) scanPackage(pkg);
     }
 
+    public String[] listTagNames() {
+        return parserMap.keySet().toArray(String[]::new);
+    }
+
     public void putParser(String tagName, Parser<?> parser) {
         parserMap.put(tagName, parser);
     }

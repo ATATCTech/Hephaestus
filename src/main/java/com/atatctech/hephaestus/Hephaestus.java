@@ -32,4 +32,8 @@ public final class Hephaestus {
         Parser<?> parser = Config.getInstance().getParser(temp.tagName);
         return parser == null ? temp : parser.parse(temp.inner);
     }
+
+    public static String[] listTagNames() {
+        return Config.getInstance().listTagNames();
+    }
 }
