@@ -38,7 +38,7 @@ System.out.println(skeleton.expr());
 ### Parse Hexpr
 
 ```java
-Component component = Hephaestus.parseExpr("<Welcome:(component={md:{# Welcome to the world of Hephaestus}};)>");
+Component component = Hephaestus.parse("<Welcome:(component={md:{# Welcome to the world of Hephaestus}};)>");
 Skeleton skeleton = (Skeleton) component;
 System.out.println(((MDBlock) skeleton.getComponent()).getMarkdown().getText());
 ```

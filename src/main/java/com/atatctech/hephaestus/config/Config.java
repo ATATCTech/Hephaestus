@@ -4,6 +4,7 @@ import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.ComponentConfig;
 import com.atatctech.hephaestus.exception.MissingFieldException;
 import com.atatctech.hephaestus.parser.Parser;
+import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
 
 import java.util.*;
@@ -43,6 +44,7 @@ public final class Config {
         for (String pkg : packages) scanPackage(pkg);
     }
 
+    @NotNull
     public String[] listTagNames() {
         return parserMap.keySet().toArray(String[]::new);
     }

@@ -162,6 +162,17 @@ public class Text extends Component {
         return e;
     }
 
+    public static boolean charAtEqualsAny(String s, int i, char... cs) {
+        char bit = s.charAt(i);
+        for (char c : cs) {
+            if (bit != c) continue;
+            if (i > 0) return s.charAt(i - 1) != COMPILER_CHARACTER;
+            if (c == COMPILER_CHARACTER && s.length() > 1) return s.charAt(1) != COMPILER_CHARACTER;
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Determine whether {@param s} starts with {@param c} and the occurrence is not a quotation.
      * @param s the string object

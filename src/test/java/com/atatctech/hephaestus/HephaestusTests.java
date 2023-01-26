@@ -7,17 +7,15 @@ import org.junit.jupiter.api.Test;
 public class HephaestusTests {
     @Test
     void test() throws BadFormat {
-        Skeleton skeleton1 = new Skeleton("S1");
-        Skeleton skeleton2 = new Skeleton("S2");
-        Skeleton skeleton3 = new Skeleton("S3");
-        Skeleton skeleton4 = new Skeleton("S4");
-        Skeleton skeleton5 = new Skeleton("S5");
-
-        skeleton1.appendChild(skeleton2);
-        skeleton1.appendChild(skeleton3);
-        skeleton2.appendChild(skeleton4);
-        skeleton3.appendChild(skeleton5);
-
-        System.out.println(Hephaestus.parseExpr(skeleton1.expr()));
+        System.out.println(new Skeleton("skeleton2"));
+        String a = Hephaestus.clean("""
+                 < skeleton :(component={md: {
+                ### Test
+                
+                This is a test.
+                }};)[<skeleton2> <skeleton3>]>
+                """);
+        System.out.println(a);
+        System.out.println(Hephaestus.parse(a));
     }
 }
