@@ -29,6 +29,6 @@ public class HTMLBlock extends Component {
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + getHTML().expr() + "}";
+        return generateExpr(getHTML().expr());
     }
 }

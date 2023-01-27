@@ -29,6 +29,6 @@ public class MDBlock extends Component {
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + getMarkdown().expr() + "}";
+        return generateExpr(getMarkdown().expr());
     }
 }

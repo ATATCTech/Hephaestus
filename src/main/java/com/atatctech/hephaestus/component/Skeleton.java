@@ -1,5 +1,7 @@
 package com.atatctech.hephaestus.component;
 
+import com.atatctech.hephaestus.Compilable;
+import com.atatctech.hephaestus.Compiler;
 import com.atatctech.hephaestus.attribute.Attribute;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.parser.Parser;
@@ -7,7 +9,7 @@ import com.atatctech.hephaestus.parser.Parser;
 /**
  * A component used to integrate pages and display hierarchical relationships.
  */
-public class Skeleton extends WrapperComponent {
+public class Skeleton extends WrapperComponent implements Compilable {
     public static Parser<Skeleton> PARSER = WrapperComponent.makeParser(Skeleton.class);
 
     protected String name;
@@ -60,5 +62,10 @@ public class Skeleton extends WrapperComponent {
     public String expr() {
         String expr = "<" + Text.compile(getName()) + ":" + AttributeUtils.extractAttributes(this) + getChildren().expr();
         return (expr.endsWith(":") ? expr.substring(0, expr.length() - 1) : expr) + ">";
+    }
+
+    @Override
+    public void compile(Compiler compiler) {
+        if (getComponent() instanceof Ref ref) compiler.compile(ref);
     }
 }

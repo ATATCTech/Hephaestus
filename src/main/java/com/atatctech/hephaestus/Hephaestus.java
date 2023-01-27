@@ -1,16 +1,14 @@
 package com.atatctech.hephaestus;
 
-import com.atatctech.hephaestus.component.Component;
-import com.atatctech.hephaestus.component.MultiComponent;
-import com.atatctech.hephaestus.component.Text;
-import com.atatctech.hephaestus.component.UnsupportedComponent;
+import com.atatctech.hephaestus.component.*;
 import com.atatctech.hephaestus.config.Config;
 import com.atatctech.hephaestus.exception.BadFormat;
 import com.atatctech.hephaestus.exception.ComponentNotClosed;
 import com.atatctech.hephaestus.parser.Parser;
-import com.atatctech.hephaestus.component.Skeleton;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
 
 public final class Hephaestus {
     @Nullable
@@ -68,5 +66,17 @@ public final class Hephaestus {
             builder.append(bit);
         }
         return builder.toString();
+    }
+
+    public static Component compileComponentTree(Component top) {
+        Map<String, Component> componentMap = new HashMap<>();
+        List<Ref> references = new LinkedList<>();
+        top.parallelTraversal((component, depth) -> {
+            if (component instanceof Ref ref) references.add(ref);
+            else if (component.getId() != null) componentMap.put(component.getId(), component);
+            if (component instanceof Compilable compilable) compilable.compile(refs -> references.addAll(Arrays.asList(refs)));
+        });
+        references.forEach(ref -> ref.referTo(componentMap.get(ref.getId())));
+        return top;
     }
 }

@@ -72,7 +72,7 @@ public abstract class WrapperComponent extends Component {
 
     @Override
     public String expr() {
-        return "{" + getTagName() + ":" + AttributeUtils.extractAttributes(this) + getChildren().expr() + "}";
+        return generateExpr(getChildren().expr());
     }
 
     public static <C extends WrapperComponent> Parser<C> makeParser(Class<C> clz) {

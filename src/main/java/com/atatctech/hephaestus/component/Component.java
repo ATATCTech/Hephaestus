@@ -1,6 +1,8 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.Style;
+import com.atatctech.hephaestus.attribute.Attribute;
+import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.function.Consumer;
 
 /**
@@ -12,6 +14,8 @@ import com.atatctech.hephaestus.function.Consumer;
  * If there are attributes need to be written in the expression, annotate the fields with `Attribute`. See documentation.
  */
 public abstract class Component {
+    @Attribute
+    protected String id;
     protected Style style = new Style();
 
     protected Component() {
@@ -33,6 +37,14 @@ public abstract class Component {
         ComponentConfig config = getConfig();
         if (config == null) return "undefined";
         return config.tagName();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setStyle(Style style) {
@@ -58,6 +70,7 @@ public abstract class Component {
 
     /**
      * Exposes an interface capable of traversing the component tree. Different from `Component.forEach()`, this method traverses the component tree horizontally from top to bottom (BFS).
+     * It has a better performance compared to `Component.forEach()`.
      * @param action callback function
      * @param depth indicates the depth of the top (this) component
      */
@@ -67,6 +80,10 @@ public abstract class Component {
 
     public void parallelTraversal(Consumer<? super Component> action) {
         parallelTraversal(action, 0);
+    }
+
+    protected String generateExpr(String inner) {
+        return "{" + getTagName() + ":" + AttributeUtils.extractAttributes(this) + inner + "}";
     }
 
     /**
