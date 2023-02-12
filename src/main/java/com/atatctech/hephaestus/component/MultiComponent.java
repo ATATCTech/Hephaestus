@@ -67,7 +67,7 @@ public class MultiComponent extends Component implements Collection<Component> {
                 next.addAll(wrapperComponent.getChildren().components);
             action.accept(component, depth);
         }
-        if (next.size() > 0) parallelTraversal(action, depth + 1, next);
+        if (!next.isEmpty()) parallelTraversal(action, depth + 1, next);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class MultiComponent extends Component implements Collection<Component> {
 
     @Override
     public String expr() {
-        if (components.size() == 0) return "";
+        if (components.isEmpty()) return "";
         if (components.size() == 1) return components.get(0).expr();
         StringBuilder expr = new StringBuilder("[");
         components.forEach(component -> expr.append(component.expr()));
