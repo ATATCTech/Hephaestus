@@ -43,7 +43,7 @@ publishing {
             pom {
                 name = 'Hephaestus'
                 description = 'The most suitable text language for documentation. Native support for Markdown and HTML.'
-                url = 'https://github.com/ATATC/Hephaestus'
+                url = 'https://github.com/ATATCTech/Hephaestus'
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
@@ -52,15 +52,15 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = 'ATATC'
-                        name = 'ATATC'
-                        email = 'futerry@outlook.com'
+                        id = 'ATATCTech'
+                        name = 'ATATCTech'
+                        email = 'email@atatctech.com'
                     }
                 }
                 scm {
-                    connection = 'scm:git:git:github.com/ATATC/Hephaestus.git'
-                    developerConnection = 'scm:git:https://github.com/ATATC/Hephaestus.git'
-                    url = 'https://github.com/ATATC/Hephaestus'
+                    connection = 'scm:git:git:github.com/ATATCTech/Hephaestus.git'
+                    developerConnection = 'scm:git:https://github.com/ATATCTech/Hephaestus.git'
+                    url = 'https://github.com/ATATCTech/Hephaestus'
                 }
             }
         }
