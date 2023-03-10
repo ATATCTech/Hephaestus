@@ -35,8 +35,7 @@ public abstract class Component {
      */
     public String getTagName() {
         ComponentConfig config = getConfig();
-        if (config == null) return "undefined";
-        return config.tagName();
+        return config == null ? "undefined" : config.tagName();
     }
 
     public void setId(String id) {
