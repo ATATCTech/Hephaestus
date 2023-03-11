@@ -1,23 +1,23 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.Hephaestus;
-import com.atatctech.hephaestus.export.fs.ComponentFile;
+import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
 
-@ComponentFile.RequireTransform
+@Transform.RequireTransform
 @ComponentConfig(tagName = "html")
 public class HTMLBlock extends Component {
     public static Parser<HTMLBlock> PARSER;
 
-    public static final ComponentFile.Transform TRANSFORM;
+    public static final Transform TRANSFORM;
 
     static {
         PARSER = expr -> new HTMLBlock((Text) Hephaestus.parseExpr(expr));
-        TRANSFORM = new ComponentFile.Transform() {
+        TRANSFORM = new Transform() {
             @Override
             public String beforeWrite(Component component) {
                 if (component instanceof HTMLBlock htmlBlock) return htmlBlock.getHTML().getText();
-                return ComponentFile.DEFAULT_TRANSFORM.beforeWrite(component);
+                return Transform.DEFAULT_TRANSFORM.beforeWrite(component);
             }
 
             @Override

@@ -1,4 +1,4 @@
-package com.atatctech.packages.basics.basics;
+package com.atatctech.packages.basics;
 
 import java.io.File;
 import java.io.FileWriter;

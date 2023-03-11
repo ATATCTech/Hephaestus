@@ -1,6 +1,7 @@
 package com.atatctech.hephaestus.component;
 
 
+import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -38,6 +39,12 @@ public class Version extends WrapperComponent {
         public int hashCode() {
             return Arrays.hashCode(args);
         }
+    }
+
+    public static Parser<Version> PARSER;
+
+    static {
+        PARSER = expr -> null;
     }
 
     protected Serial serial;

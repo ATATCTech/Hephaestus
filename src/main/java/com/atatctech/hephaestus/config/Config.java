@@ -3,7 +3,7 @@ package com.atatctech.hephaestus.config;
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.ComponentConfig;
 import com.atatctech.hephaestus.exception.MissingFieldException;
-import com.atatctech.hephaestus.export.fs.ComponentFile;
+import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
@@ -24,7 +24,7 @@ public final class Config {
 
     private final Map<String, Parser<?>> parserMap = new ConcurrentHashMap<>();
 
-    private final Map<String, ComponentFile.Transform> transformMap = new ConcurrentHashMap<>();
+    private final Map<String, Transform> transformMap = new ConcurrentHashMap<>();
 
     private Config() {
         scanPackages(Component.class.getPackageName());
@@ -44,8 +44,8 @@ public final class Config {
                 throw new MissingFieldException(clz, "PARSER");
             } catch (IllegalAccessException ignored) {
             }
-            ComponentFile.Transform transform = ComponentFile.getTransform(clz);
-            if (transform != ComponentFile.DEFAULT_TRANSFORM) putTransform(componentConfig.tagName(), transform);
+            Transform transform = Transform.getTransform(clz);
+            if (transform != Transform.DEFAULT_TRANSFORM) putTransform(componentConfig.tagName(), transform);
         }
     }
 
@@ -66,11 +66,11 @@ public final class Config {
         return parserMap.get(tagName);
     }
 
-    public void putTransform(String tagName, ComponentFile.Transform transform) {
+    public void putTransform(String tagName, Transform transform) {
         transformMap.put(tagName, transform);
     }
 
-    public ComponentFile.Transform getTransform(String tagName) {
+    public Transform getTransform(String tagName) {
         return transformMap.get(tagName);
     }
 }
