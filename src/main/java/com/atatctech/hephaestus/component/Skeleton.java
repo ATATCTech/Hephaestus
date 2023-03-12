@@ -4,17 +4,38 @@ import com.atatctech.hephaestus.Compilable;
 import com.atatctech.hephaestus.Compiler;
 import com.atatctech.hephaestus.attribute.Attribute;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
+import com.atatctech.hephaestus.export.fs.HiddenComponent;
+import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
 
 /**
  * A component used to integrate pages and display hierarchical relationships.
  */
+@Transform.RequireTransform
 public class Skeleton extends WrapperComponent implements Compilable {
     public static Parser<Skeleton> PARSER = WrapperComponent.makeParser(Skeleton.class);
+    public static final Transform TRANSFORM;
+
+    static {
+        TRANSFORM = new Transform() {
+            @Override
+            public String interfereFilename(int index, Component component) {
+                return ((Skeleton) component).getName();
+            }
+
+            @Override
+            public Component handleFilename(String filename, Component component) {
+                Skeleton skeleton = (Skeleton) component;
+                skeleton.setName(filename);
+                return skeleton;
+            }
+        };
+    }
 
     protected String name;
 
     @Attribute
+    @HiddenComponent
     protected Component component;
 
     protected Skeleton parent;

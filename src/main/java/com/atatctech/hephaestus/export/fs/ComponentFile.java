@@ -10,26 +10,32 @@ import com.atatctech.packages.basics.Basics;
 import java.io.File;
 import java.io.IOException;
 
-public record ComponentFile(Component component, File file) {
+public record ComponentFile(Component component) implements FileSystemEntity {
     public ComponentFile {
-        if (component instanceof WrapperComponent)
-            throw new HephaestusRuntimeException("Wrapper components should be converted into `ComponentFolder`.");
+        if (component instanceof WrapperComponent) throw new HephaestusRuntimeException("Wrapper components should be converted into `ComponentFolder`.");
     }
 
-    public boolean write() {
-        Transform transform = Transform.DEFAULT_TRANSFORM;
+    @Override
+    public boolean write(File file) {
+        return write(file.getAbsolutePath());
+    }
+
+    @Override
+    public boolean write(String filename) {
         Class<? extends Component> clz = component.getClass();
-        if (clz.isAnnotationPresent(Transform.RequireTransform.class)) transform = Transform.getTransform(clz);
+        Transform transform = Transform.getTransform(clz);
         String suffix = component.getTagName();
         if (suffix.equals("undefined")) suffix = "hexpr";
         suffix = "." + suffix;
-        String filename = file.getAbsolutePath();
-        return Basics.NativeHandler.writeFile(filename.endsWith(suffix) ? filename : filename + suffix, transform.beforeWrite(component));
+        return Basics.NativeHandler.writeFile(filename.endsWith(suffix) ? filename : filename + suffix, (transform == null ? new Transform() : transform).beforeWrite(component));
     }
 
     public static ComponentFile read(File file) throws IOException, HephaestusException {
-        String filename = file.getName();
+        return read(file.getAbsolutePath());
+    }
+
+    public static ComponentFile read(String filename) throws IOException, HephaestusException {
         Transform transform = Config.getInstance().getTransform(filename.substring(filename.lastIndexOf(".") + 1));
-        return new ComponentFile((transform == null ? Transform.DEFAULT_TRANSFORM : transform).afterRead(Basics.NativeHandler.readFile(file)), file);
+        return new ComponentFile((transform == null ? new Transform() : transform).afterRead(Basics.NativeHandler.readFile(filename)));
     }
 }

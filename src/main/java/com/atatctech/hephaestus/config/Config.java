@@ -44,8 +44,10 @@ public final class Config {
                 throw new MissingFieldException(clz, "PARSER");
             } catch (IllegalAccessException ignored) {
             }
-            Transform transform = Transform.getTransform(clz);
-            if (transform != Transform.DEFAULT_TRANSFORM) putTransform(componentConfig.tagName(), transform);
+            if (clz.isAnnotationPresent(Transform.RequireTransform.class)) {
+                Transform transform = Transform.getTransform(clz);
+                if (transform != null) putTransform(componentConfig.tagName(), transform);
+            }
         }
     }
 

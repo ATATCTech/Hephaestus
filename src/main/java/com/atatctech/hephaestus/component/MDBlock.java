@@ -17,11 +17,11 @@ public class MDBlock extends Component {
             @Override
             public String beforeWrite(Component component) {
                 if (component instanceof MDBlock mdBlock) return mdBlock.getMarkdown().getText();
-                return Transform.DEFAULT_TRANSFORM.beforeWrite(component);
+                return super.beforeWrite(component);
             }
 
             @Override
-            public Component afterRead(String content) {
+            public MDBlock afterRead(String content) {
                 return new MDBlock(new Text(content));
             }
         };

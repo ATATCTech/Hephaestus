@@ -2,7 +2,6 @@ package com.atatctech.hephaestus.export.fs;
 
 import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.component.Component;
-import com.atatctech.hephaestus.exception.BadFormat;
 import com.atatctech.hephaestus.exception.HephaestusException;
 import com.atatctech.hephaestus.exception.MissingFieldException;
 
@@ -12,19 +11,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 
-public abstract class Transform {
-    public static final Transform DEFAULT_TRANSFORM = new Transform() {
-        @Override
-        public String beforeWrite(Component component) {
-            return component.expr();
-        }
-
-        @Override
-        public Component afterRead(String content) throws BadFormat {
-            return Hephaestus.parse(content);
-        }
-    };
-
+public class Transform {
     public static Transform getTransform(Class<?> clz) {
         if (clz.isAnnotationPresent(RequireTransform.class)) {
             try {
@@ -36,12 +23,24 @@ public abstract class Transform {
             } catch (IllegalAccessException ignored) {
             }
         }
-        return DEFAULT_TRANSFORM;
+        return null;
     }
 
-    public abstract String beforeWrite(Component component);
+    public String beforeWrite(Component component) {
+        return component.expr();
+    }
 
-    public abstract Component afterRead(String content) throws HephaestusException;
+    public Component afterRead(String content) throws HephaestusException {
+        return Hephaestus.parse(content);
+    }
+
+    public Component handleFilename(String filename, Component component) {
+        return component;
+    }
+
+    public String interfereFilename(int index, Component component) {
+        return String.valueOf(index);
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)

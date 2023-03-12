@@ -17,11 +17,11 @@ public class HTMLBlock extends Component {
             @Override
             public String beforeWrite(Component component) {
                 if (component instanceof HTMLBlock htmlBlock) return htmlBlock.getHTML().getText();
-                return Transform.DEFAULT_TRANSFORM.beforeWrite(component);
+                return super.beforeWrite(component);
             }
 
             @Override
-            public Component afterRead(String content) {
+            public HTMLBlock afterRead(String content) {
                 return new HTMLBlock(new Text(content));
             }
         };

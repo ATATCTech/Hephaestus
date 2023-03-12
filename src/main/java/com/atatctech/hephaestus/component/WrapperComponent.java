@@ -79,6 +79,7 @@ public abstract class WrapperComponent extends Component {
         Constructor<C> constructor;
         try {
             constructor = clz.getDeclaredConstructor();
+            constructor.setAccessible(true);
         } catch (NoSuchMethodException ignored) {
             throw new MissingDefaultConstructorException(clz);
         }
