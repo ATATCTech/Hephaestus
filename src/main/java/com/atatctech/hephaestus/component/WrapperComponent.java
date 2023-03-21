@@ -71,7 +71,7 @@ public abstract class WrapperComponent extends Component {
     }
 
     @Override
-    public String expr() {
+    public @NotNull String expr() {
         return generateExpr(getChildren().expr());
     }
 

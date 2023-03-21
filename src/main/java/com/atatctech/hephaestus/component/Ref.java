@@ -1,6 +1,7 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.parser.Parser;
+import org.jetbrains.annotations.NotNull;
 
 @ComponentConfig(tagName = "ref")
 public class Ref extends Component {
@@ -20,7 +21,7 @@ public class Ref extends Component {
     }
 
     @Override
-    public String expr() {
+    public @NotNull String expr() {
         return to == null ? "{" + getTagName() + ":" + getId() + "}" : to.expr();
     }
 }

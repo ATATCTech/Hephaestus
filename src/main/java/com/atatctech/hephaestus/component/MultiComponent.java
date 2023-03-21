@@ -81,7 +81,7 @@ public class MultiComponent extends Component implements Collection<Component> {
     }
 
     @Override
-    public String expr() {
+    public @NotNull String expr() {
         if (components.isEmpty()) return "";
         if (components.size() == 1) return components.get(0).expr();
         StringBuilder expr = new StringBuilder("[");

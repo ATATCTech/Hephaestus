@@ -11,7 +11,7 @@ public class UnsupportedComponent extends Component {
     public String inner = "";
 
     @Override
-    public String expr() {
+    public @NotNull String expr() {
         return fullExpr;
     }
 }

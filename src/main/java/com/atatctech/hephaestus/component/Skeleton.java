@@ -7,6 +7,7 @@ import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.export.fs.HiddenComponent;
 import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A component used to integrate pages and display hierarchical relationships.
@@ -19,13 +20,13 @@ public class Skeleton extends WrapperComponent implements Compilable {
     static {
         TRANSFORM = new Transform() {
             @Override
-            public String interfereFilename(int index, Component component) {
+            public @NotNull String interfereFilename(int index, Component component) {
                 return ((Skeleton) component).getName();
             }
 
             @Override
-            public Component handleFilename(String filename, Component component) {
-                Skeleton skeleton = (Skeleton) component;
+            public @NotNull WrapperComponent handleFilename(String filename, WrapperComponent wrapperComponent) {
+                Skeleton skeleton = (Skeleton) wrapperComponent;
                 skeleton.setName(filename);
                 return skeleton;
             }
@@ -80,7 +81,7 @@ public class Skeleton extends WrapperComponent implements Compilable {
     }
 
     @Override
-    public String expr() {
+    public @NotNull String expr() {
         String expr = "<" + Text.compile(getName()) + ":" + AttributeUtils.extractAttributes(this) + getChildren().expr();
         return (expr.endsWith(":") ? expr.substring(0, expr.length() - 1) : expr) + ">";
     }

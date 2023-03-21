@@ -98,13 +98,13 @@ public class ComponentFolder implements FileSystemEntity {
             for (File file : files) {
                 if (file.getName().equals(wrapperFile.getName()) || file.getName().startsWith("hidden")) continue;
                 if (file.isDirectory()) {
-                    Component component = ComponentFolder.read(file, wrapperFile).component();
+                    WrapperComponent component = ComponentFolder.read(file, wrapperFile).component();
                     Transform transform = Transform.getTransform(component.getClass());
                     wrapperComponent.appendChild((transform == null ? new Transform() : transform).handleFilename(file.getName(), component));
                 } else wrapperComponent.appendChild(ComponentFile.read(file).component());
             }
             Transform transform = Transform.getTransform(wrapperComponent.getClass());
-            return new ComponentFolder((WrapperComponent) (transform == null ? new Transform() : transform).handleFilename(dir.getName(), wrapperComponent), wrapperFile);
+            return new ComponentFolder((transform == null ? new Transform() : transform).handleFilename(dir.getName(), wrapperComponent), wrapperFile);
         } catch (NoSuchMethodException ignored) {
             throw new MissingDefaultConstructorException(clz);
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {

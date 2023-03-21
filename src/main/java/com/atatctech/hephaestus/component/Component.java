@@ -4,6 +4,7 @@ import com.atatctech.hephaestus.Style;
 import com.atatctech.hephaestus.attribute.Attribute;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.function.Consumer;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Component is the base class of all components.
@@ -89,7 +90,7 @@ public abstract class Component {
      * Generate a string expression of the component.
      * @return the expression
      */
-    public abstract String expr();
+    public abstract @NotNull String expr();
 
     /**
      * Convert the component into a string. By default, it just simply call `expr()`.

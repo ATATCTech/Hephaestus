@@ -3,6 +3,7 @@ package com.atatctech.hephaestus.component;
 import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
+import org.jetbrains.annotations.NotNull;
 
 @Transform.RequireTransform
 @ComponentConfig(tagName = "md")
@@ -15,7 +16,7 @@ public class MDBlock extends Component {
         PARSER = expr -> new MDBlock((Text) Hephaestus.parseExpr(expr));
         TRANSFORM = new Transform() {
             @Override
-            public String beforeWrite(Component component) {
+            public @NotNull String beforeWrite(Component component) {
                 if (component instanceof MDBlock mdBlock) return mdBlock.getMarkdown().getText();
                 return super.beforeWrite(component);
             }
@@ -44,7 +45,7 @@ public class MDBlock extends Component {
     }
 
     @Override
-    public String expr() {
+    public @NotNull String expr() {
         return generateExpr(getMarkdown().expr());
     }
 }

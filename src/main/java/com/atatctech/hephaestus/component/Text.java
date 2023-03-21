@@ -44,7 +44,7 @@ public class Text extends Component {
     }
 
     @Override
-    public String expr() {
+    public @NotNull String expr() {
         return "{" + compile(getText()) + "}";
     }
 
@@ -218,8 +218,7 @@ public class Text extends Component {
      * @param requiredDepth the target level
      * @return indexes of the left bracket and the right bracket
      */
-    @NotNull
-    public static IndexPair matchBrackets(String s, char open, char close, int requiredDepth) {
+    public static @NotNull IndexPair matchBrackets(String s, char open, char close, int requiredDepth) {
         int depth = 0;
         int startIndex = -1;
         for (int i = 0; i < s.length(); i++) {
@@ -229,8 +228,7 @@ public class Text extends Component {
         return new IndexPair(startIndex, -1);
     }
 
-    @NotNull
-    public static IndexPair matchBrackets(String s, char open, char close) {
+    public static @NotNull IndexPair matchBrackets(String s, char open, char close) {
         return matchBrackets(s, open, close, 0);
     }
 }

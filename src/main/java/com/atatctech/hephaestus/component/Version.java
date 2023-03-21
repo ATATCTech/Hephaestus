@@ -66,7 +66,7 @@ public class Version extends WrapperComponent {
     }
 
     @Override
-    public String expr() {
-        return null;
+    public @NotNull String expr() {
+        return "";
     }
 }
