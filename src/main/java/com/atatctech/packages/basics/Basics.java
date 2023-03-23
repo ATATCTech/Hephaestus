@@ -3,39 +3,10 @@ package com.atatctech.packages.basics;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.file.Files;
-import java.util.Properties;
 
 public class Basics {
     public static class NativeHandler {
-        public static final String SYSTEM_SEPARATOR = System.getProperty("line.separator");
-        public static final Properties properties = System.getProperties();
-        public static InetAddress localHost = null;
-
-        static {
-            try {
-                localHost = InetAddress.getLocalHost();
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            }
-        }
-
-        public static String getName() {
-            if (localHost != null) {
-                return localHost.getHostName();
-            }
-            return "";
-        }
-
-        public static String getIP() {
-            if (localHost != null) {
-                return localHost.getHostAddress();
-            }
-            return "";
-        }
-
         public static String readFile(String filename) throws IOException {
             return readFile(new File(filename));
         }
