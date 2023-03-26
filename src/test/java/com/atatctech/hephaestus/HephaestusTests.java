@@ -1,6 +1,5 @@
 package com.atatctech.hephaestus;
 
-import com.atatctech.hephaestus.component.HTMLBlock;
 import com.atatctech.hephaestus.component.MDBlock;
 import com.atatctech.hephaestus.component.Skeleton;
 import com.atatctech.hephaestus.component.Text;
@@ -15,7 +14,6 @@ public class HephaestusTests {
     @Test
     void test() throws HephaestusException, IOException, ClassNotFoundException {
         Skeleton skeleton1 = new Skeleton("test1");
-        skeleton1.setComponent(new HTMLBlock(new Text("<h3>Test</h3>")));
         Skeleton skeleton2 = new Skeleton("test2");
         skeleton2.setComponent(new MDBlock(new Text("### Test")));
         skeleton1.appendChild(skeleton2);
