@@ -49,9 +49,8 @@ public class ComponentFolder implements FileSystemEntity {
     }
 
     protected boolean write(File dir, String dirPath) {
-        if (dir.exists()) {
-            if (!dir.isDirectory()) throw new HephaestusRuntimeException("Target must be a directory.");
-        } else if (!dir.mkdirs()) return false;
+        if (dir.exists() && !dir.isDirectory()) throw new HephaestusRuntimeException("Target must be a directory.");
+        else if (!dir.mkdirs()) return false;
         if (!writeWrapper(dirPath)) return false;
         int i = 0;
         for (Field field : component.getClass().getDeclaredFields()) {
