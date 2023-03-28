@@ -63,7 +63,7 @@ public class Transform {
     }
 
     /**
-     * This callback method is called as the last step of reading operation.
+     * This callback method is called as the last step after reading operation.
      * As an example, `Skeleton` sets its name depending on the filename.
      * *It only effects `ComponentFolder`.*
      * @param filename original filename (considered as no suffix)
@@ -75,9 +75,9 @@ public class Transform {
     }
 
     /**
-     * This callback method is called as the last step of writing operation.
+     * This callback method is called as the last step before writing operation.
      * As an example, `Skeleton` sets the folder's name (filename) according to its own name.
-     * *It only effects `ComponentFolder`.*
+     * *It only effects when the component is a child of a `WrapperComponent`.*
      * @param index index of component inside the folder
      * @param component component to write
      * @return final filename
