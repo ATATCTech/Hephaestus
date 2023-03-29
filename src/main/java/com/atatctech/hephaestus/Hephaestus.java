@@ -11,9 +11,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public final class Hephaestus {
-    @Nullable
-    public static Component parseExpr(String expr) throws BadFormat {
-        if (expr == null || expr.length() < 2) return null;
+    public static @Nullable Component parseExpr(@NotNull String expr) throws BadFormat {
+        if (expr.length() < 2) return null;
         if (Text.wrappedBy(expr, '[', ']')) return MultiComponent.PARSER.parse(expr.substring(1, expr.length() - 1));
         UnsupportedComponent temp = new UnsupportedComponent();
         temp.fullExpr = expr;
@@ -41,19 +40,16 @@ public final class Hephaestus {
         return skeleton;
     }
 
-    @Nullable
-    public static Component parse(String expr) throws BadFormat {
+    public static @Nullable Component parse(@NotNull String expr) throws BadFormat {
         return parseExpr(clean(expr));
     }
 
-    @NotNull
-    public static String[] listTagNames() {
+    public static @NotNull String[] listTagNames() {
         return Config.getInstance().listTagNames();
     }
 
-    @NotNull
-    public static String clean(String expr) {
-        if (expr == null || expr.isEmpty()) return "";
+    public static @NotNull String clean(@NotNull String expr) {
+        if (expr.isEmpty()) return "";
         int f = 0;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < expr.length(); i++) {
@@ -68,7 +64,7 @@ public final class Hephaestus {
         return builder.toString();
     }
 
-    public static Component compileComponentTree(Component top) {
+    public static @NotNull Component compileComponentTree(@NotNull Component top) {
         Map<String, Component> componentMap = new HashMap<>();
         List<Ref> references = new LinkedList<>();
         top.parallelTraversal((component, depth) -> {

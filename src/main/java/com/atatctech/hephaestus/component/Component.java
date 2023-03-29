@@ -60,7 +60,7 @@ public abstract class Component {
      * @param action callback function
      * @param depth indicates the depth of the top (this) component
      */
-    public void forEach(Consumer<? super Component> action, int depth) {
+    public void forEach(@NotNull Consumer<? super Component> action, int depth) {
         action.accept(this, depth);
     }
 
@@ -74,7 +74,7 @@ public abstract class Component {
      * @param action callback function
      * @param depth indicates the depth of the top (this) component
      */
-    public void parallelTraversal(Consumer<? super Component> action, int depth) {
+    public void parallelTraversal(@NotNull Consumer<? super Component> action, int depth) {
         action.accept(this, depth);
     }
 

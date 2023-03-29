@@ -7,6 +7,8 @@ import com.atatctech.hephaestus.exception.HephaestusException;
 import com.atatctech.hephaestus.exception.HephaestusRuntimeException;
 import com.atatctech.hephaestus.exception.MissingDefaultConstructorException;
 import com.atatctech.packages.basics.Basics;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,22 +18,22 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class ComponentFolder implements FileSystemEntity {
-    protected final WrapperComponent component;
+    protected final @NotNull WrapperComponent component;
 
     protected final File wrapperFile;
 
-    public ComponentFolder(WrapperComponent component, File wrapperFile) {
+    public ComponentFolder(@NotNull WrapperComponent component, File wrapperFile) {
         this.component = component;
         this.wrapperFile = wrapperFile;
     }
 
-    public ComponentFolder(WrapperComponent component) {
+    public ComponentFolder(@NotNull WrapperComponent component) {
         this.component = component;
         wrapperFile = new File(".wrapper");
     }
 
     @Override
-    public WrapperComponent component() {
+    public @NotNull WrapperComponent component() {
         return component;
     }
 
@@ -39,16 +41,16 @@ public class ComponentFolder implements FileSystemEntity {
         return Basics.NativeHandler.writeFile(dirPath + "/" + wrapperFile.getName(), component.getClass().getName() + "@" + AttributeUtils.extractAttributes(component));
     }
 
-    protected static boolean writeSub(Component component, String dirPath, int index, String prefix) {
+    protected static boolean writeSub(@NotNull Component component, @NotNull String dirPath, int index, @NotNull String prefix) {
         Transform transform = Transform.getTransform(component.getClass());
         return (component instanceof WrapperComponent wrapperComponent ? new ComponentFolder(wrapperComponent) : new ComponentFile(component)).write(dirPath + "/" + prefix + (transform == null ? new Transform() : transform).interfereFilename(index, component));
     }
 
-    protected static boolean writeSub(Component component, String dirPath, int index) {
+    protected static boolean writeSub(@NotNull Component component, @NotNull String dirPath, int index) {
         return writeSub(component, dirPath, index, "");
     }
 
-    protected boolean write(File dir, String dirPath) {
+    protected boolean write(@NotNull File dir, @NotNull String dirPath) {
         if (dir.exists()) {
             if (!dir.isDirectory()) throw new HephaestusRuntimeException("Target must be a directory.");
         } else if (!dir.mkdirs()) return false;
@@ -72,16 +74,17 @@ public class ComponentFolder implements FileSystemEntity {
     }
 
     @Override
-    public boolean write(File dir) {
+    public boolean write(@NotNull File dir) {
         return write(dir, dir.getAbsolutePath());
     }
 
     @Override
-    public boolean write(String dirPath) {
+    public boolean write(@NotNull String dirPath) {
         return write(new File(dirPath), dirPath);
     }
 
-    protected static ComponentFolder read(File dir, String dirPath, File wrapperFile) throws IOException, ClassNotFoundException, HephaestusException {
+    @Contract("_, _, _ -> new")
+    protected static @NotNull ComponentFolder read(@NotNull File dir, @NotNull String dirPath, @NotNull File wrapperFile) throws IOException, ClassNotFoundException, HephaestusException {
         String wrapper = Basics.NativeHandler.readFile(dirPath + "/" + wrapperFile.getName());
         int separatorIndex = wrapper.indexOf("@");
         String className = wrapper.substring(0, separatorIndex);
@@ -112,19 +115,23 @@ public class ComponentFolder implements FileSystemEntity {
         }
     }
 
-    public static ComponentFolder read(File dir, File wrapperFile) throws IOException, ClassNotFoundException, HephaestusException {
+    @Contract("_, _ -> new")
+    public static @NotNull ComponentFolder read(@NotNull File dir, @NotNull File wrapperFile) throws IOException, ClassNotFoundException, HephaestusException {
         return read(dir, dir.getAbsolutePath(), wrapperFile);
     }
 
-    public static ComponentFolder read(File dir) throws IOException, ClassNotFoundException, HephaestusException {
+    @Contract("_ -> new")
+    public static @NotNull ComponentFolder read(@NotNull File dir) throws IOException, ClassNotFoundException, HephaestusException {
         return read(dir, new File(".wrapper"));
     }
 
-    public static ComponentFolder read(String dirPath, File wrapperFile) throws IOException, ClassNotFoundException, HephaestusException {
+    @Contract("_, _ -> new")
+    public static @NotNull ComponentFolder read(@NotNull String dirPath, @NotNull File wrapperFile) throws IOException, ClassNotFoundException, HephaestusException {
         return read(new File(dirPath), dirPath, wrapperFile);
     }
 
-    public static ComponentFolder read(String dirPath) throws IOException, ClassNotFoundException, HephaestusException {
+    @Contract("_ -> new")
+    public static @NotNull ComponentFolder read(@NotNull String dirPath) throws IOException, ClassNotFoundException, HephaestusException {
         return read(dirPath, new File(".wrapper"));
     }
 }

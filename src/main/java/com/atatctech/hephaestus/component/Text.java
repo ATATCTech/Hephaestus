@@ -2,6 +2,7 @@ package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.format.Format;
 import com.atatctech.hephaestus.parser.Parser;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
@@ -14,19 +15,22 @@ import java.util.regex.Pattern;
 public class Text extends Component {
     public static Parser<Text> PARSER = expr -> new Text(Text.decompile(expr));
 
-    protected String text;
+    protected @NotNull String text = "";
 
     protected Format format;
 
-    public Text(String text) {
+    public Text() {
+    }
+
+    public Text(@NotNull String text) {
+        setText(text);
+    }
+
+    public void setText(@NotNull String text) {
         this.text = text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getText() {
+    public @NotNull String getText() {
         return text;
     }
 
@@ -70,7 +74,8 @@ public class Text extends Component {
      * @param c the character to quote
      * @return quotation string
      */
-    public static String quote(char c) {
+    @Contract(pure = true)
+    public static @NotNull String quote(char c) {
         return String.valueOf(COMPILER_CHARACTER) + c;
     }
 
@@ -123,7 +128,7 @@ public class Text extends Component {
      * @param fromIndex search starts from this index
      * @return the index
      */
-    public static int indexOf(String s, char c, int fromIndex) {
+    public static int indexOf(@NotNull String s, char c, int fromIndex) {
         for (int i = fromIndex; i < s.length(); i++) if (charAtEquals(s, i, c)) return i;
         return -1;
     }
@@ -155,14 +160,14 @@ public class Text extends Component {
      * @param c the character to compare
      * @return true: equal; false: unequal
      */
-    public static boolean charAtEquals(String s, int i, char c) {
+    public static boolean charAtEquals(@NotNull String s, int i, char c) {
         boolean e = s.charAt(i) == c;
         if (i > 0) return e && s.charAt(i - 1) != COMPILER_CHARACTER;
         if (c == COMPILER_CHARACTER && s.length() > 1) return e && s.charAt(1) != COMPILER_CHARACTER;
         return e;
     }
 
-    public static boolean charAtEqualsAny(String s, int i, char... cs) {
+    public static boolean charAtEqualsAny(@NotNull String s, int i, char @NotNull ... cs) {
         char bit = s.charAt(i);
         for (char c : cs) {
             if (bit != c) continue;
@@ -218,7 +223,8 @@ public class Text extends Component {
      * @param requiredDepth the target level
      * @return indexes of the left bracket and the right bracket
      */
-    public static @NotNull IndexPair matchBrackets(String s, char open, char close, int requiredDepth) {
+    @Contract("_, _, _, _ -> new")
+    public static @NotNull IndexPair matchBrackets(@NotNull String s, char open, char close, int requiredDepth) {
         int depth = 0;
         int startIndex = -1;
         for (int i = 0; i < s.length(); i++) {

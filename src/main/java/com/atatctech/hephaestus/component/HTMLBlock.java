@@ -4,6 +4,7 @@ import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Transform.RequireTransform
 @ComponentConfig(tagName = "html")
@@ -16,7 +17,7 @@ public class HTMLBlock extends Component {
         PARSER = expr -> new HTMLBlock((Text) Hephaestus.parseExpr(expr));
         TRANSFORM = new Transform() {
             @Override
-            public @NotNull String beforeWrite(Component component) {
+            public @NotNull String beforeWrite(@NotNull Component component) {
                 if (component instanceof HTMLBlock htmlBlock) return htmlBlock.getHTML().getText();
                 return super.beforeWrite(component);
             }
@@ -28,20 +29,20 @@ public class HTMLBlock extends Component {
         };
     }
 
-    protected Text html;
+    protected @Nullable Text html;
 
     public HTMLBlock() {}
 
-    public HTMLBlock(Text html) {
+    public HTMLBlock(@Nullable Text html) {
         setHTML(html);
     }
 
-    public void setHTML(Text html) {
+    public void setHTML(@Nullable Text html) {
         this.html = html;
     }
 
-    public Text getHTML() {
-        return html;
+    public @NotNull Text getHTML() {
+        return html == null ? new Text() : html;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Transform.RequireTransform
 @ComponentConfig(tagName = "md")
@@ -16,7 +17,7 @@ public class MDBlock extends Component {
         PARSER = expr -> new MDBlock((Text) Hephaestus.parseExpr(expr));
         TRANSFORM = new Transform() {
             @Override
-            public @NotNull String beforeWrite(Component component) {
+            public @NotNull String beforeWrite(@NotNull Component component) {
                 if (component instanceof MDBlock mdBlock) return mdBlock.getMarkdown().getText();
                 return super.beforeWrite(component);
             }
@@ -28,20 +29,20 @@ public class MDBlock extends Component {
         };
     }
 
-    protected Text markdown;
+    protected @Nullable Text markdown;
 
     public MDBlock() {}
 
-    public MDBlock(Text markdown) {
+    public MDBlock(@Nullable Text markdown) {
         setMarkdown(markdown);
     }
 
-    public void setMarkdown(Text html) {
-        this.markdown = html;
+    public void setMarkdown(@Nullable Text markdown) {
+        this.markdown = markdown;
     }
 
-    public Text getMarkdown() {
-        return markdown;
+    public @NotNull Text getMarkdown() {
+        return markdown == null ? new Text() : markdown;
     }
 
     @Override

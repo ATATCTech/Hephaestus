@@ -11,14 +11,13 @@ import java.util.Objects;
 @ComponentConfig(tagName = "v")
 public class Version extends WrapperComponent {
     public static class Serial {
-        @NotNull
-        protected final Object[] args;
+        protected final @NotNull Object[] args;
 
         public Serial(Object... args) {
             this.args = args;
         }
 
-        public boolean equals(Serial serial, boolean sequential) {
+        public boolean equals(@NotNull Serial serial, boolean sequential) {
             if (args.length != serial.args.length) return false;
             List<Object> argsList = Arrays.asList(serial.args);
             for (int i = 0; i < args.length; i++) {

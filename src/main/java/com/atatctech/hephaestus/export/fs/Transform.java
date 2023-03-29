@@ -25,7 +25,7 @@ public class Transform {
      * @param clz target class
      * @return the `Transform` object (if exists)
      */
-    public static @Nullable Transform getTransform(Class<?> clz) {
+    public static @Nullable Transform getTransform(@NotNull Class<?> clz) {
         if (clz.isAnnotationPresent(RequireTransform.class)) {
             try {
                 Field field = clz.getField("TRANSFORM");
@@ -46,7 +46,7 @@ public class Transform {
      * @param component component to write
      * @return string representation
      */
-    public @NotNull String beforeWrite(Component component) {
+    public @NotNull String beforeWrite(@NotNull Component component) {
         return component.expr();
     }
 
@@ -59,7 +59,7 @@ public class Transform {
      * @throws HephaestusException if parsing fails
      */
     public @Nullable Component afterRead(String content) throws HephaestusException {
-        return Hephaestus.parse(content);
+        return Hephaestus.parseExpr(content);
     }
 
     /**

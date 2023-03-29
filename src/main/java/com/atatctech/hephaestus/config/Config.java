@@ -51,12 +51,11 @@ public final class Config {
         }
     }
 
-    public void scanPackages(String... packages) {
+    public void scanPackages(String @NotNull ... packages) {
         for (String pkg : packages) scanPackage(pkg);
     }
 
-    @NotNull
-    public String[] listTagNames() {
+    public @NotNull String[] listTagNames() {
         return parserMap.keySet().toArray(String[]::new);
     }
 

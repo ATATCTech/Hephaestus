@@ -63,7 +63,7 @@ public class Skeleton extends WrapperComponent implements Compilable {
         return component;
     }
 
-    public void setParent(Skeleton parent) {
+    public void setParent(@NotNull Skeleton parent) {
         if (!parent.getChildren().contains(this)) parent.appendChild(this);
         else this.parent = parent;
     }

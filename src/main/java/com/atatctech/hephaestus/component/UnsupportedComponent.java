@@ -3,12 +3,9 @@ package com.atatctech.hephaestus.component;
 import org.jetbrains.annotations.NotNull;
 
 public class UnsupportedComponent extends Component {
-    @NotNull
-    public String tagName = "undefined";
-    @NotNull
-    public String fullExpr = "";
-    @NotNull
-    public String inner = "";
+    public @NotNull String tagName = "undefined";
+    public @NotNull String fullExpr = "";
+    public @NotNull String inner = "";
 
     @Override
     public @NotNull String expr() {

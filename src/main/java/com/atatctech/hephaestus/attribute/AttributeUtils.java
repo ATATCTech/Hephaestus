@@ -5,6 +5,7 @@ import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.Text;
 import com.atatctech.hephaestus.exception.BadFormat;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
@@ -21,7 +22,7 @@ public final class AttributeUtils {
         return fields;
     }
 
-    public static String extractAttributes(Component component) {
+    public static @NotNull String extractAttributes(@NotNull Component component) {
         Set<Field> fields = getDeclaredFields(component.getClass());
         StringBuilder attributes = new StringBuilder("(");
         for (Field field : fields) {
@@ -47,7 +48,7 @@ public final class AttributeUtils {
         return new AttributesAndBody(expr.substring(0, endIndex), expr.substring(endIndex));
     }
 
-    public static void injectField(Field field, Object instance, String value) throws IllegalAccessException, BadFormat {
+    public static void injectField(@NotNull Field field, Object instance, String value) throws IllegalAccessException, BadFormat {
         field.setAccessible(true);
         Class<?> t = field.getType();
         if (t == String.class) field.set(instance, value);
@@ -60,11 +61,11 @@ public final class AttributeUtils {
         else field.set(instance, t.cast(value));
     }
 
-    public static String getAttributeName(Attribute annotation, Field field) {
+    public static String getAttributeName(@NotNull Attribute annotation, Field field) {
         return annotation.name().isEmpty() ? field.getName() : annotation.name();
     }
 
-    public static String getAttribute(String attributesExpr, String attributeName) {
+    public static @Nullable String getAttribute(@NotNull String attributesExpr, @NotNull String attributeName) {
         if (attributesExpr.length() < attributeName.length()) return null;
         int startIndex = attributesExpr.indexOf(attributeName);
         if (startIndex < 0) return null;
@@ -76,7 +77,7 @@ public final class AttributeUtils {
         return attributesExpr.substring(startIndex, endIndex);
     }
 
-    public static void injectAttributes(Component component, String attributesExpr) {
+    public static void injectAttributes(@NotNull Component component, String attributesExpr) {
         Set<Field> fields = getDeclaredFields(component.getClass());
         for (Field field : fields) {
             try {

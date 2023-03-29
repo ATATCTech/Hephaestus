@@ -11,8 +11,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class WrapperComponent extends Component {
-    @NotNull
-    protected MultiComponent children = new MultiComponent();
+    protected @NotNull MultiComponent children = new MultiComponent();
 
     protected WrapperComponent(MultiComponent children) {
         setChildren(children);
@@ -59,13 +58,13 @@ public abstract class WrapperComponent extends Component {
     }
 
     @Override
-    public void forEach(Consumer<? super Component> action, int depth) {
+    public void forEach(@NotNull Consumer<? super Component> action, int depth) {
         super.forEach(action, depth);
         getChildren().forEach(action, depth + 1);
     }
 
     @Override
-    public void parallelTraversal(Consumer<? super Component> action, int depth) {
+    public void parallelTraversal(@NotNull Consumer<? super Component> action, int depth) {
         super.parallelTraversal(action, depth);
         getChildren().parallelTraversal(action, depth + 1);
     }
@@ -75,7 +74,7 @@ public abstract class WrapperComponent extends Component {
         return generateExpr(getChildren().expr());
     }
 
-    public static <C extends WrapperComponent> Parser<C> makeParser(Class<C> clz) {
+    public static <C extends WrapperComponent> @NotNull Parser<C> makeParser(@NotNull Class<C> clz) {
         Constructor<C> constructor;
         try {
             constructor = clz.getDeclaredConstructor();
