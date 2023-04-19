@@ -4,10 +4,13 @@ import com.atatctech.hephaestus.component.*;
 import com.atatctech.hephaestus.config.Config;
 import com.atatctech.hephaestus.exception.BadFormat;
 import com.atatctech.hephaestus.exception.ComponentNotClosed;
+import com.atatctech.hephaestus.export.fs.ComponentFile;
+import com.atatctech.hephaestus.export.fs.ComponentFolder;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.*;
 
 public final class Hephaestus {
@@ -74,5 +77,13 @@ public final class Hephaestus {
         });
         references.forEach(ref -> ref.referTo(componentMap.get(ref.getId())));
         return top;
+    }
+
+    public static boolean export(@NotNull Component component, File to) {
+        return component instanceof WrapperComponent wrapperComponent ? new ComponentFolder(wrapperComponent).write(to) : new ComponentFile(component).write(to);
+    }
+
+    public static boolean export(@NotNull Component component, String to) {
+        return export(component, new File(to));
     }
 }
