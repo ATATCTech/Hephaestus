@@ -8,6 +8,7 @@ import com.atatctech.hephaestus.export.fs.HiddenComponent;
 import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A component used to integrate pages and display hierarchical relationships.
@@ -63,12 +64,12 @@ public class Skeleton extends WrapperComponent implements Compilable {
         return component;
     }
 
-    public void setParent(@NotNull Skeleton parent) {
-        if (!parent.getChildren().contains(this)) parent.appendChild(this);
-        else this.parent = parent;
+    public void setParent(@Nullable Skeleton parent) {
+        if (parent == null || parent.getChildren().contains(this)) this.parent = parent;
+        else parent.appendChild(this);
     }
 
-    public Skeleton getParent() {
+    public @Nullable Skeleton getParent() {
         return parent;
     }
 
