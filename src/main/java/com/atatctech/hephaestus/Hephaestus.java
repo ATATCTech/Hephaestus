@@ -81,12 +81,12 @@ public final class Hephaestus {
         return top;
     }
 
-    public static boolean exportToFS(@NotNull Component component, File to) {
-        return component instanceof WrapperComponent wrapperComponent ? new ComponentFolder(wrapperComponent).write(to) : new ComponentFile(component).write(to);
+    public static boolean exportToFS(@NotNull Component component, @NotNull File to, @Nullable File wrapperFile) {
+        return component instanceof WrapperComponent wrapperComponent ? (wrapperFile == null ? new ComponentFolder(wrapperComponent) : new ComponentFolder(wrapperComponent, wrapperFile)).write(to) : new ComponentFile(component).write(to);
     }
 
-    public static boolean exportToFS(@NotNull Component component, String to) {
-        return exportToFS(component, new File(to));
+    public static boolean exportToFS(@NotNull Component component, @NotNull File to) {
+        return exportToFS(component, to, null);
     }
 
     public static Component importFromFS(@NotNull File target, @Nullable File wrapperFile) throws HephaestusException, IOException, ClassNotFoundException {
