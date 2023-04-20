@@ -36,12 +36,9 @@ public final class Hephaestus {
             return parser == null ? temp : parser.parse(temp.inner);
         }
         if (!Text.wrappedBy(expr, '<', '>')) throw new ComponentNotClosed(expr);
-        Skeleton skeleton;
-        if (temp.tagName.isEmpty()) skeleton = new Skeleton(temp.inner);
-        else {
-            skeleton = Skeleton.PARSER.parse(temp.inner);
-            skeleton.setName(Text.decompile(temp.tagName));
-        }
+        if (temp.tagName.isEmpty()) return new Skeleton(Text.decompile(temp.inner));
+        Skeleton skeleton = Skeleton.PARSER.parse(temp.inner);
+        skeleton.setName(Text.decompile(temp.tagName));
         return skeleton;
     }
 
