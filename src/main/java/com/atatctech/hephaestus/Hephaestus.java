@@ -85,15 +85,31 @@ public final class Hephaestus {
         return component instanceof WrapperComponent wrapperComponent ? (wrapperFile == null ? new ComponentFolder(wrapperComponent) : new ComponentFolder(wrapperComponent, wrapperFile)).write(to) : new ComponentFile(component).write(to);
     }
 
+    public static boolean exportToFS(@NotNull Component component, @NotNull String to, @Nullable File wrapperFile) {
+        return exportToFS(component, new File(to), wrapperFile);
+    }
+
     public static boolean exportToFS(@NotNull Component component, @NotNull File to) {
         return exportToFS(component, to, null);
+    }
+
+    public static boolean exportToFS(@NotNull Component component, @NotNull String to) {
+        return exportToFS(component, new File(to));
     }
 
     public static Component importFromFS(@NotNull File target, @Nullable File wrapperFile) throws HephaestusException, IOException, ClassNotFoundException {
         return (target.isDirectory() ? (wrapperFile == null ? ComponentFolder.read(target) : ComponentFolder.read(target, wrapperFile)) : ComponentFile.read(target)).component();
     }
 
+    public static Component importFromFS(@NotNull String target, @Nullable File wrapperFile) throws HephaestusException, IOException, ClassNotFoundException {
+        return importFromFS(new File(target), wrapperFile);
+    }
+
     public static Component importFromFS(@NotNull File target) throws HephaestusException, IOException, ClassNotFoundException {
         return importFromFS(target, null);
+    }
+
+    public static Component importFromFS(@NotNull String target) throws HephaestusException, IOException, ClassNotFoundException {
+        return importFromFS(new File(target));
     }
 }
