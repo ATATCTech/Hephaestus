@@ -13,7 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 public abstract class WrapperComponent extends Component {
     protected @NotNull MultiComponent children = new MultiComponent();
 
-    protected WrapperComponent(MultiComponent children) {
+    protected WrapperComponent(@NotNull MultiComponent children) {
         setChildren(children);
     }
 
@@ -28,15 +28,15 @@ public abstract class WrapperComponent extends Component {
         return children;
     }
 
-    public void appendChild(Component child) {
+    public void appendChild(@NotNull Component child) {
         children.add(child);
     }
 
-    public Component child(int index) {
+    public @NotNull Component child(int index) {
         return getChildren().get(index);
     }
 
-    public void removeChild(Component child) {
+    public void removeChild(@NotNull Component child) {
         children.remove(child);
     }
 
@@ -44,7 +44,7 @@ public abstract class WrapperComponent extends Component {
         children.remove(index);
     }
 
-    public String getText() {
+    public @NotNull String getText() {
         StringBuilder text = new StringBuilder();
         getChildren().forEach((component, depth) -> {
             if (component instanceof Text t) text.append(t.getText());

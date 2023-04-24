@@ -25,7 +25,9 @@ public class MultiComponent extends Component implements Collection<Component> {
         int endIndex = indexes.end();
         List<Component> components = new LinkedList<>();
         while (indexes.start() >= 0 && endIndex++ >= 0) {
-            components.add(Hephaestus.parseExpr(expr.substring(indexes.start(), endIndex)));
+            Component component = Hephaestus.parseExpr(expr.substring(indexes.start(), endIndex));
+            if (component == null) continue;
+            components.add(component);
             expr = expr.substring(endIndex);
             indexes = Text.matchBrackets(expr, open, close);
             endIndex = indexes.end();
@@ -42,7 +44,7 @@ public class MultiComponent extends Component implements Collection<Component> {
         setComponents(components);
     }
 
-    public MultiComponent(Component... components) {
+    public MultiComponent(Component ... components) {
         setComponents(components);
     }
 
@@ -50,7 +52,7 @@ public class MultiComponent extends Component implements Collection<Component> {
         this.components = components;
     }
 
-    public void setComponents(Component... components) {
+    public void setComponents(Component ... components) {
         setComponents(new ArrayList<>(Arrays.asList(components)));
     }
 

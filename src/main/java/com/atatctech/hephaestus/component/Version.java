@@ -43,7 +43,7 @@ public class Version extends WrapperComponent {
         }
     }
 
-    public static Parser<Version> PARSER;
+    public static @NotNull Parser<Version> PARSER;
 
     static {
         PARSER = WrapperComponent.makeParser(Version.class);

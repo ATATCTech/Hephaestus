@@ -61,7 +61,7 @@ public final class AttributeUtils {
         else field.set(instance, t.cast(value));
     }
 
-    public static String getAttributeName(@NotNull Attribute annotation, @NotNull Field field) {
+    public static @NotNull String getAttributeName(@NotNull Attribute annotation, @NotNull Field field) {
         return annotation.name().isEmpty() ? field.getName() : annotation.name();
     }
 
@@ -77,7 +77,7 @@ public final class AttributeUtils {
         return attributesExpr.substring(startIndex, endIndex);
     }
 
-    public static void injectAttributes(@NotNull Component component, String attributesExpr) {
+    public static void injectAttributes(@NotNull Component component, @NotNull String attributesExpr) {
         Set<Field> fields = getDeclaredFields(component.getClass());
         for (Field field : fields) {
             try {

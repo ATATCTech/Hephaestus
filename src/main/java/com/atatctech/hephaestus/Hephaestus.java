@@ -71,7 +71,10 @@ public final class Hephaestus {
         List<Ref> references = new LinkedList<>();
         top.parallelTraversal((component, depth) -> {
             if (component instanceof Ref ref) references.add(ref);
-            else if (component.getId() != null) componentMap.put(component.getId(), component);
+            else {
+                String id = component.getId();
+                if (id != null) componentMap.put(id, component);
+            }
             if (component instanceof Compilable compilable) compilable.compile(refs -> references.addAll(Arrays.asList(refs)));
         });
         references.forEach(ref -> ref.referTo(componentMap.get(ref.getId())));

@@ -13,11 +13,11 @@ import java.util.regex.Pattern;
  * You may also notice that yes, there are static methods related to text processing under this class.
  */
 public class Text extends Component {
-    public static Parser<Text> PARSER = expr -> new Text(Text.decompile(expr));
+    public static @NotNull Parser<Text> PARSER = expr -> new Text(Text.decompile(expr));
 
     protected @NotNull String text = "";
 
-    protected Format format;
+    protected @NotNull Format format = Format.UNKNOWN;
 
     public Text() {
     }
@@ -34,17 +34,17 @@ public class Text extends Component {
         return text;
     }
 
-    public void assertFormat(Format format) {
+    public void assertFormat(@NotNull Format format) {
         this.format = format;
     }
 
-    public Format detectFormat() {
+    public @NotNull Format detectFormat() {
         if (getText().matches("<[a-z][\\s\\S]*>")) return Format.HTML;
         return Format.MARKDOWN;
     }
 
-    public Format getFormat() {
-        return format == null ? detectFormat() : format;
+    public @NotNull Format getFormat() {
+        return format;
     }
 
     @Override
@@ -85,8 +85,7 @@ public class Text extends Component {
      * @param c the character that needs to be quoted
      * @return compiled string
      */
-    public static String compile(String s, char c) {
-        if (s == null) return null;
+    public static @NotNull String compile(@NotNull String s, char c) {
         return s.replaceAll(Pattern.quote(String.valueOf(c)), quote(c));
     }
 
@@ -95,7 +94,7 @@ public class Text extends Component {
      * @param s the string object
      * @return the compiled string
      */
-    public static String compile(String s) {
+    public static @NotNull String compile(@NotNull String s) {
         for (char c : RESERVED_KEYWORDS) s = compile(s, c);
         return s;
     }
@@ -106,8 +105,7 @@ public class Text extends Component {
      * @param c the character whose quotations need to be removed
      * @return the decompiled string
      */
-    public static String decompile(String s, char c) {
-        if (s == null) return null;
+    public static @NotNull String decompile(@NotNull String s, char c) {
         return s.replaceAll(Pattern.quote(quote(c)), String.valueOf(c));
     }
 
@@ -116,7 +114,7 @@ public class Text extends Component {
      * @param s the string object
      * @return the decompiled string
      */
-    public static String decompile(String s) {
+    public static @NotNull String decompile(@NotNull String s) {
         for (char c : RESERVED_KEYWORDS) s = decompile(s, c);
         return s;
     }
@@ -133,7 +131,7 @@ public class Text extends Component {
         return -1;
     }
 
-    public static int indexOf(String s, char c) {
+    public static int indexOf(@NotNull String s, char c) {
         return indexOf(s, c, 0);
     }
 
@@ -144,12 +142,12 @@ public class Text extends Component {
      * @param fromIndex search starts from this index
      * @return the index
      */
-    public static int lastIndexOf(String s, char c, int fromIndex) {
+    public static int lastIndexOf(@NotNull String s, char c, int fromIndex) {
         for (int i = fromIndex; i > 0; i--) if (charAtEquals(s, i, c)) return i;
         return -1;
     }
 
-    public static int lastIndexOf(String s, char c) {
+    public static int lastIndexOf(@NotNull String s, char c) {
         return lastIndexOf(s, c, s.length() - 1);
     }
 
@@ -184,7 +182,7 @@ public class Text extends Component {
      * @param c expected starting character
      * @return true: does start with; false: does not start with
      */
-    public static boolean startsWith(String s, char c) {
+    public static boolean startsWith(@NotNull String s, char c) {
         return charAtEquals(s, 0, c);
     }
 
@@ -194,7 +192,7 @@ public class Text extends Component {
      * @param c expected ending character
      * @return true: does end with; false: does not end with
      */
-    public static boolean endsWith(String s, char c) {
+    public static boolean endsWith(@NotNull String s, char c) {
         return charAtEquals(s, s.length() - 1, c);
     }
 
@@ -205,11 +203,11 @@ public class Text extends Component {
      * @param end expected ending character
      * @return true: is wrapped by; false: is not wrapped by
      */
-    public static boolean wrappedBy(String s, char start, char end) {
+    public static boolean wrappedBy(@NotNull String s, char start, char end) {
         return startsWith(s, start) && endsWith(s, end);
     }
 
-    public static boolean wrappedBy(String s, char boarder) {
+    public static boolean wrappedBy(@NotNull String s, char boarder) {
         return wrappedBy(s, boarder, boarder);
     }
 
@@ -234,7 +232,7 @@ public class Text extends Component {
         return new IndexPair(startIndex, -1);
     }
 
-    public static @NotNull IndexPair matchBrackets(String s, char open, char close) {
+    public static @NotNull IndexPair matchBrackets(@NotNull String s, char open, char close) {
         return matchBrackets(s, open, close, 0);
     }
 }

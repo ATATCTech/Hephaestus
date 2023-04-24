@@ -6,6 +6,7 @@ import com.atatctech.hephaestus.exception.MissingFieldException;
 import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Field;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class Config {
     private final static Config instance = new Config();
 
-    public static Config getInstance() {
+    public static @NotNull Config getInstance() {
         return instance;
     }
 
@@ -30,7 +31,7 @@ public final class Config {
         scanPackages(Component.class.getPackageName());
     }
 
-    public void scanPackage(String pkg) {
+    public void scanPackage(@NotNull String pkg) {
         Reflections reflections = new Reflections(pkg);
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(ComponentConfig.class);
         for (Class<?> clz : classes) {
@@ -59,19 +60,19 @@ public final class Config {
         return parserMap.keySet().toArray(String[]::new);
     }
 
-    public void putParser(String tagName, Parser<?> parser) {
+    public void putParser(@NotNull String tagName, @NotNull Parser<?> parser) {
         parserMap.put(tagName, parser);
     }
 
-    public Parser<?> getParser(String tagName) {
+    public @Nullable Parser<?> getParser(@NotNull String tagName) {
         return parserMap.get(tagName);
     }
 
-    public void putTransform(String tagName, Transform transform) {
+    public void putTransform(@NotNull String tagName, @NotNull Transform transform) {
         transformMap.put(tagName, transform);
     }
 
-    public Transform getTransform(String tagName) {
+    public @Nullable Transform getTransform(@NotNull String tagName) {
         return transformMap.get(tagName);
     }
 }
