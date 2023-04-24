@@ -14,11 +14,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class AttributeUtils {
-    public static Set<Field> getDeclaredFields(Class<?> clz) {
-        if (clz == null) return null;
+    public static @NotNull Set<Field> getDeclaredFields(@NotNull Class<?> clz) {
         Set<Field> fields = new HashSet<>(Arrays.asList(clz.getDeclaredFields()));
-        Set<Field> superFields = getDeclaredFields(clz.getSuperclass());
-        if (superFields != null) fields.addAll(superFields);
+        Class<?> superClz = clz.getSuperclass();
+        if (superClz == null) return fields;
+        Set<Field> superFields = getDeclaredFields(superClz);
+        fields.addAll(superFields);
         return fields;
     }
 
@@ -38,17 +39,16 @@ public final class AttributeUtils {
         return attributes + ")";
     }
 
-    public record AttributesAndBody(String attributesExpr, String bodyExpr) {}
+    public record AttributesAndBody(@NotNull String attributesExpr, @NotNull String bodyExpr) {}
 
-    @Nullable
-    public static AttributesAndBody searchAttributesInExpr(String expr) {
+    public static @Nullable AttributesAndBody searchAttributesInExpr(@NotNull String expr) {
         if (!Text.startsWith(expr, '(')) return null;
         int endIndex = Text.indexOf(expr, ')', 1) + 1;
         if (endIndex < 1) return null;
         return new AttributesAndBody(expr.substring(0, endIndex), expr.substring(endIndex));
     }
 
-    public static void injectField(@NotNull Field field, Object instance, String value) throws IllegalAccessException, BadFormat {
+    public static void injectField(@NotNull Field field, @NotNull Object instance, @NotNull String value) throws IllegalAccessException, BadFormat {
         field.setAccessible(true);
         Class<?> t = field.getType();
         if (t == String.class) field.set(instance, value);
@@ -61,7 +61,7 @@ public final class AttributeUtils {
         else field.set(instance, t.cast(value));
     }
 
-    public static String getAttributeName(@NotNull Attribute annotation, Field field) {
+    public static String getAttributeName(@NotNull Attribute annotation, @NotNull Field field) {
         return annotation.name().isEmpty() ? field.getName() : annotation.name();
     }
 

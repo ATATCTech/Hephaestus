@@ -5,6 +5,7 @@ import com.atatctech.hephaestus.attribute.Attribute;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.function.Consumer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Component is the base class of all components.
@@ -16,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class Component {
     @Attribute
-    protected String id;
-    protected Style style = new Style();
+    protected @Nullable String id;
+    protected @Nullable Style style = new Style();
 
     protected Component() {
     }
@@ -26,7 +27,7 @@ public abstract class Component {
      * Get the `ComponentConfig` annotation of this class.
      * @return the `ComponentConfig` annotation.
      */
-    public ComponentConfig getConfig() {
+    public @Nullable ComponentConfig getConfig() {
         return getClass().getAnnotation(ComponentConfig.class);
     }
 
@@ -34,24 +35,24 @@ public abstract class Component {
      * Get the configured custom tag name of this class.
      * @return the tag name, "undefined" if it does not exist
      */
-    public String getTagName() {
+    public @NotNull String getTagName() {
         ComponentConfig config = getConfig();
         return config == null ? "undefined" : config.tagName();
     }
 
-    public void setId(String id) {
+    public void setId(@Nullable String id) {
         this.id = id;
     }
 
-    public String getId() {
+    public @Nullable String getId() {
         return id;
     }
 
-    public void setStyle(Style style) {
+    public void setStyle(@Nullable Style style) {
         this.style = style;
     }
 
-    public Style getStyle() {
+    public @Nullable Style getStyle() {
         return style;
     }
 
@@ -78,11 +79,11 @@ public abstract class Component {
         action.accept(this, depth);
     }
 
-    public void parallelTraversal(Consumer<? super Component> action) {
+    public void parallelTraversal(@NotNull Consumer<? super Component> action) {
         parallelTraversal(action, 0);
     }
 
-    protected String generateExpr(String inner) {
+    protected @NotNull String generateExpr(@NotNull String inner) {
         return "{" + getTagName() + ":" + AttributeUtils.extractAttributes(this) + inner + "}";
     }
 
@@ -97,7 +98,7 @@ public abstract class Component {
      * @return a string
      */
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return expr();
     }
 }

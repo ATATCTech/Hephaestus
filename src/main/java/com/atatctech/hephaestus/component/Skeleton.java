@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @Transform.RequireTransform
 public class Skeleton extends WrapperComponent implements Compilable {
-    public static Parser<Skeleton> PARSER = WrapperComponent.makeParser(Skeleton.class);
+    public static @NotNull Parser<Skeleton> PARSER = WrapperComponent.makeParser(Skeleton.class);
     public static final Transform TRANSFORM;
 
     static {
@@ -34,33 +34,33 @@ public class Skeleton extends WrapperComponent implements Compilable {
         };
     }
 
-    protected String name;
+    protected @NotNull String name = "unnamed";
 
     @Attribute
     @HiddenComponent
-    protected Component component;
+    protected @Nullable Component component;
 
-    protected Skeleton parent;
+    protected @Nullable Skeleton parent;
 
     public Skeleton() {}
 
-    public Skeleton(String name) {
+    public Skeleton(@NotNull String name) {
         setName(name);
     }
 
-    public void setName(String name) {
+    public void setName(@NotNull String name) {
         this.name = name;
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return name;
     }
 
-    public void setComponent(Component component) {
+    public void setComponent(@Nullable Component component) {
         this.component = component;
     }
 
-    public Component getComponent() {
+    public @Nullable Component getComponent() {
         return component;
     }
 
@@ -74,7 +74,7 @@ public class Skeleton extends WrapperComponent implements Compilable {
     }
 
     @Override
-    public void appendChild(Component child) {
+    public void appendChild(@NotNull Component child) {
         if (child instanceof Skeleton skeleton) {
             super.appendChild(child);
             skeleton.setParent(this);
@@ -88,7 +88,7 @@ public class Skeleton extends WrapperComponent implements Compilable {
     }
 
     @Override
-    public void compile(Compiler compiler) {
+    public void compile(@NotNull Compiler compiler) {
         if (getComponent() instanceof Ref ref) compiler.compile(ref);
     }
 }

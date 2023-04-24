@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 @Transform.RequireTransform
 @ComponentConfig(tagName = "md")
 public class MDBlock extends Component {
-    public static Parser<MDBlock> PARSER;
+    public static @NotNull Parser<MDBlock> PARSER;
 
     public static final Transform TRANSFORM;
 
@@ -23,7 +23,7 @@ public class MDBlock extends Component {
             }
 
             @Override
-            public MDBlock afterRead(String content) {
+            public MDBlock afterRead(@NotNull String content) {
                 return new MDBlock(new Text(content));
             }
         };

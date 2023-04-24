@@ -12,7 +12,7 @@ import java.util.*;
  * A collection of components.
  */
 public class MultiComponent extends Component implements Collection<Component> {
-    public static Parser<MultiComponent> PARSER = expr -> {
+    public static @NotNull Parser<MultiComponent> PARSER = expr -> {
         char open, close;
         if (Text.wrappedBy(expr, '{', '}')) {
             open = '{';
@@ -38,7 +38,7 @@ public class MultiComponent extends Component implements Collection<Component> {
     public MultiComponent() {
     }
 
-    public MultiComponent(List<Component> components) {
+    public MultiComponent(@NotNull List<Component> components) {
         setComponents(components);
     }
 
@@ -59,7 +59,7 @@ public class MultiComponent extends Component implements Collection<Component> {
         for (Component component : components) component.forEach(action, depth);
     }
 
-    protected void parallelTraversal(Consumer<? super Component> action, int depth, @NotNull List<Component> components) {
+    protected void parallelTraversal(@NotNull Consumer<? super Component> action, int depth, @NotNull List<Component> components) {
         List<Component> next = new LinkedList<>();
         for (Component component : components) {
             if (component instanceof WrapperComponent wrapperComponent)
@@ -75,7 +75,7 @@ public class MultiComponent extends Component implements Collection<Component> {
     }
 
     @Override
-    public void parallelTraversal(Consumer<? super Component> action) {
+    public void parallelTraversal(@NotNull Consumer<? super Component> action) {
         parallelTraversal(action, 0);
     }
 

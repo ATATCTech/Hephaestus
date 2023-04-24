@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 @Transform.RequireTransform
 @ComponentConfig(tagName = "html")
 public class HTMLBlock extends Component {
-    public static Parser<HTMLBlock> PARSER;
+    public static @NotNull Parser<HTMLBlock> PARSER;
 
     public static final Transform TRANSFORM;
 
@@ -23,7 +23,7 @@ public class HTMLBlock extends Component {
             }
 
             @Override
-            public HTMLBlock afterRead(String content) {
+            public HTMLBlock afterRead(@NotNull String content) {
                 return new HTMLBlock(new Text(content));
             }
         };

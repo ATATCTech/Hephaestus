@@ -52,6 +52,8 @@ public class Version extends WrapperComponent {
     @Attribute
     protected @NotNull Serial serial = new Serial("undefined");
 
+    public Version() {}
+
     public Version(@NotNull Serial serial) {
         setSerial(serial);
     }
