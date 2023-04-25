@@ -104,7 +104,10 @@ public class ComponentFolder implements FileSystemEntity {
                     WrapperComponent component = ComponentFolder.read(file, wrapperFile).component();
                     Transform transform = Transform.getTransform(component.getClass());
                     wrapperComponent.appendChild((transform == null ? new Transform() : transform).handleFilename(file.getName(), component));
-                } else wrapperComponent.appendChild(ComponentFile.read(file).component());
+                } else {
+                    Component component = ComponentFile.read(file).component();
+                    if (component != null) wrapperComponent.appendChild(component);
+                }
             }
             Transform transform = Transform.getTransform(wrapperComponent.getClass());
             return new ComponentFolder((transform == null ? new Transform() : transform).handleFilename(dir.getName(), wrapperComponent), wrapperFile);
