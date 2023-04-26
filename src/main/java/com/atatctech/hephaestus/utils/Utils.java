@@ -1,0 +1,24 @@
+package com.atatctech.hephaestus.utils;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+public final class Utils {
+    /**
+     * Get the complementary set of all declared fields in {@param clz} and every super class.
+     * @param clz target class
+     * @return all declared fields
+     */
+    public static @NotNull Set<Field> getDeclaredFields(@NotNull Class<?> clz) {
+        Set<Field> fields = new HashSet<>(Arrays.asList(clz.getDeclaredFields()));
+        Class<?> superClz = clz.getSuperclass();
+        if (superClz == null) return fields;
+        Set<Field> superFields = getDeclaredFields(superClz);
+        fields.addAll(superFields);
+        return fields;
+    }
+}

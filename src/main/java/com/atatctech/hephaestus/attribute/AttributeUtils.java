@@ -5,26 +5,16 @@ import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.Text;
 import com.atatctech.hephaestus.exception.BadFormat;
+import com.atatctech.hephaestus.utils.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 public final class AttributeUtils {
-    public static @NotNull Set<Field> getDeclaredFields(@NotNull Class<?> clz) {
-        Set<Field> fields = new HashSet<>(Arrays.asList(clz.getDeclaredFields()));
-        Class<?> superClz = clz.getSuperclass();
-        if (superClz == null) return fields;
-        Set<Field> superFields = getDeclaredFields(superClz);
-        fields.addAll(superFields);
-        return fields;
-    }
-
     public static @NotNull String extractAttributes(@NotNull Component component) {
-        Set<Field> fields = getDeclaredFields(component.getClass());
+        Set<Field> fields = Utils.getDeclaredFields(component.getClass());
         StringBuilder attributes = new StringBuilder("(");
         for (Field field : fields) {
             try {
@@ -78,7 +68,7 @@ public final class AttributeUtils {
     }
 
     public static void injectAttributes(@NotNull Component component, @NotNull String attributesExpr) {
-        Set<Field> fields = getDeclaredFields(component.getClass());
+        Set<Field> fields = Utils.getDeclaredFields(component.getClass());
         for (Field field : fields) {
             try {
                 if (!field.isAnnotationPresent(Attribute.class)) continue;

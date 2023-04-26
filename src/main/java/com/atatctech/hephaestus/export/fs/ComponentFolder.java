@@ -6,6 +6,7 @@ import com.atatctech.hephaestus.component.WrapperComponent;
 import com.atatctech.hephaestus.exception.HephaestusException;
 import com.atatctech.hephaestus.exception.HephaestusRuntimeException;
 import com.atatctech.hephaestus.exception.MissingDefaultConstructorException;
+import com.atatctech.hephaestus.utils.Utils;
 import com.atatctech.packages.basics.Basics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +57,7 @@ public class ComponentFolder implements FileSystemEntity {
         } else if (!dir.mkdirs()) return false;
         if (!writeWrapper(dirPath)) return false;
         int i = 0;
-        for (Field field : component.getClass().getDeclaredFields()) {
+        for (Field field : Utils.getDeclaredFields(component.getClass())) {
             if (field.isAnnotationPresent(HiddenComponent.class)) {
                 try {
                     field.setAccessible(true);
