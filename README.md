@@ -2,7 +2,11 @@
 
 The most suitable text language for documentation. Native support for Markdown and HTML.
 
-The language is designed to be as compact as possible to reduce the overhead of network transmission, and at the same time, it supports generating outlines.
+This language is dedicated to the inclusion of hierarchical relationships. The syntax is very similar to HTML or XML, yet it lies in a higher tier.
+
+Hephaestus also supports extensions and secondary development to achieve high scalability. 
+
+Official JavaScript Implementation: [Hephaestus-JS](https://github.com/ATATCTech/Hephaestus-JS)
 
 ## Installation
 
@@ -10,7 +14,7 @@ The language is designed to be as compact as possible to reduce the overhead of 
 
 ```groovy
 dependencies {
-    implementation 'com.atatctech:hephaestus:1.0.0'
+    implementation 'com.atatctech:hephaestus:1.0.1'
 }
 ```
 
@@ -20,7 +24,7 @@ dependencies {
 <dependency>
     <groupId>com.atatctech</groupId>
     <artifactId>hephaestus</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -77,5 +81,78 @@ To list all the supported tag names, use:
 ```java
 String[] supportedTagNames = Hephaestus.listTagNames();
 System.out.println(supportTagNames);
+```
+
+## Extensions
+
+### Load Extensions
+
+```java
+// load the extension
+Config.getInstance().scanPackage("{EXTENSION_PACKAGE}");
+// check if successful
+System.out.println(Hephaestus.listTagNames());
+```
+
+### Create an Extension
+
+#### Register
+
+To register a component, inherit from `Component` and annotate with `@ComponentConfig`.
+
+Note that registering a component that has an existing tag name would override the current component.
+
+```java
+package com.example;
+
+@ComponentConfig(tagName="myc")
+public class MyComponent extends Component {
+    public static Parser<MyComponent> PARSER;
+    
+    static {
+        PARSER = expr -> new MyComponent();
+    }
+    
+    public MyComponent() {}
+    
+    @Override
+    public @NotNull String expr() {
+        return generateExpr("This is my component.");
+    }
+}
+```
+
+`@ComponentConfig` requires an argument `tagName`, which specifies two things: the tag name appears in Hexpr and the file suffix when exporting to the file system.
+
+The class must have a static field exactly named "PARSER".
+
+A default constructor with no parameter must be included to support runtime reflection.
+
+#### Load and Test
+
+```java
+Config.getInstance().scanPackage("com.example");
+
+Component myComponent = new MyComponent();
+String expr = myComponent.expr();
+System.out.println(expr);
+myComponent = Hephaestus.parseExpr(expr);
+assert myComponent != null;
+System.out.println(myComponent.getTagName());
+```
+
+```shell
+{myc:This is my component.}
+myc
+```
+
+### Replace an Existing Parser
+
+Parsers are usually and should be defined as not final. Replacing a component's parser is extremely simple.
+
+The following example replaces `Skeleton`'s parser.
+
+```java
+Skeleton.PARSER = WrapperComponent.makeParser(Skeleton.class);
 ```
 

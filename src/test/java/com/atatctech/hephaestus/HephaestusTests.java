@@ -1,24 +1,38 @@
 package com.atatctech.hephaestus;
 
-import com.atatctech.hephaestus.component.MDBlock;
-import com.atatctech.hephaestus.component.Skeleton;
-import com.atatctech.hephaestus.component.Text;
-import com.atatctech.hephaestus.exception.HephaestusException;
-import com.atatctech.hephaestus.export.fs.ComponentFolder;
-import com.atatctech.hephaestus.export.fs.FileSystemEntity;
+import com.atatctech.hephaestus.component.Component;
+import com.atatctech.hephaestus.component.ComponentConfig;
+import com.atatctech.hephaestus.config.Config;
+import com.atatctech.hephaestus.exception.BadFormat;
+import com.atatctech.hephaestus.parser.Parser;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
 public class HephaestusTests {
+    @ComponentConfig(tagName = "myc")
+    static class MyComponent extends Component {
+        public static Parser<MyComponent> PARSER;
+
+        static {
+            PARSER = expr -> new MyComponent();
+        }
+
+        public MyComponent() {}
+
+        @Override
+        public @NotNull String expr() {
+            return generateExpr("This is my component.");
+        }
+    }
     @Test
-    void test() throws HephaestusException, IOException, ClassNotFoundException {
-        Skeleton skeleton1 = new Skeleton("test1");
-        Skeleton skeleton2 = new Skeleton("test2");
-        skeleton2.setComponent(new MDBlock(new Text("### Test")));
-        skeleton1.appendChild(skeleton2);
-        FileSystemEntity fileSystemEntity = new ComponentFolder(skeleton1);
-        System.out.println(fileSystemEntity.write("F:\\Test2"));
-        System.out.println(ComponentFolder.read("F:\\Test2").component());
+    void test() throws BadFormat {
+        Config.getInstance().scanPackage("com.atatctech.hephaestus");
+
+        Component myComponent = new MyComponent();
+        String expr = myComponent.expr();
+        System.out.println(expr);
+        myComponent = Hephaestus.parseExpr(expr);
+        assert myComponent != null;
+        System.out.println(myComponent.getTagName());
     }
 }
