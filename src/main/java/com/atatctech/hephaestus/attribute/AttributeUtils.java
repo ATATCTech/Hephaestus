@@ -10,21 +10,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
-import java.util.Set;
 
 public final class AttributeUtils {
     public static @NotNull String extractAttributes(@NotNull Component component) {
-        Set<Field> fields = Utils.getDeclaredFields(component.getClass());
         StringBuilder attributes = new StringBuilder("(");
-        for (Field field : fields) {
+        Utils.forEachDeclaredField(component.getClass(), field -> {
             try {
-                if (!field.isAnnotationPresent(Attribute.class)) continue;
+                if (!field.isAnnotationPresent(Attribute.class)) return;
                 field.setAccessible(true);
                 Object val = field.get(component);
-                if (val == null) continue;
+                if (val == null) return;
                 attributes.append(getAttributeName(field.getAnnotation(Attribute.class), field)).append("=").append(val).append(";");
             } catch (IllegalAccessException ignored) {}
-        }
+        });
         if (attributes.length() == 1) return "";
         return attributes + ")";
     }
@@ -68,14 +66,13 @@ public final class AttributeUtils {
     }
 
     public static void injectAttributes(@NotNull Component component, @NotNull String attributesExpr) {
-        Set<Field> fields = Utils.getDeclaredFields(component.getClass());
-        for (Field field : fields) {
+        Utils.forEachDeclaredField(component.getClass(), field -> {
             try {
-                if (!field.isAnnotationPresent(Attribute.class)) continue;
+                if (!field.isAnnotationPresent(Attribute.class)) return;
                 String val = getAttribute(attributesExpr, getAttributeName(field.getAnnotation(Attribute.class), field));
-                if (val == null) continue;
+                if (val == null) return;
                 injectField(field, component, val);
             } catch (IllegalAccessException | BadFormat ignored) {}
-        }
+        });
     }
 }
