@@ -101,4 +101,16 @@ public abstract class Component {
     public @NotNull String toString() {
         return expr();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Component component)) return false;
+        return expr().equals(component.expr());
+    }
+
+    @Override
+    public int hashCode() {
+        return expr().hashCode();
+    }
 }
