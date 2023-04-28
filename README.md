@@ -67,7 +67,7 @@ Different brackets represent different meanings in Hexpr.
 The component is the largest unit in Hexpr. A component consists of the following parts:
 
 ```hepxr
-{TAG_NAME:CONTENT}
+{TAG_NAME:(ATTRIBUTES)CONTENT}
 ```
 
 Specifically, TAG_NAME indicates the type of component. CONTENT can be everything depending on what the component needs.
