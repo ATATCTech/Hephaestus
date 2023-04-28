@@ -15,4 +15,6 @@ public @interface Attribute {
      * @return the name, the name of the field is used instead if empty
      */
     @NotNull String name() default "";
+
+    @NotNull Class<? extends TargetConstructor<?>> targetConstructor() default DefaultTargetConstructor.class;
 }

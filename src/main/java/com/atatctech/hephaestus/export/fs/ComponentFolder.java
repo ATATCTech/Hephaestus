@@ -64,7 +64,7 @@ public class ComponentFolder implements FileSystemEntity {
                     Component hiddenComponent = (Component) field.get(component);
                     if (hiddenComponent != null && !writeSub(hiddenComponent, dirPath, i++, "hidden")) return false;
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+                    throw new HephaestusRuntimeException(e);
                 }
             }
         }

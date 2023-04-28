@@ -1,11 +1,9 @@
 package com.atatctech.hephaestus.attribute;
 
-import com.atatctech.hephaestus.Color;
-import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.Text;
 import com.atatctech.hephaestus.exception.BadFormat;
-import com.atatctech.hephaestus.exception.MissingMethodException;
+import com.atatctech.hephaestus.exception.HephaestusRuntimeException;
 import com.atatctech.hephaestus.utils.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,28 +37,12 @@ public final class AttributeUtils {
         return new AttributesAndBody(expr.substring(0, endIndex), expr.substring(endIndex));
     }
 
-    public static void injectField(@NotNull Field field, @NotNull Object instance, @NotNull String value) throws IllegalAccessException, BadFormat {
+    public static void injectField(@NotNull Field field, @NotNull Object instance, @NotNull String value, @NotNull Class<? extends TargetConstructor<?>> targetConstructor) throws IllegalAccessException, BadFormat, NoSuchMethodException, InvocationTargetException, InstantiationException {
         field.setAccessible(true);
-        Class<?> t = field.getType();
-        if (t.isAnnotationPresent(AttributeType.class)) {
-            try {
-                Method castMethod = t.getDeclaredMethod("cast");
-                castMethod.setAccessible(true);
-                field.set(instance, castMethod.invoke(instance, value));
-            } catch (NoSuchMethodException e) {
-                throw new MissingMethodException(t, "cast");
-            } catch (InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        else if (t == String.class) field.set(instance, value);
-        else if (t == Integer.class) field.set(instance, Integer.valueOf(value));
-        else if (t == Float.class) field.set(instance, Float.valueOf(value));
-        else if (t == Long.class) field.set(instance, Long.valueOf(value));
-        else if (t == Double.class) field.set(instance, Double.valueOf(value));
-        else if (t == Color.class) field.set(instance, new Color(value));
-        else if (t == Component.class) field.set(instance, Hephaestus.parseExpr(value));
-        else field.set(instance, t.cast(value));
+        Method cast = targetConstructor.getDeclaredMethod("cast", String.class);
+        if (!field.getType().isAssignableFrom(cast.getReturnType())) throw new HephaestusRuntimeException("Target constructor does not return the required type.");
+        cast.setAccessible(true);
+        field.set(instance, cast.invoke(targetConstructor.getDeclaredConstructor().newInstance(), value));
     }
 
     public static @NotNull String getAttributeName(@NotNull Attribute annotation, @NotNull Field field) {
@@ -83,10 +65,12 @@ public final class AttributeUtils {
         Utils.forEachDeclaredField(component.getClass(), field -> {
             try {
                 if (!field.isAnnotationPresent(Attribute.class)) return;
-                String val = getAttribute(attributesExpr, getAttributeName(field.getAnnotation(Attribute.class), field));
+                Attribute annotation = field.getAnnotation(Attribute.class);
+                String val = getAttribute(attributesExpr, getAttributeName(annotation, field));
                 if (val == null) return;
-                injectField(field, component, val);
-            } catch (IllegalAccessException | BadFormat ignored) {}
+                injectField(field, component, val, annotation.targetConstructor());
+            } catch (IllegalAccessException | BadFormat | NoSuchMethodException | InvocationTargetException |
+                     InstantiationException ignored) {}
         });
     }
 }

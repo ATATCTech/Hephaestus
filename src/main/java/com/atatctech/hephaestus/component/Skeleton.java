@@ -4,6 +4,7 @@ import com.atatctech.hephaestus.Compilable;
 import com.atatctech.hephaestus.Compiler;
 import com.atatctech.hephaestus.attribute.Attribute;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
+import com.atatctech.hephaestus.attribute.TargetConstructorForComponent;
 import com.atatctech.hephaestus.export.fs.HiddenComponent;
 import com.atatctech.hephaestus.export.fs.Transform;
 import com.atatctech.hephaestus.parser.Parser;
@@ -36,8 +37,8 @@ public class Skeleton extends WrapperComponent implements Compilable {
 
     protected @NotNull String name = "unnamed";
 
-    @Attribute
     @HiddenComponent
+    @Attribute(targetConstructor = TargetConstructorForComponent.class)
     protected @Nullable Component component;
 
     protected @Nullable Skeleton parent;

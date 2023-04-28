@@ -2,6 +2,7 @@ package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
+import com.atatctech.hephaestus.exception.HephaestusRuntimeException;
 import com.atatctech.hephaestus.exception.MissingDefaultConstructorException;
 import com.atatctech.hephaestus.function.Consumer;
 import com.atatctech.hephaestus.parser.Parser;
@@ -96,7 +97,7 @@ public abstract class WrapperComponent extends Component {
                 if (bodyComponent != null) component.setChildren(bodyComponent instanceof MultiComponent children ? children : new MultiComponent(bodyComponent));
                 return component;
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
-                throw new RuntimeException(e);
+                throw new HephaestusRuntimeException(e);
             }
         };
     }
