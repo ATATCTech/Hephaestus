@@ -1,6 +1,5 @@
 package com.atatctech.hephaestus.component;
 
-import com.atatctech.hephaestus.Style;
 import com.atatctech.hephaestus.attribute.Attribute;
 import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.function.Consumer;
@@ -19,7 +18,6 @@ public abstract class Component {
     protected @Nullable Ref proxy;
     @Attribute
     protected @Nullable String id;
-    protected @Nullable Style style = new Style();
 
     protected Component() {
     }
@@ -61,13 +59,6 @@ public abstract class Component {
         return id;
     }
 
-    public void setStyle(@Nullable Style style) {
-        this.style = style;
-    }
-
-    public @Nullable Style getStyle() {
-        return style;
-    }
 
     /**
      * Exposes an interface capable of traversing the component tree. This method traverses the component tree in order from top right to bottom left (DFS).
