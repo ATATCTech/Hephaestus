@@ -237,6 +237,11 @@ public class Text extends Component {
         return matchBrackets(s, open, close, 0);
     }
 
+    /**
+     * Get the other bracket.
+     * @param b the left bracket or the right one
+     * @return the other one
+     */
     public static char pairBracket(char b) {
         return switch (b) {
             case '(' -> ')';
