@@ -16,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
  * If there are attributes need to be written in the expression, annotate the fields with `Attribute`. See documentation.
  */
 public abstract class Component {
+    protected @Nullable Ref proxy;
     @Attribute
     protected @Nullable String id;
     protected @Nullable Style style = new Style();
@@ -38,6 +39,18 @@ public abstract class Component {
     public @NotNull String getTagName() {
         ComponentConfig config = getConfig();
         return config == null ? "undefined" : config.tagName();
+    }
+
+    public boolean isProxy() {
+        return proxy != null;
+    }
+
+    public void setProxy(@Nullable Ref proxy) {
+        this.proxy = proxy;
+    }
+
+    public @Nullable Ref getProxy() {
+        return proxy;
     }
 
     public void setId(@Nullable String id) {
@@ -84,7 +97,7 @@ public abstract class Component {
     }
 
     protected @NotNull String generateExpr(@NotNull String inner) {
-        return "{" + getTagName() + ":" + AttributeUtils.extractAttributes(this) + inner + "}";
+        return proxy == null ? "{" + getTagName() + ":" + AttributeUtils.extractAttributes(this) + inner + "}" : proxy.expr();
     }
 
     /**
@@ -105,8 +118,8 @@ public abstract class Component {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Component component)) return false;
-        return expr().equals(component.expr());
+        if (o instanceof Component component) return expr().equals(component.expr());
+        return false;
     }
 
     @Override

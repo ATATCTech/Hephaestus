@@ -4,8 +4,6 @@ import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-
 @ComponentConfig(tagName = "ref")
 public class Ref extends Component {
     public static @NotNull Parser<Ref> PARSER;
@@ -25,6 +23,6 @@ public class Ref extends Component {
 
     @Override
     public @NotNull String expr() {
-        return to == null ? generateExpr(Objects.requireNonNull(getId(), "")) : to.expr();
+        return to == null ? generateExpr("") : to.expr();
     }
 }

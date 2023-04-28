@@ -30,10 +30,10 @@ public final class AttributeUtils {
 
     public record AttributesAndBody(@NotNull String attributesExpr, @NotNull String bodyExpr) {}
 
-    public static @Nullable AttributesAndBody searchAttributesInExpr(@NotNull String expr) {
-        if (!Text.startsWith(expr, '(')) return null;
+    public static @NotNull AttributesAndBody searchAttributesInExpr(@NotNull String expr) {
+        if (!Text.startsWith(expr, '(')) return new AttributesAndBody("", expr);
         int endIndex = Text.indexOf(expr, ')', 1) + 1;
-        if (endIndex < 1) return null;
+        if (endIndex < 1) return new AttributesAndBody("", expr);
         return new AttributesAndBody(expr.substring(0, endIndex), expr.substring(endIndex));
     }
 

@@ -1,7 +1,6 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.Hephaestus;
-import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.exception.HephaestusRuntimeException;
 import com.atatctech.hephaestus.exception.MissingDefaultConstructorException;
 import com.atatctech.hephaestus.function.Consumer;
@@ -86,14 +85,7 @@ public abstract class WrapperComponent extends Component {
         return expr -> {
             try {
                 C component = constructor.newInstance();
-                AttributeUtils.AttributesAndBody attributesAndBody = AttributeUtils.searchAttributesInExpr(expr);
-                String body;
-                if (attributesAndBody == null) body = expr;
-                else {
-                    body = attributesAndBody.bodyExpr();
-                    AttributeUtils.injectAttributes(component, attributesAndBody.attributesExpr());
-                }
-                Component bodyComponent = Hephaestus.parseExpr(body);
+                Component bodyComponent = Hephaestus.parseExpr(expr);
                 if (bodyComponent != null) component.setChildren(bodyComponent instanceof MultiComponent children ? children : new MultiComponent(bodyComponent));
                 return component;
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {

@@ -1,7 +1,6 @@
 package com.atatctech.hephaestus.component;
 
 import com.atatctech.hephaestus.Hephaestus;
-import com.atatctech.hephaestus.exception.BadFormat;
 import com.atatctech.hephaestus.function.Consumer;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.NotNull;
@@ -13,15 +12,8 @@ import java.util.*;
  */
 public class MultiComponent extends Component implements Collection<Component> {
     public static @NotNull Parser<MultiComponent> PARSER = expr -> {
-        char open, close;
-        if (Text.wrappedBy(expr, '{', '}')) {
-            open = '{';
-            close = '}';
-        } else if (Text.wrappedBy(expr, '<', '>')) {
-            open = '<';
-            close = '>';
-        } else throw new BadFormat("Unrecognized format.", expr);
-        Text.IndexPair indexes = Text.matchBrackets(expr, open, close);
+        char open = expr.charAt(0);
+        Text.IndexPair indexes = Text.matchBrackets(expr, open, Text.pairBracket(open));
         int endIndex = indexes.end();
         List<Component> components = new LinkedList<>();
         while (indexes.start() >= 0 && endIndex++ >= 0) {
@@ -29,7 +21,8 @@ public class MultiComponent extends Component implements Collection<Component> {
             if (component == null) continue;
             components.add(component);
             expr = expr.substring(endIndex);
-            indexes = Text.matchBrackets(expr, open, close);
+            if (expr.length() == 0) break;
+            indexes = Text.matchBrackets(expr, open = expr.charAt(0), Text.pairBracket(open));
             endIndex = indexes.end();
         }
         return new MultiComponent(components);

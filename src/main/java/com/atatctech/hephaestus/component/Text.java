@@ -1,5 +1,6 @@
 package com.atatctech.hephaestus.component;
 
+import com.atatctech.hephaestus.exception.HephaestusRuntimeException;
 import com.atatctech.hephaestus.format.Format;
 import com.atatctech.hephaestus.parser.Parser;
 import org.jetbrains.annotations.Contract;
@@ -234,5 +235,19 @@ public class Text extends Component {
 
     public static @NotNull IndexPair matchBrackets(@NotNull String s, char open, char close) {
         return matchBrackets(s, open, close, 0);
+    }
+
+    public static char pairBracket(char b) {
+        return switch (b) {
+            case '(' -> ')';
+            case '[' -> ']';
+            case '{' -> '}';
+            case '<' -> '>';
+            case ')' -> '(';
+            case ']' -> '[';
+            case '}' -> '{';
+            case '>' -> '<';
+            default -> throw new HephaestusRuntimeException("Not a bracket: " + b + ".");
+        };
     }
 }

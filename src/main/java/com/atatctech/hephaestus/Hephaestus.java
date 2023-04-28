@@ -1,5 +1,6 @@
 package com.atatctech.hephaestus;
 
+import com.atatctech.hephaestus.attribute.AttributeUtils;
 import com.atatctech.hephaestus.component.*;
 import com.atatctech.hephaestus.config.Config;
 import com.atatctech.hephaestus.exception.BadFormat;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class Hephaestus {
     public static @Nullable Component parseExpr(@NotNull String expr) throws BadFormat {
@@ -29,15 +31,20 @@ public final class Hephaestus {
             temp.tagName = expr.substring(1, i);
             temp.inner = expr.substring(i + 1, expr.length() - 1);
         }
+        AttributeUtils.AttributesAndBody attributesAndBody = AttributeUtils.searchAttributesInExpr(temp.inner);
+        temp.inner = attributesAndBody.bodyExpr();
         if (Text.wrappedBy(expr, '{', '}')) {
             if (temp.tagName.isEmpty()) return Text.PARSER.parse(temp.inner);
             temp.tagName = temp.tagName.replaceAll(" ", "");
             Parser<?> parser = Config.getInstance().getParser(temp.tagName);
-            return parser == null ? temp : parser.parse(temp.inner);
+            Component component = parser == null ? temp : parser.parse(temp.inner);
+            AttributeUtils.injectAttributes(component, attributesAndBody.attributesExpr());
+            return component;
         }
         if (!Text.wrappedBy(expr, '<', '>')) throw new ComponentNotClosed(expr);
         if (temp.tagName.isEmpty()) return new Skeleton(Text.decompile(temp.inner));
         Skeleton skeleton = Skeleton.PARSER.parse(temp.inner);
+        AttributeUtils.injectAttributes(skeleton, attributesAndBody.attributesExpr());
         skeleton.setName(Text.decompile(temp.tagName));
         return skeleton;
     }
@@ -78,6 +85,18 @@ public final class Hephaestus {
             if (component instanceof Compilable compilable) compilable.compile(refs -> references.addAll(Arrays.asList(refs)));
         });
         references.forEach(ref -> ref.referTo(componentMap.get(ref.getId())));
+        return top;
+    }
+
+    public static @NotNull Component reduceRedundancy(@NotNull Component top) {
+        Set<Component> componentSet = new HashSet<>();
+        AtomicInteger idIter = new AtomicInteger();
+        top.parallelTraversal((component, depth) -> {
+            if (componentSet.contains(component)) {
+                for (Component c : componentSet) if (c.equals(component)) c.setId(String.valueOf(idIter.get()));
+                component.setProxy(new Ref(String.valueOf(idIter.getAndIncrement())));
+            } else componentSet.add(component);
+        });
         return top;
     }
 
