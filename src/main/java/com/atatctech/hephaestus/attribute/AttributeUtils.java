@@ -5,11 +5,14 @@ import com.atatctech.hephaestus.Hephaestus;
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.Text;
 import com.atatctech.hephaestus.exception.BadFormat;
+import com.atatctech.hephaestus.exception.MissingMethodException;
 import com.atatctech.hephaestus.utils.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public final class AttributeUtils {
     public static @NotNull String extractAttributes(@NotNull Component component) {
@@ -39,7 +42,18 @@ public final class AttributeUtils {
     public static void injectField(@NotNull Field field, @NotNull Object instance, @NotNull String value) throws IllegalAccessException, BadFormat {
         field.setAccessible(true);
         Class<?> t = field.getType();
-        if (t == String.class) field.set(instance, value);
+        if (t.isAnnotationPresent(AttributeType.class)) {
+            try {
+                Method castMethod = t.getDeclaredMethod("cast");
+                castMethod.setAccessible(true);
+                field.set(instance, castMethod.invoke(instance, value));
+            } catch (NoSuchMethodException e) {
+                throw new MissingMethodException(t, "cast");
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else if (t == String.class) field.set(instance, value);
         else if (t == Integer.class) field.set(instance, Integer.valueOf(value));
         else if (t == Float.class) field.set(instance, Float.valueOf(value));
         else if (t == Long.class) field.set(instance, Long.valueOf(value));

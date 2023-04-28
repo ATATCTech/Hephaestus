@@ -28,7 +28,7 @@ public class Transform {
     public static @Nullable Transform getTransform(@NotNull Class<?> clz) {
         if (clz.isAnnotationPresent(RequireTransform.class)) {
             try {
-                Field field = clz.getField("TRANSFORM");
+                Field field = clz.getDeclaredField("TRANSFORM");
                 field.setAccessible(true);
                 return (Transform) field.get(null);
             } catch (NoSuchFieldException e) {

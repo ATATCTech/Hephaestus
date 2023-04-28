@@ -38,7 +38,7 @@ public final class Config {
             if (!Component.class.isAssignableFrom(clz)) continue;
             ComponentConfig componentConfig = clz.getAnnotation(ComponentConfig.class);
             try {
-                Field field = clz.getField("PARSER");
+                Field field = clz.getDeclaredField("PARSER");
                 field.setAccessible(true);
                 putParser(componentConfig.tagName(), (Parser<?>) field.get(null));
             } catch (NoSuchFieldException ignored) {
