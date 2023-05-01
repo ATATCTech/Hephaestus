@@ -7,7 +7,7 @@ plugins {
 apply plugin: 'maven-publish'
 
 group 'com.atatctech'
-version '1.0.1b8'
+version '1.0.1'
 
 repositories {
     mavenCentral()

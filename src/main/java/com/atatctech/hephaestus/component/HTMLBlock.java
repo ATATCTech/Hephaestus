@@ -31,8 +31,6 @@ public class HTMLBlock extends Component {
 
     protected @Nullable Text html;
 
-    public HTMLBlock() {}
-
     public HTMLBlock(@Nullable Text html) {
         setHTML(html);
     }

@@ -31,8 +31,6 @@ public class MDBlock extends Component {
 
     protected @Nullable Text markdown;
 
-    public MDBlock() {}
-
     public MDBlock(@Nullable Text markdown) {
         setMarkdown(markdown);
     }
