@@ -67,7 +67,7 @@ public final class Hephaestus {
             else if (f == 1 && Text.charAtEquals(expr, i, ':')) f = 2;
             else if (f == 2 && Text.charAtEquals(expr, i, '(')) f = 3;
             else if (Text.charAtEqualsAny(expr, i, '}', '>')) f = 0;
-            if (f != 1 && (bit == '\n' || bit == ' ')) continue;
+            if (f != 1 && (bit == '\n' || bit == ' ' || bit == '\r')) continue;
             builder.append(bit);
         }
         return builder.toString();
