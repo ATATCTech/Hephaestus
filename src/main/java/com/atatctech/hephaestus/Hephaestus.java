@@ -9,6 +9,7 @@ import com.atatctech.hephaestus.exception.HephaestusException;
 import com.atatctech.hephaestus.export.fs.ComponentFile;
 import com.atatctech.hephaestus.export.fs.ComponentFolder;
 import com.atatctech.hephaestus.parser.Parser;
+import com.atatctech.hephaestus.structure.Constraint;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -100,6 +101,10 @@ public final class Hephaestus {
         return top;
     }
 
+    public static boolean satisfies(@NotNull Component component, @NotNull Constraint constraint) {
+        return constraint.conforms(component);
+    }
+
     public static boolean exportToFS(@NotNull Component component, @NotNull File to, @Nullable File wrapperFile) {
         return component instanceof WrapperComponent wrapperComponent ? (wrapperFile == null ? new ComponentFolder(wrapperComponent) : new ComponentFolder(wrapperComponent, wrapperFile)).write(to) : new ComponentFile(component).write(to);
     }
@@ -116,19 +121,19 @@ public final class Hephaestus {
         return exportToFS(component, new File(to));
     }
 
-    public static Component importFromFS(@NotNull File target, @Nullable File wrapperFile) throws HephaestusException, IOException, ClassNotFoundException {
+    public static @Nullable Component importFromFS(@NotNull File target, @Nullable File wrapperFile) throws HephaestusException, IOException, ClassNotFoundException {
         return (target.isDirectory() ? (wrapperFile == null ? ComponentFolder.read(target) : ComponentFolder.read(target, wrapperFile)) : ComponentFile.read(target)).component();
     }
 
-    public static Component importFromFS(@NotNull String target, @Nullable File wrapperFile) throws HephaestusException, IOException, ClassNotFoundException {
+    public static @Nullable Component importFromFS(@NotNull String target, @Nullable File wrapperFile) throws HephaestusException, IOException, ClassNotFoundException {
         return importFromFS(new File(target), wrapperFile);
     }
 
-    public static Component importFromFS(@NotNull File target) throws HephaestusException, IOException, ClassNotFoundException {
+    public static @Nullable Component importFromFS(@NotNull File target) throws HephaestusException, IOException, ClassNotFoundException {
         return importFromFS(target, null);
     }
 
-    public static Component importFromFS(@NotNull String target) throws HephaestusException, IOException, ClassNotFoundException {
+    public static @Nullable Component importFromFS(@NotNull String target) throws HephaestusException, IOException, ClassNotFoundException {
         return importFromFS(new File(target));
     }
 }

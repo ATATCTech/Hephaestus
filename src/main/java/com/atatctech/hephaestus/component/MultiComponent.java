@@ -10,6 +10,7 @@ import java.util.*;
 /**
  * A collection of components.
  */
+@ComponentConfig(tagName = "mc")
 public class MultiComponent extends Component implements Collection<Component> {
     public static @NotNull Parser<MultiComponent> PARSER = expr -> {
         char open = expr.charAt(0);

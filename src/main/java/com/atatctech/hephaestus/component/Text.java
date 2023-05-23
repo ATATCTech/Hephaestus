@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
  * Basically, it is used for string scape.
  * You may also notice that yes, there are static methods related to text processing under this class.
  */
+@ComponentConfig(tagName = "t")
 public class Text extends Component {
     public static @NotNull Parser<Text> PARSER = expr -> new Text(Text.decompile(expr));
 
@@ -184,7 +185,7 @@ public class Text extends Component {
      * @return true: does start with; false: does not start with
      */
     public static boolean startsWith(@NotNull String s, char c) {
-        return charAtEquals(s, 0, c);
+        return !s.isEmpty() && charAtEquals(s, 0, c);
     }
 
     /**
@@ -194,7 +195,7 @@ public class Text extends Component {
      * @return true: does end with; false: does not end with
      */
     public static boolean endsWith(@NotNull String s, char c) {
-        return charAtEquals(s, s.length() - 1, c);
+        return !s.isEmpty() && charAtEquals(s, s.length() - 1, c);
     }
 
     /**

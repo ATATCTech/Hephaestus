@@ -59,7 +59,6 @@ public abstract class Component {
         return id;
     }
 
-
     /**
      * Exposes an interface capable of traversing the component tree. This method traverses the component tree in order from top right to bottom left (DFS).
      * @param action callback function
@@ -69,7 +68,7 @@ public abstract class Component {
         action.accept(this, depth);
     }
 
-    public void forEach(Consumer<? super Component> action) {
+    public void forEach(@NotNull Consumer<? super Component> action) {
         forEach(action, 0);
     }
 

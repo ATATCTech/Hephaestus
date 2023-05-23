@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
  * A component used to integrate pages and display hierarchical relationships.
  */
 @Transform.RequireTransform
+@ComponentConfig(tagName = "sk")
 public class Skeleton extends WrapperComponent implements Compilable {
     public static @NotNull Parser<Skeleton> PARSER = WrapperComponent.makeParser(Skeleton.class);
     public static final Transform TRANSFORM;
