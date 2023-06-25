@@ -54,7 +54,7 @@ public final class Hephaestus {
         return parseExpr(clean(expr));
     }
 
-    public static @NotNull String[] listTagNames() {
+    public static @NotNull String @NotNull [] listTagNames() {
         return Config.getInstance().listTagNames();
     }
 
