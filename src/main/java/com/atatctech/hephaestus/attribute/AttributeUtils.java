@@ -2,7 +2,6 @@ package com.atatctech.hephaestus.attribute;
 
 import com.atatctech.hephaestus.component.Component;
 import com.atatctech.hephaestus.component.Text;
-import com.atatctech.hephaestus.exception.BadFormat;
 import com.atatctech.hephaestus.exception.HephaestusRuntimeException;
 import com.atatctech.hephaestus.utils.Utils;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +36,7 @@ public final class AttributeUtils {
         return new AttributesAndBody(expr.substring(0, endIndex), expr.substring(endIndex));
     }
 
-    public static void injectField(@NotNull Field field, @NotNull Object instance, @NotNull String value, @NotNull Class<? extends TargetConstructor<?>> targetConstructor) throws IllegalAccessException, BadFormat, NoSuchMethodException, InvocationTargetException, InstantiationException {
+    public static void injectField(@NotNull Field field, @NotNull Object instance, @NotNull String value, @NotNull Class<? extends TargetConstructor<?>> targetConstructor) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
         field.setAccessible(true);
         Method cast = targetConstructor.getDeclaredMethod("cast", String.class);
         if (!field.getType().isAssignableFrom(cast.getReturnType())) throw new HephaestusRuntimeException("Target constructor does not return the required type.");
@@ -69,7 +68,7 @@ public final class AttributeUtils {
                 String val = getAttribute(attributesExpr, getAttributeName(annotation, field));
                 if (val == null) return;
                 injectField(field, component, val, annotation.targetConstructor());
-            } catch (IllegalAccessException | BadFormat | NoSuchMethodException | InvocationTargetException |
+            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException |
                      InstantiationException ignored) {}
         });
     }

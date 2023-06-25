@@ -18,7 +18,7 @@ public final class PD {
      * @param tagNames acceptable tag names
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain is(@NotNull String... tagNames) {
+    public static @NotNull ConstraintChain is(@NotNull String @NotNull ... tagNames) {
         return new ConstraintChain(component -> {
             for (String tagName : tagNames) if (component.getTagName().equals(tagName)) return true;
             return false;
@@ -31,7 +31,7 @@ public final class PD {
      * @param componentClasses acceptable component classes
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain is(@NotNull Class<?>... componentClasses) {
+    public static @NotNull ConstraintChain is(@NotNull Class<?> @NotNull ... componentClasses) {
         return new ConstraintChain(component -> {
             for (Class<?> componentClass : componentClasses) if (componentClass.isInstance(component)) return true;
             return false;
@@ -116,7 +116,7 @@ public final class PD {
      * @param tagNames acceptable tag names
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain has(int least, int most, @NotNull String... tagNames) {
+    public static @NotNull ConstraintChain has(int least, int most, @NotNull String @NotNull ... tagNames) {
         return has(least, most, is(tagNames));
     }
 
@@ -128,7 +128,7 @@ public final class PD {
      * @param componentClasses acceptable component classes
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain has(int least, int most, @NotNull Class<?>... componentClasses) {
+    public static @NotNull ConstraintChain has(int least, int most, @NotNull Class<?> @NotNull ... componentClasses) {
         return has(least, most, is(componentClasses));
     }
 
@@ -139,7 +139,7 @@ public final class PD {
      * @param tagNames acceptable tag names
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain more(int than, @NotNull String... tagNames) {
+    public static @NotNull ConstraintChain more(int than, @NotNull String @NotNull ... tagNames) {
         return has(than + 1, -1, tagNames);
     }
 
@@ -150,7 +150,7 @@ public final class PD {
      * @param componentClasses acceptable component classes
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain more(int than, @NotNull Class<?>... componentClasses) {
+    public static @NotNull ConstraintChain more(int than, @NotNull Class<?> @NotNull ... componentClasses) {
         return has(than + 1, -1, componentClasses);
     }
 
@@ -160,7 +160,7 @@ public final class PD {
      * @param tagNames acceptable tag names
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain includes(@NotNull String... tagNames) {
+    public static @NotNull ConstraintChain includes(@NotNull String @NotNull ... tagNames) {
         return more(0, tagNames);
     }
 
@@ -170,7 +170,7 @@ public final class PD {
      * @param componentClasses acceptable component classes
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain includes(@NotNull Class<?>... componentClasses) {
+    public static @NotNull ConstraintChain includes(@NotNull Class<?> @NotNull ... componentClasses) {
         return more(0, componentClasses);
     }
 
@@ -180,7 +180,7 @@ public final class PD {
      * @param tagNames acceptable tag names
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain all(@NotNull String... tagNames) {
+    public static @NotNull ConstraintChain all(@NotNull String @NotNull ... tagNames) {
         return forEach().and(is(tagNames));
     }
 
@@ -190,7 +190,7 @@ public final class PD {
      * @param componentClasses acceptable component classes
      * @return constraint chain
      */
-    public static @NotNull ConstraintChain all(@NotNull Class<?>... componentClasses) {
+    public static @NotNull ConstraintChain all(@NotNull Class<?> @NotNull ... componentClasses) {
         return forEach().and(is(componentClasses));
     }
 }

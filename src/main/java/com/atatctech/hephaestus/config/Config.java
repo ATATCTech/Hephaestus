@@ -52,7 +52,7 @@ public final class Config {
         }
     }
 
-    public void scanPackages(String @NotNull ... packages) {
+    public void scanPackages(@NotNull String @NotNull ... packages) {
         for (String pkg : packages) scanPackage(pkg);
     }
 

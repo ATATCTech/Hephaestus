@@ -29,24 +29,24 @@ public class MultiComponent extends Component implements Collection<Component> {
         return new MultiComponent(components);
     };
 
-    protected @NotNull List<Component> components = new LinkedList<>();
+    protected @NotNull List<@NotNull Component> components = new LinkedList<>();
 
     public MultiComponent() {
     }
 
-    public MultiComponent(@NotNull List<Component> components) {
+    public MultiComponent(@NotNull List<@NotNull Component> components) {
         setComponents(components);
     }
 
-    public MultiComponent(Component ... components) {
+    public MultiComponent(@NotNull Component @NotNull ... components) {
         setComponents(components);
     }
 
-    public void setComponents(@NotNull List<Component> components) {
+    public void setComponents(@NotNull List<@NotNull Component> components) {
         this.components = components;
     }
 
-    public void setComponents(Component ... components) {
+    public void setComponents(@NotNull Component @NotNull ... components) {
         setComponents(new ArrayList<>(Arrays.asList(components)));
     }
 
@@ -55,7 +55,7 @@ public class MultiComponent extends Component implements Collection<Component> {
         for (Component component : components) component.forEach(action, depth);
     }
 
-    protected void parallelTraversal(@NotNull Consumer<? super Component> action, int depth, @NotNull List<Component> components) {
+    protected void parallelTraversal(@NotNull Consumer<? super Component> action, int depth, @NotNull List<@NotNull Component> components) {
         List<Component> next = new LinkedList<>();
         for (Component component : components) {
             if (component instanceof WrapperComponent wrapperComponent)
