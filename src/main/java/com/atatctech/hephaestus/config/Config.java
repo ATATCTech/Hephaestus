@@ -56,7 +56,7 @@ public final class Config {
         for (String pkg : packages) scanPackage(pkg);
     }
 
-    public @NotNull String[] listTagNames() {
+    public @NotNull String @NotNull [] listTagNames() {
         return parserMap.keySet().toArray(String[]::new);
     }
 

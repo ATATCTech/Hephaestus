@@ -105,12 +105,12 @@ public class MultiComponent extends Component implements Collection<Component> {
     }
 
     @Override
-    public Object @NotNull [] toArray() {
+    public @NotNull Object @NotNull [] toArray() {
         return components.toArray();
     }
 
     @Override
-    public <T> T @NotNull [] toArray(T @NotNull [] a) {
+    public <T> @NotNull T @NotNull [] toArray(T @NotNull [] a) {
         return components.toArray(a);
     }
 
