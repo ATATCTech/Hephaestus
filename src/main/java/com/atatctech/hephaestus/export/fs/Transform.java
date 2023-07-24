@@ -59,7 +59,7 @@ public class Transform {
      * @throws HephaestusException if parsing fails
      */
     public @Nullable Component afterRead(@NotNull String content) throws HephaestusException {
-        return Hephaestus.parseExpr(content);
+        return Hephaestus.parse(content);
     }
 
     /**
