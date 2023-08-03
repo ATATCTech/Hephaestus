@@ -22,7 +22,7 @@ public class MultiComponent extends Component implements Collection<Component> {
             if (component == null) continue;
             components.add(component);
             expr = expr.substring(endIndex);
-            if (expr.length() == 0) break;
+            if (expr.isEmpty()) break;
             indexes = Text.matchBrackets(expr, open = expr.charAt(0), Text.pairBracket(open));
             endIndex = indexes.end();
         }
