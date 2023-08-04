@@ -39,12 +39,14 @@ public final class Hephaestus {
             temp.tagName = temp.tagName.replaceAll(" ", "");
             Parser<?> parser = Config.getInstance().getParser(temp.tagName);
             Component component = parser == null ? temp : parser.parse(temp.inner);
+            if (component == null) return null;
             AttributeUtils.injectAttributes(component, attributesAndBody.attributesExpr());
             return component;
         }
         if (!Text.wrappedBy(expr, '<', '>')) throw new ComponentNotClosed(expr);
         if (temp.tagName.isEmpty()) return new Skeleton(Text.decompile(temp.inner));
         Skeleton skeleton = Skeleton.PARSER.parse(temp.inner);
+        if (skeleton == null) return null;
         AttributeUtils.injectAttributes(skeleton, attributesAndBody.attributesExpr());
         skeleton.setName(Text.decompile(temp.tagName));
         return skeleton;
