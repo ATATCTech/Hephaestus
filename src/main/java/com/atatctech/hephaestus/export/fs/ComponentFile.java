@@ -38,7 +38,7 @@ public record ComponentFile(@Nullable Component component) implements FileSystem
     }
 
     public static @NotNull ComponentFile read(@NotNull String filename) throws IOException, HephaestusException {
-        Transform transform = Config.getInstance().getTransform(filename.substring(filename.lastIndexOf(".") + 1));
+        Transform transform = Config.getTransform(filename.substring(filename.lastIndexOf(".") + 1));
         return new ComponentFile((transform == null ? new Transform() : transform).afterRead(Basics.NativeHandler.readFile(filename)));
     }
 }

@@ -17,21 +17,18 @@ import java.util.concurrent.ConcurrentHashMap;
  * The global configuration manager.
  */
 public final class Config {
-    private final static Config instance = new Config();
+    private static final Map<String, Parser<?>> parserMap = new ConcurrentHashMap<>();
 
-    public static @NotNull Config getInstance() {
-        return instance;
-    }
+    private static final Map<String, Transform> transformMap = new ConcurrentHashMap<>();
 
-    private final Map<String, Parser<?>> parserMap = new ConcurrentHashMap<>();
-
-    private final Map<String, Transform> transformMap = new ConcurrentHashMap<>();
-
-    private Config() {
+    static {
         scanPackages(Component.class.getPackageName());
     }
 
-    public void scanPackage(@NotNull String pkg) {
+    private Config() {
+    }
+
+    public static void scanPackage(@NotNull String pkg) {
         Reflections reflections = new Reflections(pkg);
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(ComponentConfig.class);
         for (Class<?> clz : classes) {
@@ -52,27 +49,27 @@ public final class Config {
         }
     }
 
-    public void scanPackages(@NotNull String @NotNull ... packages) {
+    public static void scanPackages(@NotNull String @NotNull ... packages) {
         for (String pkg : packages) scanPackage(pkg);
     }
 
-    public @NotNull String @NotNull [] listTagNames() {
+    public static @NotNull String @NotNull [] listTagNames() {
         return parserMap.keySet().toArray(String[]::new);
     }
 
-    public void putParser(@NotNull String tagName, @NotNull Parser<?> parser) {
+    public static void putParser(@NotNull String tagName, @NotNull Parser<?> parser) {
         parserMap.put(tagName, parser);
     }
 
-    public @Nullable Parser<?> getParser(@NotNull String tagName) {
+    public static @Nullable Parser<?> getParser(@NotNull String tagName) {
         return parserMap.get(tagName);
     }
 
-    public void putTransform(@NotNull String tagName, @NotNull Transform transform) {
+    public static void putTransform(@NotNull String tagName, @NotNull Transform transform) {
         transformMap.put(tagName, transform);
     }
 
-    public @Nullable Transform getTransform(@NotNull String tagName) {
+    public static @Nullable Transform getTransform(@NotNull String tagName) {
         return transformMap.get(tagName);
     }
 }

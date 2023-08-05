@@ -37,7 +37,7 @@ public final class Hephaestus {
         if (Text.wrappedBy(expr, '{', '}')) {
             if (temp.tagName.isEmpty()) return Text.PARSER.parse(temp.inner);
             temp.tagName = temp.tagName.replaceAll(" ", "");
-            Parser<?> parser = Config.getInstance().getParser(temp.tagName);
+            Parser<?> parser = Config.getParser(temp.tagName);
             Component component = parser == null ? temp : parser.parse(temp.inner);
             if (component == null) return null;
             AttributeUtils.injectAttributes(component, attributesAndBody.attributesExpr());
@@ -57,7 +57,7 @@ public final class Hephaestus {
     }
 
     public static @NotNull String @NotNull [] listTagNames() {
-        return Config.getInstance().listTagNames();
+        return Config.listTagNames();
     }
 
     public static @NotNull String clean(@NotNull String expr) {
