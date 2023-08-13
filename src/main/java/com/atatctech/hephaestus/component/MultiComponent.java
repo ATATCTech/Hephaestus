@@ -13,6 +13,7 @@ import java.util.*;
 @ComponentConfig(tagName = "mc")
 public class MultiComponent extends Component implements Collection<Component> {
     public static @NotNull Parser<MultiComponent> PARSER = expr -> {
+        if (expr.isEmpty()) return new MultiComponent();
         char open = expr.charAt(0);
         Text.IndexPair indexes = Text.matchBrackets(expr, open, Text.pairBracket(open));
         int endIndex = indexes.end();

@@ -11,6 +11,7 @@ public class Ref extends Component {
     static {
         PARSER = Ref::new;
     }
+
     protected @Nullable Component to;
 
     public Ref(@Nullable String id) {
