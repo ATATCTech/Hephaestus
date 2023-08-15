@@ -28,25 +28,31 @@ public final class Config {
     private Config() {
     }
 
+    public static void scanClass(@NotNull Class<?> clz) {
+        if (!Component.class.isAssignableFrom(clz)) return;
+        ComponentConfig componentConfig = clz.getAnnotation(ComponentConfig.class);
+        try {
+            Field field = clz.getDeclaredField("PARSER");
+            field.setAccessible(true);
+            putParser(componentConfig.tagName(), (Parser<?>) field.get(null));
+        } catch (NoSuchFieldException ignored) {
+            throw new MissingFieldException(clz, "PARSER");
+        } catch (IllegalAccessException ignored) {
+        }
+        if (clz.isAnnotationPresent(Transform.RequireTransform.class)) {
+            Transform transform = Transform.getTransform(clz);
+            if (transform != null) putTransform(componentConfig.tagName(), transform);
+        }
+    }
+
+    public static void scanClasses(@NotNull Class<?> @NotNull ... classes) {
+        for (Class<?> clz : classes) scanClass(clz);
+    }
+
     public static void scanPackage(@NotNull String pkg) {
         Reflections reflections = new Reflections(pkg);
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(ComponentConfig.class);
-        for (Class<?> clz : classes) {
-            if (!Component.class.isAssignableFrom(clz)) continue;
-            ComponentConfig componentConfig = clz.getAnnotation(ComponentConfig.class);
-            try {
-                Field field = clz.getDeclaredField("PARSER");
-                field.setAccessible(true);
-                putParser(componentConfig.tagName(), (Parser<?>) field.get(null));
-            } catch (NoSuchFieldException ignored) {
-                throw new MissingFieldException(clz, "PARSER");
-            } catch (IllegalAccessException ignored) {
-            }
-            if (clz.isAnnotationPresent(Transform.RequireTransform.class)) {
-                Transform transform = Transform.getTransform(clz);
-                if (transform != null) putTransform(componentConfig.tagName(), transform);
-            }
-        }
+        classes.forEach(Config::scanClass);
     }
 
     public static void scanPackages(@NotNull String @NotNull ... packages) {
