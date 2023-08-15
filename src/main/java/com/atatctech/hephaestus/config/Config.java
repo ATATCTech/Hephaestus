@@ -22,7 +22,7 @@ public final class Config {
     private static final Map<String, Transform> transformMap = new ConcurrentHashMap<>();
 
     static {
-        scanPackages(Component.class.getPackageName());
+        scanPackage(Component.class.getPackageName());
     }
 
     private Config() {
