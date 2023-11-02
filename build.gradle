@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'signing'
+    id "net.ltgt.errorprone" version "3.1.0"
 }
 
 apply plugin: 'maven-publish'
@@ -20,6 +21,18 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    errorprone "com.uber.nullaway:nullaway:0.10.16"
+    errorprone "com.google.errorprone:error_prone_core:2.23.0"
+}
+
+import net.ltgt.gradle.errorprone.CheckSeverity
+
+tasks.withType(JavaCompile).configureEach {
+    options.errorprone {
+        check("NullAway", CheckSeverity.ERROR)
+        option("NullAway:AnnotatedPackages", "com.atatctech.athena2")
+    }
 }
 
 java {
